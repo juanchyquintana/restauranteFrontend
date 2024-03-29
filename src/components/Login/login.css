@@ -23,14 +23,20 @@
 }
 
 
+@media all and (min-width: 768px){    
+    .form-Img-Container{
+        max-width: 70vw;
+    }
+}
 
-@media all and (max-width: 991px){    
+@media all and (min-width: 351px) and (max-width: 767){    
     .form-Img-Container{
         max-width: 80vw;
     }
+}
 
-    .img-form{
-        display: none;
+@media all and (max-width: 350px){    
+    .form-Img-Container{
+        max-width: 90vw;
     }
-
 }
