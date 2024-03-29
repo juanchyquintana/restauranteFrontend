@@ -1,6 +1,36 @@
-.img-ingreso{
+.login-container{
+    position: relative;
+}
+
+.background-img-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.img-blur-ingreso{
     height: 100vh;
     width: 100%;
     object-fit: cover;
     filter: blur(5px);
+}
+
+.form-Img-Container{
+    /* position: relative; */
+    z-index: 5;
+}
+
+
+
+@media all and (max-width: 991px){    
+    .form-Img-Container{
+        max-width: 80vw;
+    }
+
+    .img-form{
+        display: none;
+    }
+
 }
