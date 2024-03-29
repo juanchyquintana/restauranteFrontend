@@ -9,9 +9,9 @@ const Registrarse = () => {
   } = useForm();
 
   const crearUsuario = () => {
-    console.log("Campos llenos");
+    // TODO: Escribir logica para crear un usuario
   };
-  console.log(errors)
+
   return (
     <>
       <h1 className="text-center fw-bold text-uppercase display-4  mt-5">Crear Cuenta</h1>
