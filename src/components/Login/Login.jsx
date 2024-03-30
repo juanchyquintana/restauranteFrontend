@@ -1,12 +1,13 @@
 import { Button, Form } from "react-bootstrap";
 import backgroundImg from "../../assets/Login/backgroundImg.webp";
+import formImg from "../../assets/Login/formImage.webp";
 import "./login.css";
 import { useForm } from "react-hook-form";
 
 const Login = () => {
   const {
-    handleSubmit,
     register,
+    handleSubmit,
     formState: { errors },
   } = useForm();
 
@@ -18,11 +19,11 @@ const Login = () => {
         <img src={backgroundImg} className="img-blur-ingreso" />
       </div>
 
-      <div className="form-Img-Container container-fluid bg-light p-3 p-lg-0 rounded-3">
+      <div className="form-e-Img-Container container-fluid bg-light p-3 p-lg-0 rounded-3">
 
         <div className="row m-0">
-          <div className="img-form col-lg-6 bg-dark d-none d-lg-flex rounded-start-3">
-            <img src="" className="img-fluid"/>
+          <div className="img-form-div col-lg-6 d-none d-lg-flex rounded-start-3 p-0">
+            <img src={formImg} className="form-img"/>
           </div>
 
           <div className="col-lg-6 d-flex flex-column justify-content-center align-items-lg-center">
@@ -86,7 +87,7 @@ const Login = () => {
               </Form.Text>
 
               <div className="text-center">
-                <Button>Ingresar</Button>
+                <Button type="submit">Ingresar</Button>
               </div>
             </Form>
           </div>
