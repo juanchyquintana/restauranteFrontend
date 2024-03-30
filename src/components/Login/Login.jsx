@@ -18,16 +18,17 @@ const Login = () => {
         <img src={backgroundImg} className="img-blur-ingreso" />
       </div>
 
-      <div className="form-Img-Container container-fluid bg-light p-3 rounded-3">
-        <h2 className="text-center mb-2">¡Bienvenido!</h2>
+      <div className="form-Img-Container container-fluid bg-light p-3 p-lg-0 rounded-3">
 
-        <div className="row">
-          <div className="img-form col-lg-6 bg-dark d-none d-lg-block">
-            <img src="" />
+        <div className="row m-0">
+          <div className="img-form col-lg-6 bg-dark d-none d-lg-flex rounded-start-3">
+            <img src="" className="img-fluid"/>
           </div>
 
-          <div className="col-lg-6">
-            <Form onSubmit={handleSubmit(validarFormulario)}>
+          <div className="col-lg-6 d-flex flex-column justify-content-center align-items-lg-center">
+          <h2 className="text-center mb-3">¡Bienvenido!</h2>
+            <Form onSubmit={handleSubmit(validarFormulario)}
+            className="formulario">
               <Form.Group>
                 <Form.Label htmlFor="correo">Correo</Form.Label>
                 <Form.Control
