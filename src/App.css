@@ -18,8 +18,19 @@
   background-size: cover;
   margin-top: 0;
 }
+.banner-imagen3 {
+  background-image: url("./src/assets/chefs-trabajando-cocina-luz-roja-colgando-techo_902338-14584.jpg");
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+  margin-top: 0;
+}
 .navbar-custom {
   background-color: transparent;
+}
+.centrarNav{
+margin-left: auto;
+margin-right: auto;
 }
 .opcionImagen{
   width: 100%;
