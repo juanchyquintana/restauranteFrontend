@@ -87,7 +87,13 @@ const Login = () => {
               </Form.Text>
 
               <div className="text-center">
-                <Button type="submit">Ingresar</Button>
+              <Button
+                  variant="danger"
+                  type="submit"
+                  className="w-100 text-uppercase fw-bold my-2"
+                >
+                  Ingresar
+                </Button>
               </div>
             </Form>
           </div>
