@@ -25,6 +25,13 @@
   min-height: 100vh;
   margin-top: 0;
 }
+.banner-imagen4 {
+  background-image: url("./src/assets/low-angle-asian-paper-lanterns.jpg");
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
+  margin-top: 0;
+}
 .navbar-custom {
   background-color: transparent;
 }
@@ -44,4 +51,8 @@ margin-right: auto;
 }
 .tamañoCard:hover {
   transform: translateY(-10px); 
+}
+.imagenEvento{
+  height: 33vh;
+  object-fit: cover;
 }
