@@ -4,6 +4,7 @@
     
     position: relative;
 }
+
 #bg-404 img{
     width: 750px;
     height: auto;
@@ -25,8 +26,6 @@
 #bg-404 button{
     font-size: 30px;
     bottom: 50px;
-    /* background: pink; */
-    /* border: #423201 solid 1.9px;     */
 }
 #bg-404 button a{
     text-decoration: dashed;
