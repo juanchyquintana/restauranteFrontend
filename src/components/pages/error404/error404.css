@@ -1,0 +1,100 @@
+#bg-404{
+    width: 100%;
+    height: 95vh;
+    
+    position: relative;
+}
+#bg-404 img{
+    width: 750px;
+    height: auto;
+    
+}
+
+#bg-404 h1, #bg-404 p, #bg-404 button{
+    font-family: 'Raleway', sans-serif;
+    position: absolute;
+    color: #000000;}
+
+#bg-404 p{
+    font-weight:550;
+    font-size: 35px;
+    bottom: 100px;
+    text-align: center;
+}
+
+#bg-404 button{
+    font-size: 30px;
+    bottom: 50px;
+    /* background: pink; */
+    /* border: #423201 solid 1.9px;     */
+}
+#bg-404 button a{
+    text-decoration: dashed;
+    font-weight: bold;
+    color: #000000;
+}
+
+#bg-404 h1{
+    
+    font-weight: bold;
+    font-size: 55px;
+    top: 75px;
+    left: 100px;
+}
+#bg-404 svg{
+    color: #423201;
+}
+
+@media all and (max-width: 1000px) {  
+    #bg-404 img{
+        width: 65vw;
+    }
+    
+}
+@media all and (max-width: 760px) {  
+    #bg-404 h1{
+        text-align: center;
+        right: auto;
+        left: auto;
+    }
+}
+@media all and (max-width: 600px) {  
+    #bg-404 h1{
+        font-size: 45px;
+    }
+    #bg-404 p{
+        font-size: 25px;
+    }
+    #bg-404 a{
+        font-size: 20px;
+    }    
+}
+@media all and (max-width: 300px) {  
+    #bg-404 h1{
+        font-size: 40px;
+    }
+    #bg-404 p{
+        font-size: 20px;
+    }
+    #bg-404 a{
+        font-size: 15px;
+    }
+    
+}
+@media all and (max-height: 650px){
+    #bg-404 img, #bg-404 svg{
+        opacity: .5;
+    }
+}
+@media all and (max-height: 370px){
+    #bg-404 p{
+        font-size: 25px;
+        bottom: 35px;
+        text-align: center;
+    }
+    #bg-404 a{
+        font-size: 20px;
+        bottom: 5px;
+        text-decoration: dashed;
+    }
+}
