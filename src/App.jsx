@@ -2,11 +2,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Administrador from "./components/pages/Administrador";
 import Registrarse from "./components/Registrarse";
 import Login from "./components/Login/Login";
-import Error404 from "./components/pages/error404/Error404";
 import Inicio from "./components/pages/Inicio";
 import Menu from "./components/common/Menu";
 import Footer from "./components/common/Footer";
-
+import Error404 from "./components/pages/error404/Error404";
 
 function App() {
   return (
