@@ -10,7 +10,7 @@ const Cocina = () => {
         <Container fluid>
           <Card className="mb-3">
             <Card.Body className="card-padre-body">
-              <Card.Title className="mb-3">Pedido 23</Card.Title>
+              <Card.Title className="mb-3">Pedido 19</Card.Title>
               <Container fluid className="d-flex p-0 gap-4">
                 <CardProductoCocina />
                 <CardProductoCocina />
@@ -25,7 +25,7 @@ const Cocina = () => {
           
           <Card className="mb-3">
             <Card.Body className="card-padre-body">
-              <Card.Title className="mb-3">Pedido 23</Card.Title>
+              <Card.Title className="mb-3">Pedido 18</Card.Title>
               <Container fluid className="d-flex p-0 gap-4">
                 <CardProductoCocina />
                 <CardProductoCocina />
@@ -33,7 +33,22 @@ const Cocina = () => {
               
             </Card.Body>
             <Card.Footer className="d-flex justify-content-between align-items-center">
-                <p className="m-0 btn btn-success">5:03</p>
+                <p className="m-0 btn btn-warning">22:17</p>
+                <Button>Finalizar</Button>
+            </Card.Footer>
+          </Card>
+
+          <Card className="mb-3">
+            <Card.Body className="card-padre-body">
+              <Card.Title className="mb-3">Pedido 17</Card.Title>
+              <Container fluid className="d-flex p-0 gap-4">
+                <CardProductoCocina />
+                <CardProductoCocina />
+              </Container>
+              
+            </Card.Body>
+            <Card.Footer className="d-flex justify-content-between align-items-center">
+                <p className="m-0 btn btn-danger">35:58</p>
                 <Button>Finalizar</Button>
             </Card.Footer>
           </Card>
