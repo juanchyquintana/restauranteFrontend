@@ -1,0 +1,10 @@
+.cocina-container{
+    margin-top: 80px;
+}
+
+
+@media all and (max-width: 567px){
+    .card-padre-body{
+        overflow: auto;
+    }
+}
