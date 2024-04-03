@@ -1,20 +1,25 @@
 #bg-404{
     width: 100%;
     height: 95vh;
-    
+    background-image: url("../../../assets/bambu-fondo2.jpg");
+    background-size: cover;
     position: relative;
+    
 }
 
-#bg-404 img{
-    width: 750px;
+#bg-404 .imagen{
+    width: 650px;
     height: auto;
     
 }
-
+#bg-404 svg{
+    filter: drop-shadow(0 -5px 10px rgba(250,250,250,.8))
+}
 #bg-404 h1, #bg-404 p, #bg-404 button{
     font-family: 'Raleway', sans-serif;
     position: absolute;
-    color: #000000;}
+    color: #FFFFFF;
+}
 
 #bg-404 p{
     font-weight:550;
