@@ -31,11 +31,14 @@
 #bg-404 button{
     font-size: 30px;
     bottom: 50px;
+    background: #FF7A0C;
+    border: #FF7A0C solid 1px;
+    
 }
 #bg-404 button a{
     text-decoration: dashed;
     font-weight: bold;
-    color: #000000;
+    color: #FFFFFF;
 }
 
 #bg-404 h1{
