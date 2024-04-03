@@ -3,7 +3,7 @@ import './cardProdCocina.css'
 
 const CardProductoCocina = () => {
   return (
-    <Card className="card-container">
+    <Card id="card-container">
       <Card.Img variant="top" src="https://images.pexels.com/photos/2098085/pexels-photo-2098085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="card-img"/>
       <Card.Body>
         <Card.Title>Card Title</Card.Title>

@@ -11,9 +11,6 @@ const Cocina = () => {
           <Card className="mb-3">
             <Card.Body className="card-padre-body">
               <Card.Title className="mb-3">Pedido 23</Card.Title>
-              {/* <Card.Subtitle className="mb-2 text-muted">
-                5:03
-              </Card.Subtitle> */}
               <Container fluid className="d-flex p-0 gap-4">
                 <CardProductoCocina />
                 <CardProductoCocina />
@@ -29,9 +26,6 @@ const Cocina = () => {
           <Card className="mb-3">
             <Card.Body className="card-padre-body">
               <Card.Title className="mb-3">Pedido 23</Card.Title>
-              {/* <Card.Subtitle className="mb-2 text-muted">
-                5:03
-              </Card.Subtitle> */}
               <Container fluid className="d-flex p-0 gap-4">
                 <CardProductoCocina />
                 <CardProductoCocina />
