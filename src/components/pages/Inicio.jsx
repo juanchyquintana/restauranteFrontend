@@ -1,6 +1,7 @@
 import { Container, Row } from "react-bootstrap";
 import Cardevento from "./placas/Cardevento";
 import Cardlink from "./placas/Cardlink";
+import './inicio.css'
 
 const Inicio = () => {
   return (

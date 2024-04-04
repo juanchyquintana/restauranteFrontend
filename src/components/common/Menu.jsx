@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useState, useEffect } from 'react';
 import './menu.css'
+import { Link } from 'react-router-dom';
 
 
 const Menu = () => {
@@ -31,10 +32,11 @@ const Menu = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto centrarNav">
-            <Nav.Link href="#home"className='text-light'>Inicio</Nav.Link>
-            <Nav.Link href="#link"className='text-light'>Administrador</Nav.Link>
-            <Nav.Link href="#home"className='text-light'>Login</Nav.Link>
-            <Nav.Link href="#link"className='text-light'>Register</Nav.Link>
+            <Link to="/" className='text-light nav-link'>Inicio</Link>
+            <Link to="/administrador" className='text-light nav-link'>Administrador</Link>
+            <Link to="/cocina" className='text-light nav-link'>Cocina</Link>
+            <Link to="/ingresar" className='text-light nav-link'>Login</Link>
+            <Link to="/registrarse" className='text-light nav-link'>Register</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
