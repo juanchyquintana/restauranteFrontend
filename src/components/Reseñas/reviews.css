@@ -4,25 +4,19 @@
   align-items: center;
 }
 
-.image-custom img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ajustar la imagen al contenedor */
-  border-radius: 50%; /* Borde redondeado de la imagen */
+.tamañoImagen{
+  width: 200px;
+  height: 200px;
 }
 
-@media all and (min-width: 767px) {
-    .card-custom {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 25%; /* Ancho del card */
-        margin: 0 auto; /* Centrar el card */
-      }
-    
-      .image-custom {
-        width: 100px; /* Ancho de la imagen */
-        height: 100px; /* Alto de la imagen */
-        margin-bottom: 10px; /* Margen inferior de la imagen */
-      }
+.marginResenas {
+  margin-top: 100px; 
+  margin-bottom: 50px; 
+  width: 100%; 
+  max-width: 1200px; 
+  margin-left: auto; 
+  margin-right: auto; 
+  padding-left: 15px; 
+  padding-right: 15px; 
+  box-sizing: border-box; 
 }

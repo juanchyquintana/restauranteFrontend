@@ -84,7 +84,7 @@ const Reviews = () => {
   };
 
   return (
-    <>
+    <section className="marginResenas">
       <h2 className="text-center mb-5">
         Reseñas de Clientes
       </h2>
@@ -94,27 +94,29 @@ const Reviews = () => {
       >
         {reviews.map((review, index) => (
           <Carousel.Item key={index} className="carousel-item-custom">
-              <Card className="shadow card-custom">
+            <div className="d-flex justify-content-center">
+              <Card className="shadow card-custom ">
                 <Card.Body className="text-center d-flex flex-column align-items-center">
                   <div>
                     <Card.Img
                       src={review.photo}
                       alt={`Imagen Artista ${index + 1}`}
-                      className="img-fluid"
+                      className="tamañoImagen"
                     />
                   </div>
 
-                  <div className="my-3">
+                  <div className="my-3 px-3">
                     <h3 className="fw-bold">- {review.name} -</h3>
                     <div>{mostrarEstrellas(review.rating)}</div>
                     <p className="lead">{review.comment}</p>
                   </div>
                 </Card.Body>
               </Card>
+            </div>
           </Carousel.Item>
         ))}
       </Carousel>
-    </>
+    </section>
   );
 };
 
