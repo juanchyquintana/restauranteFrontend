@@ -1,0 +1,22 @@
+.carousel-item-custom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tamañoImagen{
+  width: 200px;
+  height: 200px;
+}
+
+.marginResenas {
+  margin-top: 100px; 
+  margin-bottom: 50px; 
+  width: 100%; 
+  max-width: 1200px; 
+  margin-left: auto; 
+  margin-right: auto; 
+  padding-left: 15px; 
+  padding-right: 15px; 
+  box-sizing: border-box; 
+}
