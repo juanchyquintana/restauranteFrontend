@@ -37,6 +37,7 @@ const Menu = () => {
             <Link to="/cocina" className='text-light nav-link'>Cocina</Link>
             <Link to="/ingresar" className='text-light nav-link'>Login</Link>
             <Link to="/registrarse" className='text-light nav-link'>Register</Link>
+            <Link to="/nosotros" className='text-light nav-link'>Sobre nosotros</Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
