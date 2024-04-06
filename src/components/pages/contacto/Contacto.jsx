@@ -11,9 +11,9 @@ const Contacto = () => {
      } = useForm();
 
   const onSubmit = data => {
-    // Aquí puedes agregar la lógica para enviar los datos del formulario
+    // Aquí lógica para enviar los datos del formulario
     console.log(data);
-    // Limpia el formulario después de enviar los datos
+    
     reset();
   };
 
