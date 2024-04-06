@@ -18,7 +18,7 @@ const Contacto = () => {
   };
 
   return (
-    <section id="mainContacto" className='mt-5'>
+    <section id="mainContacto" className='mt-5 mx-2 mx-lg-auto'>
       <h1>Contacto </h1>
       <p >¡Gracias por tu interés en contactar con nosotros! Por favor, llena el formulario a continuación y te responderemos lo antes posible.</p>
       <Form onSubmit={handleSubmit(onSubmit)}>
