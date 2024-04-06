@@ -9,6 +9,7 @@ import Error404 from "./components/pages/error404/Error404";
 import Cocina from "./components/pages/cocina/Cocina";
 import Contacto from "./components/pages/contacto/Contacto";
 import Reviews from "./components/Reseñas/Reviews";
+import Nosotros from "./components/pages/nosotros/Nosotros";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/cocina" element={<Cocina />}/>
           <Route exact path="/contacto" element={<Contacto />}/>
           <Route exact path="/reseñas" element={<Reviews />}/>
+          <Route exact path="/nosotros" element={<Nosotros />}/>
           <Route path="*" element={<Error404></Error404>}></Route>
         </Routes>
         <Footer />
