@@ -7,10 +7,10 @@ const Nosotros = () => {
         <section id="about-us" className='mt-5 text-white'>
         <Container>
           <Row>
-            <Col md={6}>
+            <Col lg={6}>
               <Image src={nosotrosImg} alt="Sobre Nosotros" fluid />
             </Col>
-            <Col md={6}>
+            <Col lg={6}>
               <h2>Nuestra Historia</h2>
               <p>
                 Lotus es un restaurante chino familiar que ha estado sirviendo auténtica cocina china durante más de dos décadas. Nos enorgullecemos de ofrecer platos elaborados con ingredientes frescos y sabrosos, preparados por nuestros talentosos chefs.
