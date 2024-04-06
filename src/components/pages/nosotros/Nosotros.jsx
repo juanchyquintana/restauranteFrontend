@@ -1,8 +1,10 @@
 import { Container, Row, Col, Image } from 'react-bootstrap';
 import nosotrosImg from "../../../assets/chefs-trabajando-cocina-luz-roja-colgando-techo_902338-14584.jpg"
+import "./nosotros.css"
+import CardPersonal from './CardPersonal';
 const Nosotros = () => {
     return (
-        <section id="about-us" className='mt-5'>
+        <section id="about-us" className='mt-5 text-white'>
         <Container>
           <Row>
             <Col md={6}>
@@ -25,7 +27,28 @@ const Nosotros = () => {
               </p>
             </Col>
           </Row>
+          <Row className="">
+          <Col sm={12} className="text-center">
+            <h2>Nuestro Equipo</h2>
+          </Col>
+          <Col md={4} className='d-flex justify-content-center my-2'>
+            <CardPersonal ></CardPersonal>
+          </Col>
+          <Col md={4} className='d-flex justify-content-center my-2'>
+            <CardPersonal></CardPersonal>
+          </Col>
+          <Col md={4} className='d-flex justify-content-center my-2'>
+            <CardPersonal></CardPersonal>
+          </Col>
+          <Col md={4} className='d-flex justify-content-center my-2'>
+            <CardPersonal></CardPersonal>
+          </Col>
+          <Col md={4} className='d-flex justify-content-center my-2'>
+            <CardPersonal></CardPersonal>
+          </Col>
+        </Row>
         </Container>
+        
       </section>
     );
 };
