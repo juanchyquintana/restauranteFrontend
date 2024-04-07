@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-.mainPage {
+main{
   flex-grow: 1;
 }
 
