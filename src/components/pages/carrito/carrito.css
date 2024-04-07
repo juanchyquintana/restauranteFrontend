@@ -1,0 +1,11 @@
+.img-tabla{
+    aspect-ratio: 3/2;
+    min-width: 150px;
+    max-width: 200px;
+    object-fit: cover;
+}
+
+.input-tabla{
+   width: auto;
+   max-width: 100px;
+}

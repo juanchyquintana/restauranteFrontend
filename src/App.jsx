@@ -18,7 +18,6 @@ function App() {
     <>
       <BrowserRouter>
         <Menu />
-        <main>
           <Routes>
             <Route exact path="/" element={<Inicio />} />
             <Route exact path="/registrarse" element={<Registrarse />} />
@@ -31,7 +30,6 @@ function App() {
             <Route exact path="/nosotros" element={<Nosotros />} />
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>
-        </main>
         <Footer />
       </BrowserRouter>
     </>
