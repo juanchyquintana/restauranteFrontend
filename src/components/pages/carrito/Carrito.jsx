@@ -2,7 +2,9 @@ import './carrito.css'
 
 const Carrito = () => {
   return (
-    <div>Carrito</div>
+    <section className='mainPage'>
+
+    </section>
   )
 }
 
