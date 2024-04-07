@@ -12,14 +12,13 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      <Menu />
+        <Menu />
         <Routes>
-          <Route exact path="/" element={<Inicio />}/>
-          <Route exact path="/registrarse" element={<Registrarse />}/>
+          <Route exact path="/" element={<Inicio />} />
+          <Route exact path="/registrarse" element={<Registrarse />} />
           <Route exact path="/ingresar" element={<Login />} />
           <Route exact path="/administrador" element={<Administrador />} />
-          <Route exact path="/cocina" element={<Cocina />}/>
-          <Route path="*" element={<Error404></Error404>}></Route>
+          <Route exact path="/cocina" element={<Cocina />} />
         </Routes>
         <Footer />
       </BrowserRouter>
