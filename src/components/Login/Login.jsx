@@ -14,7 +14,7 @@ const Login = () => {
   const validarFormulario = () => {};
 
   return (
-    <section className="login-container p-0 m-0 mainPage d-flex flex-column justify-content-center">
+    <section className="mainPage login-container p-0 m-0 d-flex flex-column justify-content-center">
       <div className="background-img-container bg-black">
         <img src={backgroundImg} className="img-blur-ingreso" />
       </div>
