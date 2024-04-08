@@ -9,7 +9,7 @@ const VistaProducto = () => {
             className="vistaCard img-fluid"
           />
         </div>
-        <div className="col-lg-6">
+        <div className="col-lg-6 bg-white">
           <h4 className="my-3">Cerveza Tsingtao</h4>
           <hr />
           <p>
