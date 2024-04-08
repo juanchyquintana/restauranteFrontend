@@ -10,60 +10,59 @@ const NuevoProducto = ({ editar, titulo }) => {
     setValue,
   } = useForm();
 
-  const productoValidado = (e) => {
-    e.preventDefault()
-
-    console.log('Validado')
-  }
+  const productoValidado = () => {
+    console.log("Validado");
+    reset();
+  };
 
   return (
-    <>
+    <section className="my-4">
       <Container>
-        <h2 className="display-4 mt-5">{titulo}</h2>
+        <h2 className="display-4 mt-5 text-center text-lg-start ">{titulo}</h2>
         <hr />
         <section className=" bg-white shadow rounded-5  p-3 my-4">
           <Form onSubmit={handleSubmit(productoValidado)}>
-            <Form.Group className="mb-3">
-              <Form.Label>Producto</Form.Label>
+            <Form.Group className="my-3">
+              <Form.Label className="fw-bold">Nombre del Plato</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ej: Café"
-                {...register("nombreProducto", {
-                  required: "El Nombre del Producto es Obligatorio",
+                placeholder="Ej: Sopa Wan Tan, Rollitos de primavera, Zongzi, Jiaozi..."
+                {...register("nombrePlato", {
+                  required: "El Nombre del Plato es Obligatorio",
                   minLength: {
                     value: 2,
                     message:
-                      "El nombre del producto debe tener como minimo 2 caracteres",
+                      "El Nombre del Plato debe tener como minimo 2 caracteres",
                   },
                   maxLength: {
                     value: 50,
                     message:
-                      "El nombre del producto debe tener como máximo 20 caracteres",
+                      "El Nombre del Plato debe tener como máximo 20 caracteres",
                   },
                 })}
               />
             </Form.Group>
 
             <Form.Text className="text-danger">
-              {errors.nombreProducto?.message}
+              {errors.nombrePlato?.message}
             </Form.Text>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Precio</Form.Label>
+            <Form.Group className="my-3">
+              <Form.Label className="fw-bold">Precio</Form.Label>
               <Form.Control
                 type="number"
-                placeholder="Ej: $50"
+                placeholder="Ej: $1500"
                 {...register("precio", {
                   required: "El Precio es Obligatorio",
                   min: {
                     value: 50,
                     message:
-                      "El precio del producto debe tener un precio minimo de $50 caracteres",
+                      "El Precio del producto debe tener un precio minimo de $50",
                   },
                   max: {
                     value: 10000,
                     message:
-                      "El precio del producto debe tener un precio máximo de $10000 caracteres",
+                      "El Precio del producto debe tener un precio máximo de $10000",
                   },
                 })}
               />
@@ -73,8 +72,8 @@ const NuevoProducto = ({ editar, titulo }) => {
               {errors.precio?.message}
             </Form.Text>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Imagen URL</Form.Label>
+            <Form.Group className="my-3">
+              <Form.Label className="fw-bold">Imagen URL</Form.Label>
               <Form.Control
                 type="url"
                 placeholder="Ej: https://www.pexels.com/es-es/vans-en-blanco-y-negro-fuera-de-la-decoracion-para-colgar-en-la-pared-1230679/"
@@ -92,8 +91,8 @@ const NuevoProducto = ({ editar, titulo }) => {
               {errors.imagen?.message}
             </Form.Text>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Categoría</Form.Label>
+            <Form.Group className="my-3">
+              <Form.Label className="fw-bold">Categoría</Form.Label>
               <Form.Select
                 {...register("categoria", {
                   required: "Selecciona una Categoría",
@@ -102,10 +101,10 @@ const NuevoProducto = ({ editar, titulo }) => {
                 <option value="" hidden>
                   -- Seleccione una Opción --
                 </option>
-                <option value="infusiones">Infusiones</option>
-                <option value="batidos">Batidos</option>
-                <option value="dulce">Dulce</option>
-                <option value="salado">Salado</option>
+                <option value="entradas">Entradas</option>
+                <option value="platos-principales">Platos Principales</option>
+                <option value="postres">Postres</option>
+                <option value="bebidas">Bebidas</option>
               </Form.Select>
             </Form.Group>
 
@@ -113,69 +112,64 @@ const NuevoProducto = ({ editar, titulo }) => {
               {errors.categoria?.message}
             </Form.Text>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Descripción Breve</Form.Label>
-              <Form.Control
-                as="textarea"
-                placeholder="Ej: Una taza de café suave y aromático"
-                className="w-100"
-                {...register("descripcionBreve", {
-                  required: "La Descripcion Breve es Obligatoria",
-                  minLength: {
-                    value: 5,
-                    message:
-                      "La Descripcion Breve del producto debe tener como minimo 25 caracteres",
-                  },
-                  maxLength: {
-                    value: 50,
-                    message:
-                      "La Descripcion Breve del producto debe tener como máximo 120 caracteres",
-                  },
+            <Form.Group className="my-3">
+              <Form.Label className="fw-bold">
+                Estado de Disponibilidad
+              </Form.Label>
+              <Form.Select
+                {...register("estado", {
+                  required: "Selecciona una Categoría",
                 })}
-              />
+              >
+                <option value="" hidden>
+                  -- Seleccione una Opción --
+                </option>
+                <option value="disponible">Disponible</option>
+                <option value="no-disponible">No Disponible</option>
+              </Form.Select>
             </Form.Group>
 
             <Form.Text className="text-danger">
-              {errors.descripcionBreve?.message}
+              {errors.estado?.message}
             </Form.Text>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Descripción Amplia</Form.Label>
+            <Form.Group className="my-3">
+              <Form.Label className="fw-bold">Detalle del Plato</Form.Label>
               <Form.Control
                 as="textarea"
-                placeholder="Ej: El Café americano es una bebida caliente que consiste en un espresso diluido con agua caliente, lo que resulta en una taza de café suave y aromático..."
+                placeholder="Ej: El Mapo Tofu es un plato chino de tofu firme cocinado en una salsa picante y aromática con pasta de frijol fermentado, pasta de chile, ajo y cebolla verde. Es conocido por su sabor picante y numbing (麻辣), típico de la cocina de Sichuan..."
                 className="w-100"
-                {...register("descripcionAmplia", {
-                  required: "La Descripcion Amplia es Obligatoria",
+                {...register("detalle", {
+                  required: "Los Detalle del Plato es Obligatorio",
                   minLength: {
                     value: 50,
                     message:
-                      "La Descripcion Amplia del producto debe tener como minimo 25 caracteres",
+                      "El Detalle del Plato debe tener como minimo 50 caracteres",
                   },
                   maxLength: {
                     value: 300,
                     message:
-                      "La Descripcion Amplia del producto debe tener como máximo 120 caracteres",
+                      "El Detalle del Plato debe tener como máximo 300 caracteres",
                   },
                 })}
               />
             </Form.Group>
 
             <Form.Text className="text-danger">
-              {errors.descripcionAmplia?.message}
+              {errors.detalle?.message}
             </Form.Text>
 
             <Button
-              variant="success"
+              variant="danger"
               type="submit"
-              className="w-100 my-2 fw-bold"
+              className="w-100 my-3 fw-bold"
             >
-              Guardar
+              Guardar Plato
             </Button>
           </Form>
         </section>
       </Container>
-    </>
+    </section>
   );
 };
 
