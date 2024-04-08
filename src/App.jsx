@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Administrador from "./components/pages/Administrador";
 import Registrarse from "./components/Registrarse";
 import Login from "./components/Login/Login";
 import Inicio from "./components/pages/Inicio";
@@ -13,6 +12,7 @@ import Reviews from "./components/Reseñas/Reviews";
 import Nosotros from "./components/pages/nosotros/Nosotros";
 import Carrito from "./components/pages/carrito/Carrito";
 import SeccionMenu from "./components/pages/menus/SeccionMenu";
+import RutasAdministrador from "./components/routes/RutasAdministrador";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/" element={<Inicio />} />
           <Route exact path="/registrarse" element={<Registrarse />} />
           <Route exact path="/ingresar" element={<Login />} />
-          <Route exact path="/administrador" element={<Administrador />} />
+          <Route exact path="/administrador/*" element={<RutasAdministrador />}/>
           <Route exact path="/menu" element={<SeccionMenu />} />
           <Route exact path="/cocina" element={<Cocina />} />
           <Route exact path="/carrito" element={<Carrito />} />
