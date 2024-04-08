@@ -1,4 +1,4 @@
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 
 const NuevoProducto = ({ editar, titulo }) => {
@@ -76,7 +76,7 @@ const NuevoProducto = ({ editar, titulo }) => {
               <Form.Label className="fw-bold">Imagen URL</Form.Label>
               <Form.Control
                 type="url"
-                placeholder="Ej: https://www.pexels.com/es-es/vans-en-blanco-y-negro-fuera-de-la-decoracion-para-colgar-en-la-pared-1230679/"
+                placeholder="Ej: https://images.pexels.com/photos/3026802/pexels-photo-3026802.jpeg"
                 {...register("imagen", {
                   required: "La imagen es obligatoria",
                   pattern: {
@@ -91,47 +91,55 @@ const NuevoProducto = ({ editar, titulo }) => {
               {errors.imagen?.message}
             </Form.Text>
 
-            <Form.Group className="my-3">
-              <Form.Label className="fw-bold">Categoría</Form.Label>
-              <Form.Select
-                {...register("categoria", {
-                  required: "Selecciona una Categoría",
-                })}
-              >
-                <option value="" hidden>
-                  -- Seleccione una Opción --
-                </option>
-                <option value="entradas">Entradas</option>
-                <option value="platos-principales">Platos Principales</option>
-                <option value="postres">Postres</option>
-                <option value="bebidas">Bebidas</option>
-              </Form.Select>
-            </Form.Group>
+            <Row>
+              <div className="col-md-6">
+                <Form.Group className="my-3">
+                  <Form.Label className="fw-bold">Categoría</Form.Label>
+                  <Form.Select
+                    {...register("categoria", {
+                      required: "Selecciona una Categoría",
+                    })}
+                  >
+                    <option value="" hidden>
+                      -- Seleccione una Opción --
+                    </option>
+                    <option value="entradas">Entradas</option>
+                    <option value="platos-principales">
+                      Platos Principales
+                    </option>
+                    <option value="postres">Postres</option>
+                    <option value="bebidas">Bebidas</option>
+                  </Form.Select>
+                </Form.Group>
 
-            <Form.Text className="text-danger">
-              {errors.categoria?.message}
-            </Form.Text>
+                <Form.Text className="text-danger">
+                  {errors.categoria?.message}
+                </Form.Text>
+              </div>
 
-            <Form.Group className="my-3">
-              <Form.Label className="fw-bold">
-                Estado de Disponibilidad
-              </Form.Label>
-              <Form.Select
-                {...register("estado", {
-                  required: "Selecciona una Categoría",
-                })}
-              >
-                <option value="" hidden>
-                  -- Seleccione una Opción --
-                </option>
-                <option value="disponible">Disponible</option>
-                <option value="no-disponible">No Disponible</option>
-              </Form.Select>
-            </Form.Group>
+              <div className="col-md-6">
+                <Form.Group className="my-3">
+                  <Form.Label className="fw-bold">
+                    Estado de Disponibilidad
+                  </Form.Label>
+                  <Form.Select
+                    {...register("estado", {
+                      required: "Selecciona una Categoría",
+                    })}
+                  >
+                    <option value="" hidden>
+                      -- Seleccione una Opción --
+                    </option>
+                    <option value="disponible">Disponible</option>
+                    <option value="no-disponible">No Disponible</option>
+                  </Form.Select>
+                </Form.Group>
 
-            <Form.Text className="text-danger">
-              {errors.estado?.message}
-            </Form.Text>
+                <Form.Text className="text-danger">
+                  {errors.estado?.message}
+                </Form.Text>
+              </div>
+            </Row>
 
             <Form.Group className="my-3">
               <Form.Label className="fw-bold">Detalle del Plato</Form.Label>
