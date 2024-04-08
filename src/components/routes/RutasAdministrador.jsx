@@ -12,11 +12,6 @@ const RutasAdministrador = () => {
           path="/agregar-producto"
           element={<NuevoProducto editar={false} titulo="Agregar Nuevo Plato" />}
         />
-        <Route
-          exact
-          path="/editar-producto/:id"
-          element={<NuevoProducto editar={true} titulo="Editar Producto" />}
-        />
       </Routes>
     </>
   );
