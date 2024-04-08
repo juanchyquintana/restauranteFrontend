@@ -12,24 +12,26 @@ import Contacto from "./components/pages/contacto/Contacto";
 import Reviews from "./components/Reseñas/Reviews";
 import Nosotros from "./components/pages/nosotros/Nosotros";
 import Carrito from "./components/pages/carrito/Carrito";
+import SeccionMenu from "./components/pages/menus/SeccionMenu";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Menu />
-          <Routes>
-            <Route exact path="/" element={<Inicio />} />
-            <Route exact path="/registrarse" element={<Registrarse />} />
-            <Route exact path="/ingresar" element={<Login />} />
-            <Route exact path="/administrador" element={<Administrador />} />
-            <Route exact path="/cocina" element={<Cocina />} />
-            <Route exact path="/carrito" element={<Carrito />} />
-            <Route exact path="/contacto" element={<Contacto />} />
-            <Route exact path="/reseñas" element={<Reviews />} />
-            <Route exact path="/nosotros" element={<Nosotros />} />
-            <Route path="*" element={<Error404></Error404>}></Route>
-          </Routes>
+        <Routes>
+          <Route exact path="/" element={<Inicio />} />
+          <Route exact path="/registrarse" element={<Registrarse />} />
+          <Route exact path="/ingresar" element={<Login />} />
+          <Route exact path="/administrador" element={<Administrador />} />
+          <Route exact path="/menu" element={<SeccionMenu />} />
+          <Route exact path="/cocina" element={<Cocina />} />
+          <Route exact path="/carrito" element={<Carrito />} />
+          <Route exact path="/contacto" element={<Contacto />} />
+          <Route exact path="/reseñas" element={<Reviews />} />
+          <Route exact path="/nosotros" element={<Nosotros />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
         <Footer />
       </BrowserRouter>
     </>
