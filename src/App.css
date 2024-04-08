@@ -6,7 +6,11 @@
   min-height: 100vh;
 }
 
-.mainPage {
+.mainPage{
   flex-grow: 1;
+}
+
+.nav-espacio{
+  padding-top: 80px;
 }
 

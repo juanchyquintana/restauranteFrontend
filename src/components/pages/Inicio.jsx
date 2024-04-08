@@ -2,11 +2,13 @@ import { Container, Row } from "react-bootstrap";
 import Cardevento from "./placas/Cardevento";
 import Cardlink from "./placas/Cardlink";
 import './inicio.css'
+import Reviews from "../Reseñas/Reviews";
 
 const Inicio = () => {
   return (
     <>
       <section className="banner-imagen w-100 vh-100 d-flex justify-content-center align-item-center"></section>
+
       <section className="banner-imagen3 d-flex w-100 vh-100  justify-content-center align-item-center">
         <div className="row w-50 d-flex">
           <div className="col text-light text-center w-100 col-sm-1">
@@ -27,6 +29,7 @@ const Inicio = () => {
           </div>
         </div>
       </section>
+
       <section className="banner-imagen2 w-100 vh-100 d-flex justify-content-center align-item-center mt-0">
         <Container className="mt-5">
           <h1 className="display-4 text-center text-light">
@@ -39,6 +42,7 @@ const Inicio = () => {
           </Row>
         </Container>
       </section>
+
       <section className="banner-imagen4 w-100 vh-100 d-flex justify-content-center align-item-center">
         <Container className="mt-5">
           <h1 className="display-4 text-center text-light">
@@ -51,6 +55,10 @@ const Inicio = () => {
           </Row>
         </Container>
       </section>
+
+      {/* <section className="container">
+        <Reviews />
+      </section> */}
     </>
   );
 };

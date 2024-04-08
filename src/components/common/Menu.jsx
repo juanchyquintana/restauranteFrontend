@@ -34,9 +34,12 @@ const Menu = () => {
           <Nav className="ms-auto centrarNav">
             <Link to="/" className='text-light nav-link'>Inicio</Link>
             <Link to="/administrador" className='text-light nav-link'>Administrador</Link>
-            <Link to="/cocina" className='text-light nav-link'>Cocina</Link>
+            <Link to="/cocina"  className='text-light nav-link'>Cocina</Link>
+            <Link to="/contacto" className='text-light nav-link'>Contacto</Link>
+            <Link to="/nosotros" className='text-light nav-link'>Sobre nosotros</Link>
             <Link to="/ingresar" className='text-light nav-link'>Login</Link>
             <Link to="/registrarse" className='text-light nav-link'>Register</Link>
+            
           </Nav>
         </Navbar.Collapse>
       </Container>
