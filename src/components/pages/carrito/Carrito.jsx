@@ -1,5 +1,13 @@
 import "./carrito.css";
+import 'leaflet/dist/leaflet.css';
 import { Container, Table, Form, Button } from "react-bootstrap";
+import {
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+  useMap,
+} from "react-leaflet"
 
 const Carrito = () => {
   return (
@@ -81,14 +89,34 @@ const Carrito = () => {
                 <td>$250</td>
               </tr>
               <tr>
-                <td colSpan={5} className="text-end fw-bold pe-lg-5 bg-dark text-white">
-                Total: $250
+                <td
+                  colSpan={5}
+                  className="text-end fw-bold pe-lg-5 bg-dark text-white"
+                >
+                  Total: $250
                 </td>
               </tr>
             </tbody>
           </Table>
         </div>
-        <Container>Aca poner el mapa</Container>
+
+          <MapContainer
+            center={[51.505, -0.09]}
+            zoom={13}
+            scrollWheelZoom={false}
+            className="map-container"
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[51.505, -0.09]}>
+              <Popup>
+                A pretty CSS3 popup. <br /> Easily customizable.
+              </Popup>
+            </Marker>
+          </MapContainer>
+
         <Container className="d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
           <Button>Realizar pedido</Button>
         </Container>
