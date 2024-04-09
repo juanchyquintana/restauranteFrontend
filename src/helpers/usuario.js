@@ -14,3 +14,7 @@ export const registrarUsuario = async (usuario) => {
         console.log(error)
     }
 }
+
+export const loginUsuario = async (usuario) => {
+    
+}
