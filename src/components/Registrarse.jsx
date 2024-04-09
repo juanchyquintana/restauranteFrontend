@@ -31,11 +31,9 @@ const Registrarse = () => {
           icon: "success",
           title: datos.mensaje,
           showConfirmButton: true,
-          preConfirm: () => {
-            navegar('/')
-          }
         })
         reset()
+        navegar("/")
       } else {
         Swal.fire({
           position: "center",
