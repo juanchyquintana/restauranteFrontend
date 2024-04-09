@@ -1,9 +1,10 @@
+import "../components/Login/login.css";
 import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import backgroundImg from "./../assets/Login/backgroundImg.webp";
 import formImg from "./../assets/Login/formImage.webp";
-import "../components/Login/login.css";
 import { registrarUsuario } from "../helpers/usuario";
+import Swal from "sweetalert2";
 
 const Registrarse = () => {
   const {
@@ -20,6 +21,22 @@ const Registrarse = () => {
     datosUsuario.tipoUsuario = "usuario";
     try {
       const respuesta = await registrarUsuario(datosUsuario);
+      const datos = await respuesta.json();
+      if (respuesta.status === 201) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: datos.mensaje,
+          showConfirmButton: true,
+        })
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: datos.mensaje,
+          showConfirmButton: true,
+        })
+      }
     } catch (error) {
       console.log(error);
     }
