@@ -76,14 +76,15 @@ const Registrarse = () => {
                   <Form.Control
                     type="email"
                     placeholder="Ej: pepito12@gmail.com"
+                    maxLength={250}
                     {...register("email", {
                       required: "El Email es Obligatorio.",
                       minLength: {
-                        value: 4,
+                        value: 3,
                         message: "El Email debe contener al menos 4 caracteres",
                       },
                       maxLength: {
-                        value: 250,
+                        value: 254,
                         message:
                           "El email debe contener como máximo 250 caracteres",
                       },
@@ -108,6 +109,7 @@ const Registrarse = () => {
                   <Form.Control
                     type="password"
                     placeholder="Ingrese un Password"
+                    maxLength={64}
                     {...register("password", {
                       required: "El Password es Obligatorio.",
                       minLength: {
@@ -123,6 +125,9 @@ const Registrarse = () => {
                     })}
                   />
                 </Form.Group>
+                <Form.Text className="text-danger fw-bold">
+                  {errors.password?.message}
+                </Form.Text>
 
                 <Form.Group
                   className="my-3"
@@ -134,6 +139,7 @@ const Registrarse = () => {
                   <Form.Control
                     type="password"
                     placeholder="Ingrese un Password"
+                    maxLength={64}
                     {...register("confirmPassword", {
                       required: "El Password es Obligatorio.",
                       minLength: {
