@@ -17,7 +17,7 @@ export const registrarUsuario = async (usuario) => {
 
 export const loginUsuario = async (usuario) => {
   try {
-    const respuesta = await fetch(`${usuarioURL}`, {
+    const respuesta = await fetch(`${usuarioURL}/usuarios/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

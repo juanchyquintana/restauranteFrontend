@@ -3,6 +3,9 @@ import backgroundImg from "../../assets/Login/backgroundImg.webp";
 import formImg from "../../assets/Login/formImage.webp";
 import "./login.css";
 import { useForm } from "react-hook-form";
+import { loginUsuario } from "../../helpers/usuario";
+import { useNavigate } from "react-router";
+import Swal from 'sweetalert2'
 
 const Login = () => {
   const {
@@ -11,7 +14,29 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const validarFormulario = () => {};
+  const navegacion = useNavigate();
+
+  const login = async (usuario) => {
+    try {
+      const respuesta = await loginUsuario(usuario);
+      console.log(respuesta)
+      if (respuesta.status === 200) {
+        Swal.fire("¡Bienvenido!", "Has iniciado sesión correctamente", "success");
+
+        const datos = await respuesta.json();
+        sessionStorage.setItem(
+          "usuarioLotus",
+          JSON.stringify({ email: datos.email, token: datos.token })
+        );
+
+        navegacion("/administrador");
+      } else {
+        Swal.fire("Ocurrió un error", "Correo o contraseña incorrectos", "error");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
 
   return (
     <section className="mainPage login-container p-0 m-0 d-flex flex-column justify-content-center">
@@ -28,7 +53,7 @@ const Login = () => {
 
           <div className="col-lg-6 d-flex flex-column justify-content-center align-items-lg-center">
           <h2 className="text-center mb-3">¡Bienvenido!</h2>
-            <Form onSubmit={handleSubmit(validarFormulario)}
+            <Form onSubmit={handleSubmit(login)}
             className="formulario">
               <Form.Group>
                 <Form.Label htmlFor="correo">Correo</Form.Label>
