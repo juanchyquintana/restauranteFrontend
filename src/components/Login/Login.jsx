@@ -7,7 +7,7 @@ import { loginUsuario } from "../../helpers/usuario";
 import { useNavigate } from "react-router";
 import Swal from 'sweetalert2'
 
-const Login = () => {
+const Login = ({ setUsuarioLogueado }) => {
   const {
     register,
     handleSubmit,
@@ -21,15 +21,22 @@ const Login = () => {
       const respuesta = await loginUsuario(usuario);
       console.log(respuesta)
       if (respuesta.status === 200) {
-        Swal.fire("¡Bienvenido!", "Has iniciado sesión correctamente", "success");
-
         const datos = await respuesta.json();
+
         sessionStorage.setItem(
           "usuarioLotus",
-          JSON.stringify({ email: datos.email, token: datos.token })
+          JSON.stringify({ email: datos.email, token: datos.token, tipoUsuario: datos.tipoUsuario })
         );
+        setUsuarioLogueado(datos);
 
-        navegacion("/administrador");
+        Swal.fire("¡Bienvenido!", "Has iniciado sesión correctamente", "success");
+
+        if (datos.tipoUsuario === "admin") {
+          navegacion("/administrador");
+        } else {
+          navegacion("/");
+        }
+
       } else {
         Swal.fire("Ocurrió un error", "Correo o contraseña incorrectos", "error");
       }
