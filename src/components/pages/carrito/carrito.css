@@ -9,3 +9,8 @@
    width: auto;
    max-width: 100px;
 }
+
+.map-container {
+    height: 450px; /* o la altura deseada */
+    width: 100%; /* o el ancho deseado */
+  }
