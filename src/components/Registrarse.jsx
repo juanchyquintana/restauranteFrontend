@@ -1,24 +1,50 @@
+import "../components/Login/login.css";
 import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import backgroundImg from "./../assets/Login/backgroundImg.webp";
 import formImg from "./../assets/Login/formImage.webp";
-import "../components/Login/login.css";
+import { registrarUsuario } from "../helpers/usuario";
+import Swal from "sweetalert2";
 
 const Registrarse = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
+  const password = watch("password", "");
 
-  const crearUsuario = () => {
-    // TODO: Escribir logica para crear un usuario
+  const crearUsuario = async (formRegistro) => {
+    const { confirmPassword, ...datosUsuario } = formRegistro;
+    datosUsuario.estado = "activo";
+    datosUsuario.tipoUsuario = "usuario";
+    try {
+      const respuesta = await registrarUsuario(datosUsuario);
+      const datos = await respuesta.json();
+      if (respuesta.status === 201) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: datos.mensaje,
+          showConfirmButton: true,
+        })
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: datos.mensaje,
+          showConfirmButton: true,
+        })
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <section className="login-container p-0 m-0 mainPage d-flex flex-column justify-content-center">
-        
         <div className="background-img-container bg-black">
           <img src={backgroundImg} className="img-blur-ingreso" />
         </div>
@@ -32,7 +58,7 @@ const Registrarse = () => {
             <div className="col-lg-6 py-3 d-flex flex-column  justify-content-center">
               <h2 className="text-center mb-3">¡Crear Cuenta!</h2>
 
-              <Form onClick={handleSubmit(crearUsuario)}>
+              <Form onSubmit={handleSubmit(crearUsuario)}>
                 <Form.Group className="mb-3" controlId="formBasicNombre">
                   <Form.Label className="text-uppercase fw-bold">
                     Nombre Completo
@@ -41,8 +67,7 @@ const Registrarse = () => {
                     type="text"
                     placeholder="Ingrese su Nombre Completo"
                     {...register("nombre", {
-                      required:
-                        "El Nombre es Obligatorio.",
+                      required: "El Nombre es Obligatorio.",
                       minLength: {
                         value: 3,
                         message:
@@ -68,15 +93,15 @@ const Registrarse = () => {
                   <Form.Control
                     type="email"
                     placeholder="Ej: pepito12@gmail.com"
+                    maxLength={250}
                     {...register("email", {
-                      required:
-                        "El Email es Obligatorio.",
+                      required: "El Email es Obligatorio.",
                       minLength: {
-                        value: 4,
+                        value: 3,
                         message: "El Email debe contener al menos 4 caracteres",
                       },
                       maxLength: {
-                        value: 250,
+                        value: 254,
                         message:
                           "El email debe contener como máximo 250 caracteres",
                       },
@@ -101,20 +126,57 @@ const Registrarse = () => {
                   <Form.Control
                     type="password"
                     placeholder="Ingrese un Password"
+                    maxLength={64}
                     {...register("password", {
-                      required:
-                        "El Password es Obligatorio.",
+                      required: "El Password es Obligatorio.",
                       minLength: {
-                        value: 4,
+                        value: 8,
                         message:
-                          "El Password debe contener al menos 4 caracteres.",
+                          "El Password debe contener al menos 8 caracteres.",
                       },
+                      maxLength: {
+                        value: 64,
+                        message:
+                          "El password debe contener como máximo 64 caracteres",
+                      },
+                    })}
+                  />
+                </Form.Group>
+                <Form.Text className="text-danger fw-bold">
+                  {errors.password?.message}
+                </Form.Text>
+
+                <Form.Group
+                  className="my-3"
+                  controlId="formBasicConfirmPassword"
+                >
+                  <Form.Label className="text-uppercase fw-bold">
+                    confirmar Password
+                  </Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Ingrese un Password"
+                    maxLength={64}
+                    {...register("confirmPassword", {
+                      required: "El Password es Obligatorio.",
+                      minLength: {
+                        value: 8,
+                        message:
+                          "El Password debe contener al menos 8 caracteres.",
+                      },
+                      maxLength: {
+                        value: 64,
+                        message:
+                          "El password debe contener como máximo 64 caracteres",
+                      },
+                      validate: (value) =>
+                        value === password || "Las contraseñas no coinciden",
                     })}
                   />
                 </Form.Group>
 
                 <Form.Text className="text-danger fw-bold">
-                  {errors.password?.message}
+                  {errors.confirmPassword?.message}
                 </Form.Text>
 
                 <Button
@@ -129,8 +191,6 @@ const Registrarse = () => {
           </div>
         </div>
       </section>
-
-
     </>
   );
 };
