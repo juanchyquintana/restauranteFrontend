@@ -5,15 +5,18 @@ import backgroundImg from "./../assets/Login/backgroundImg.webp";
 import formImg from "./../assets/Login/formImage.webp";
 import { registrarUsuario } from "../helpers/usuario";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const Registrarse = () => {
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
   const password = watch("password", "");
+  const navegar = useNavigate()
 
   const crearUsuario = async (formRegistro) => {
     const { confirmPassword, ...datosUsuario } = formRegistro;
@@ -28,7 +31,11 @@ const Registrarse = () => {
           icon: "success",
           title: datos.mensaje,
           showConfirmButton: true,
+          preConfirm: () => {
+            navegar('/')
+          }
         })
+        reset()
       } else {
         Swal.fire({
           position: "center",
