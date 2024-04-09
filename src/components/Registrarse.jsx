@@ -12,19 +12,22 @@ const Registrarse = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const password = watch("password", "");
 
-  const password = watch("password", "")
-
-  const crearUsuario = (formRegistro) => {
-    // TODO: Escribir logica para crear un usuario
-    registrarUsuario()
-    console.log(formRegistro)
+  const crearUsuario = async (formRegistro) => {
+    const { confirmPassword, ...datosUsuario } = formRegistro;
+    datosUsuario.estado = "activo";
+    datosUsuario.tipoUsuario = "usuario";
+    try {
+      const respuesta = await registrarUsuario(datosUsuario);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <section className="login-container p-0 m-0 mainPage d-flex flex-column justify-content-center">
-        
         <div className="background-img-container bg-black">
           <img src={backgroundImg} className="img-blur-ingreso" />
         </div>
@@ -47,8 +50,7 @@ const Registrarse = () => {
                     type="text"
                     placeholder="Ingrese su Nombre Completo"
                     {...register("nombre", {
-                      required:
-                        "El Nombre es Obligatorio.",
+                      required: "El Nombre es Obligatorio.",
                       minLength: {
                         value: 3,
                         message:
@@ -75,8 +77,7 @@ const Registrarse = () => {
                     type="email"
                     placeholder="Ej: pepito12@gmail.com"
                     {...register("email", {
-                      required:
-                        "El Email es Obligatorio.",
+                      required: "El Email es Obligatorio.",
                       minLength: {
                         value: 4,
                         message: "El Email debe contener al menos 4 caracteres",
@@ -108,18 +109,25 @@ const Registrarse = () => {
                     type="password"
                     placeholder="Ingrese un Password"
                     {...register("password", {
-                      required:
-                        "El Password es Obligatorio.",
+                      required: "El Password es Obligatorio.",
                       minLength: {
-                        value: 4,
+                        value: 8,
                         message:
-                          "El Password debe contener al menos 4 caracteres.",
+                          "El Password debe contener al menos 8 caracteres.",
+                      },
+                      maxLength: {
+                        value: 64,
+                        message:
+                          "El password debe contener como máximo 64 caracteres",
                       },
                     })}
                   />
                 </Form.Group>
 
-                <Form.Group className="my-3" controlId="formBasicConfirmPassword">
+                <Form.Group
+                  className="my-3"
+                  controlId="formBasicConfirmPassword"
+                >
                   <Form.Label className="text-uppercase fw-bold">
                     Repetir Password
                   </Form.Label>
@@ -127,14 +135,19 @@ const Registrarse = () => {
                     type="password"
                     placeholder="Ingrese un Password"
                     {...register("confirmPassword", {
-                      required:
-                        "El Password es Obligatorio.",
+                      required: "El Password es Obligatorio.",
                       minLength: {
-                        value: 4,
+                        value: 8,
                         message:
-                          "El Password debe contener al menos 4 caracteres.",
+                          "El Password debe contener al menos 8 caracteres.",
                       },
-                      validate: value => value === password || "Las contraseñas no coinciden"
+                      maxLength: {
+                        value: 64,
+                        message:
+                          "El password debe contener como máximo 64 caracteres",
+                      },
+                      validate: (value) =>
+                        value === password || "Las contraseñas no coinciden",
                     })}
                   />
                 </Form.Group>
@@ -155,8 +168,6 @@ const Registrarse = () => {
           </div>
         </div>
       </section>
-
-
     </>
   );
 };
