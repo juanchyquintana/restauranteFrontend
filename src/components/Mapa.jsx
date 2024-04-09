@@ -1,52 +1,66 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
 
-const Mapa = ({ datos }) => {
+const Mapa = ({ datos, actualizarCarrito }) => {
   const [lat, setLat] = useState(datos.lat || -26.8301695);
   const [lng, setLng] = useState(datos.lng || -65.2044388);
-  const [calle, setCalle] = useState(datos.calle || "");
+  const [calle, setCalle] = useState("");
+
+  
+  const actualizarDireccion = (direccion) => {
+    setCalle(direccion);
+    if (actualizarCarrito) {
+      actualizarCarrito(direccion);
+    }
+  };
 
   useEffect(() => {
-    const mapa = L.map("mapa").setView([lat, lng], 15);
-    let marker;
+    if (datos.delivery) {
+      const mapa = L.map("mapa").setView([lat, lng], 15);
+      let marker;
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(mapa);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(mapa);
 
-    marker = new L.marker([lat, lng], {
-      draggable: true,
-      autoPan: true,
-    }).addTo(mapa);
+      marker = new L.marker([lat, lng], {
+        draggable: true,
+        autoPan: true,
+      }).addTo(mapa);
 
-    const provider = new OpenStreetMapProvider({
-      params: {
-        bounded: 1,
-        viewbox: "-65.5,-27,-64.5,-26",
-        countrycodes: "AR",
-      },
-    });
+      const provider = new OpenStreetMapProvider({
+        params: {
+          bounded: 1,
+          viewbox: "-65.5,-27,-64.5,-26",
+          countrycodes: "AR",
+        },
+      });
 
-    marker.on("moveend", (e) => {
-      const posicion = e.target.getLatLng();
-      setLat(posicion.lat);
-      setLng(posicion.lng);
+      marker.bindPopup("¡Aquí estoy!").openPopup();
 
-      provider
-        .search({ query: `${posicion.lat},${posicion.lng}` })
-        .then((results) => {
-          const result = results[0];
-          setCalle(result.label);
-        });
-    });
+      marker.on("moveend", (e) => {
+        const posicion = e.target.getLatLng();
+        setLat(posicion.lat);
+        setLng(posicion.lng);
 
-    return () => {
-      mapa.remove();
-    };
-  }, [lat, lng]);
+        provider
+          .search({ query: `${posicion.lat},${posicion.lng}` })
+          .then((resultados) => {
+            const resultado = resultados[0];
+            const calle = `${resultado.label}`;
+            setCalle(calle);
+            actualizarDireccion(calle);
+          });
+      });
+
+      return () => {
+        mapa.remove();
+      };
+    }
+  }, [datos.delivery]);
 
   return (
     <div>
@@ -58,24 +72,9 @@ const Mapa = ({ datos }) => {
         value={calle}
         onChange={(e) => setCalle(e.target.value)}
       />
-      <input
-        type="hidden"
-        name="calle"
-        id="calle"
-        value={calle}
-      />
-      <input
-        type="hidden"
-        name="lat"
-        id="lat"
-        value={lat}
-      />
-      <input
-        type="hidden"
-        name="lng"
-        id="lng"
-        value={lng}
-      />
+      <input type="hidden" name="calle" id="calle" value={calle} />
+      <input type="hidden" name="lat" id="lat" value={lat} />
+      <input type="hidden" name="lng" id="lng" value={lng} />
     </div>
   );
 };

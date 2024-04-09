@@ -5,10 +5,15 @@ import "./carrito.css";
 import Mapa from "../../Mapa";
 
 const Carrito = () => {
-  const [delivery, setDelivery] = useState(false);
+  const [datos, setDatos] = useState({
+    lat: -26.8301695,
+    lng: -65.2044388,
+    delivery: false,
+    calle: "",
+  });
 
-  const handleDeliveryChange = () => {
-    setDelivery(!delivery);
+  const actualizarCarrito = (direccion) => {
+    setDatos({ ...datos, delivery: true, calle: direccion });
   };
 
   return (
@@ -103,14 +108,14 @@ const Carrito = () => {
           <Form.Check
             type="checkbox"
             label="¿Delivery?"
-            className="fw-bold text-uppercase"
-            checked={delivery}
-            onChange={handleDeliveryChange}
+            className="fw-bold text-uppercase my-3 "
+            checked={datos.delivery}
+            onChange={() => setDatos({ ...datos, delivery: !datos.delivery })}
           />
         </div>
 
-        {delivery && (
-          <Mapa datos={{ lat: -26.8301695, lng: -65.2044388, delivery }} />
+        {datos.delivery && (
+          <Mapa datos={datos} actualizarCarrito={actualizarCarrito} />
         )}
 
         <Container className="d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
