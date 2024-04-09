@@ -1,8 +1,8 @@
 import { Container, Table, Form, Button } from "react-bootstrap";
 import { useState } from "react";
+import Mapa from "../../Mapa";
 import "leaflet/dist/leaflet.css";
 import "./carrito.css";
-import Mapa from "../../Mapa";
 
 const Carrito = () => {
   const [datos, setDatos] = useState({
@@ -31,48 +31,6 @@ const Carrito = () => {
               </tr>
             </thead>
             <tbody>
-              <tr className="align-text-bottom text-center">
-                <td>Sushi 12 piezas</td>
-                <td>
-                  <img
-                    src="https://images.pexels.com/photos/2098085/pexels-photo-2098085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="sushi"
-                    className="img-tabla"
-                  />
-                </td>
-                <td>$250</td>
-                <td>
-                  <Form className="d-flex justify-content-center">
-                    <Form.Control
-                      type="number"
-                      className="text-center input-tabla"
-                      value={1}
-                    />
-                  </Form>
-                </td>
-                <td>$250</td>
-              </tr>
-              <tr className="align-text-bottom text-center">
-                <td>Sushi 12 piezas</td>
-                <td>
-                  <img
-                    src="https://images.pexels.com/photos/2098085/pexels-photo-2098085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="sushi"
-                    className="img-tabla"
-                  />
-                </td>
-                <td>$250</td>
-                <td>
-                  <Form className="d-flex justify-content-center">
-                    <Form.Control
-                      type="number"
-                      className="text-center input-tabla"
-                      value={1}
-                    />
-                  </Form>
-                </td>
-                <td>$250</td>
-              </tr>
               <tr className="align-text-bottom text-center">
                 <td>Sushi 12 piezas</td>
                 <td>

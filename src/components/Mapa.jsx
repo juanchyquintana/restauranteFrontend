@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 import { OpenStreetMapProvider } from "leaflet-geosearch";
+import { useEffect, useState } from "react";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 
 const Mapa = ({ datos, actualizarCarrito }) => {
   const [lat, setLat] = useState(datos.lat || -26.8301695);
   const [lng, setLng] = useState(datos.lng || -65.2044388);
   const [calle, setCalle] = useState("");
 
-  
   const actualizarDireccion = (direccion) => {
     setCalle(direccion);
+
     if (actualizarCarrito) {
       actualizarCarrito(direccion);
     }
@@ -40,7 +40,6 @@ const Mapa = ({ datos, actualizarCarrito }) => {
       });
 
       marker.bindPopup("¡Aquí estoy!").openPopup();
-
       marker.on("moveend", (e) => {
         const posicion = e.target.getLatLng();
         setLat(posicion.lat);
@@ -64,13 +63,14 @@ const Mapa = ({ datos, actualizarCarrito }) => {
 
   return (
     <div>
-      <div id="mapa" style={{ height: "400px" }}></div>
+      <div id="mapa" className="shadow" style={{ height: "400px" }}></div>
       <input
         type="text"
-        placeholder="Escribe la calle"
-        className="form-control"
+        placeholder="Su direccion es..."
+        className="form-control mt-3 p-2"
         value={calle}
         onChange={(e) => setCalle(e.target.value)}
+        readOnly
       />
       <input type="hidden" name="calle" id="calle" value={calle} />
       <input type="hidden" name="lat" id="lat" value={lat} />
