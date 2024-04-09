@@ -1,15 +1,16 @@
-import "./carrito.css";
-import 'leaflet/dist/leaflet.css';
 import { Container, Table, Form, Button } from "react-bootstrap";
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-} from "react-leaflet"
+import { useState } from "react";
+import "leaflet/dist/leaflet.css";
+import "./carrito.css";
+import Mapa from "../../Mapa";
 
 const Carrito = () => {
+  const [delivery, setDelivery] = useState(false);
+
+  const handleDeliveryChange = () => {
+    setDelivery(!delivery);
+  };
+
   return (
     <section className="mainPage nav-espacio bg-light d-flex justify-content-center">
       <Container className="">
@@ -98,24 +99,19 @@ const Carrito = () => {
               </tr>
             </tbody>
           </Table>
+
+          <Form.Check
+            type="checkbox"
+            label="¿Delivery?"
+            className="fw-bold text-uppercase"
+            checked={delivery}
+            onChange={handleDeliveryChange}
+          />
         </div>
 
-          <MapContainer
-            center={[51.505, -0.09]}
-            zoom={13}
-            scrollWheelZoom={false}
-            className="map-container"
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker position={[51.505, -0.09]}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
-          </MapContainer>
+        {delivery && (
+          <Mapa datos={{ lat: -26.8301695, lng: -65.2044388, delivery }} />
+        )}
 
         <Container className="d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
           <Button>Realizar pedido</Button>
