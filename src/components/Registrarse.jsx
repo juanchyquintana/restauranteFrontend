@@ -3,16 +3,22 @@ import { useForm } from "react-hook-form";
 import backgroundImg from "./../assets/Login/backgroundImg.webp";
 import formImg from "./../assets/Login/formImage.webp";
 import "../components/Login/login.css";
+import { registrarUsuario } from "../helpers/usuario";
 
 const Registrarse = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
-  const crearUsuario = () => {
+  const password = watch("password", "")
+
+  const crearUsuario = (formRegistro) => {
     // TODO: Escribir logica para crear un usuario
+    registrarUsuario()
+    console.log(formRegistro)
   };
 
   return (
@@ -32,7 +38,7 @@ const Registrarse = () => {
             <div className="col-lg-6 py-3 d-flex flex-column  justify-content-center">
               <h2 className="text-center mb-3">¡Crear Cuenta!</h2>
 
-              <Form onClick={handleSubmit(crearUsuario)}>
+              <Form onSubmit={handleSubmit(crearUsuario)}>
                 <Form.Group className="mb-3" controlId="formBasicNombre">
                   <Form.Label className="text-uppercase fw-bold">
                     Nombre Completo
@@ -113,8 +119,28 @@ const Registrarse = () => {
                   />
                 </Form.Group>
 
+                <Form.Group className="my-3" controlId="formBasicConfirmPassword">
+                  <Form.Label className="text-uppercase fw-bold">
+                    Repetir Password
+                  </Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Ingrese un Password"
+                    {...register("confirmPassword", {
+                      required:
+                        "El Password es Obligatorio.",
+                      minLength: {
+                        value: 4,
+                        message:
+                          "El Password debe contener al menos 4 caracteres.",
+                      },
+                      validate: value => value === password || "Las contraseñas no coinciden"
+                    })}
+                  />
+                </Form.Group>
+
                 <Form.Text className="text-danger fw-bold">
-                  {errors.password?.message}
+                  {errors.confirmPassword?.message}
                 </Form.Text>
 
                 <Button
