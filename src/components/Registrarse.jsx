@@ -151,7 +151,7 @@ const Registrarse = () => {
                   controlId="formBasicConfirmPassword"
                 >
                   <Form.Label className="text-uppercase fw-bold">
-                    Repetir Password
+                    confirmar Password
                   </Form.Label>
                   <Form.Control
                     type="password"
