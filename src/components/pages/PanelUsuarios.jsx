@@ -1,7 +1,20 @@
 import { Container, Table } from "react-bootstrap";
 import ItemUsuarios from "../ItemUsuarios";
+import { useEffect, useState } from "react";
 
 const PanelUsuarios = () => {
+    const [ usuarios, setUsuarios ] = useState([]);
+
+    useEffect(() => {
+        const consultarUsuario = async () => {
+            try {
+                
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }, [])
+    
   return (
     <>
       <Container>

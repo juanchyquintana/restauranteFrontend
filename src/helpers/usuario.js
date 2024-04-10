@@ -31,3 +31,14 @@ export const loginUsuario = async (usuario) => {
     return;
   }
 };
+
+export const leerUsuariosAPI = async () => {
+  try {
+    const respuesta = await fetch(usuarioURL)
+    const resultado = await respuesta.json()
+
+    return resultado
+  } catch (error) {
+    console.log(error)
+  }
+}
