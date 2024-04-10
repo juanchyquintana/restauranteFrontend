@@ -1,7 +1,7 @@
-import { Container, Table } from "react-bootstrap";
-import ItemUsuarios from "../ItemUsuarios";
-import { useEffect, useState } from "react";
 import { leerUsuariosAPI } from "../../helpers/usuario";
+import { Container, Table } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import ItemUsuarios from "../ItemUsuarios";
 
 const PanelUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -28,7 +28,7 @@ const PanelUsuarios = () => {
 
           <hr />
 
-          <Table responsive>
+          <Table responsive striped bordered>
             <thead>
               <tr>
                 <th>Usuario</th>
@@ -42,7 +42,7 @@ const PanelUsuarios = () => {
             <tbody>
               {usuarios.map((usuario) => (
                 <ItemUsuarios 
-                    key={usuario.id}
+                    key={usuario._id}
                     usuario={usuario}
                     setUsuarios={setUsuarios}
                 />
