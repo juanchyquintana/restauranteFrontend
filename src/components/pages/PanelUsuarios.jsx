@@ -1,20 +1,23 @@
 import { Container, Table } from "react-bootstrap";
 import ItemUsuarios from "../ItemUsuarios";
 import { useEffect, useState } from "react";
+import { leerUsuariosAPI } from "../../helpers/usuario";
 
 const PanelUsuarios = () => {
-    const [ usuarios, setUsuarios ] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
 
-    useEffect(() => {
-        const consultarUsuario = async () => {
-            try {
-                
-            } catch (error) {
-                console.log(error)
-            }
-        }
-    }, [])
-    
+  useEffect(() => {
+    const consultarUsuario = async () => {
+      try {
+        const respuesta = await leerUsuariosAPI();
+        setUsuarios(respuesta);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    consultarUsuario();
+  }, []);
+
   return (
     <>
       <Container>
@@ -37,13 +40,19 @@ const PanelUsuarios = () => {
             </thead>
 
             <tbody>
-              <ItemUsuarios />
+              {usuarios.map((usuario) => (
+                <ItemUsuarios 
+                    key={usuario.id}
+                    usuario={usuario}
+                    setUsuarios={setUsuarios}
+                />
+              ))}
             </tbody>
           </Table>
         </section>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default PanelUsuarios
+export default PanelUsuarios;

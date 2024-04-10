@@ -11,9 +11,7 @@ const ItemUsuarios = () => {
           <option value="inactivo">Inactivo</option>
         </Form.Select>
       </td>
-      <td>
-        <td>Administrador or Usuario</td>
-      </td>
+      <td>Administrador or Usuario</td>
       <td>
         <div className="d-flex gap-2">
           <button className="btn btn-danger">

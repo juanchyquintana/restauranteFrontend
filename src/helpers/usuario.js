@@ -34,7 +34,7 @@ export const loginUsuario = async (usuario) => {
 
 export const leerUsuariosAPI = async () => {
   try {
-    const respuesta = await fetch(usuarioURL)
+    const respuesta = await fetch(`${usuarioURL}/usuarios`)
     const resultado = await respuesta.json()
 
     return resultado
