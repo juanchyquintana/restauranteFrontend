@@ -42,3 +42,7 @@ export const leerUsuariosAPI = async () => {
     console.log(error)
   }
 }
+
+export const borrarUsuario = async () => {
+  
+}
