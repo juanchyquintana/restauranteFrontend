@@ -13,8 +13,12 @@ import Nosotros from "./components/pages/nosotros/Nosotros";
 import Carrito from "./components/pages/carrito/Carrito";
 import SeccionMenu from "./components/pages/menus/SeccionMenu";
 import RutasAdministrador from "./components/routes/RutasAdministrador";
+import { useState } from "react";
 
 function App() {
+  const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || {};
+  const [usuarioLogueado, setUsuarioLogueado] = useState(usuario);
+
   return (
     <>
       <BrowserRouter>
@@ -22,8 +26,16 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Inicio />} />
           <Route exact path="/registrarse" element={<Registrarse />} />
-          <Route exact path="/ingresar" element={<Login />} />
-          <Route exact path="/administrador/*" element={<RutasAdministrador />}/>
+          <Route
+            exact
+            path="/ingresar"
+            element={<Login setUsuarioLogueado={setUsuarioLogueado} />}
+          />
+          <Route
+            exact
+            path="/administrador/*"
+            element={<RutasAdministrador />}
+          />
           <Route exact path="/menu" element={<SeccionMenu />} />
           <Route exact path="/cocina" element={<Cocina />} />
           <Route exact path="/carrito" element={<Carrito />} />
