@@ -1,4 +1,5 @@
 import { Container, Table } from "react-bootstrap";
+import ItemUsuarios from "../ItemUsuarios";
 
 const PanelUsuarios = () => {
   return (
@@ -23,7 +24,7 @@ const PanelUsuarios = () => {
             </thead>
 
             <tbody>
-              
+              <ItemUsuarios />
             </tbody>
           </Table>
         </section>
