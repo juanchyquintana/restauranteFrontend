@@ -261,7 +261,7 @@ const SeccionMenu = () => {
                       min={0}
                     />
                     <Button className="bg-success ms-2">
-                      <i class="bi bi-plus-circle"></i>
+                      <i className="bi bi-plus-circle"></i>
                     </Button>
                   </div>
                 </Card.Body>
