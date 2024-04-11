@@ -20,7 +20,7 @@ const PanelUsuarios = () => {
 
   return (
     <>
-      <Container>
+      <Container className="mainPage">
         <section className="my-5">
           <div className="d-flex justify-content-between align-items-center mt-5">
             <h1 className="display-5">Panel de Usuarios</h1>

@@ -1,4 +1,4 @@
-import { borrarUsuario, leerUsuariosAPI } from "../helpers/usuario";
+import { actualizarEstado, borrarUsuario, leerUsuariosAPI } from "../helpers/usuario";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 const ItemUsuarios = ({ usuario, setUsuarios }) => {
   const { email, estado, nombre, tipoUsuario, _id } = usuario;
   const [estadoUsuario, setEstadoUsuario] = useState(estado);
+  const [estadoModificado, setEstadoModificado] = useState(false)
 
   const usuarioBorrar = () => {
     Swal.fire({
@@ -40,6 +41,30 @@ const ItemUsuarios = ({ usuario, setUsuarios }) => {
     });
   };
 
+  const cambiarEstadoUsuario = async (e) => {
+    const nuevoEstado = e.target.value;
+    setEstadoUsuario(nuevoEstado)
+    setEstadoModificado(true)
+  }
+
+  const guardarCambios = async () => {
+    const respuesta = await actualizarEstado(_id, estadoUsuario);
+    if (respuesta.error) {
+      Swal.fire({
+        title: "Ocurrió un Error",
+        text: `El estado del usuario ${nombre} no pudo ser actualizado. Intenta nuevamente.`,
+        icon: "error",
+      });
+    } else {
+      setEstadoModificado(false)
+      Swal.fire({
+        title: "Estado Modificado",
+        text: `El estado del ${nombre} fue modifcado correctamente!`,
+        icon: "success",
+      });
+    }
+  }
+
   return (
     <tr>
       <td>{nombre}</td>
@@ -47,7 +72,7 @@ const ItemUsuarios = ({ usuario, setUsuarios }) => {
       <td>
         <Form.Select
           value={estadoUsuario}
-          onChange={(e) => setEstadoUsuario(e.target.value)}
+          onChange={cambiarEstadoUsuario}
         >
           <option value="activo">Activo</option>
           <option value="inactivo">Inactivo</option>
@@ -55,9 +80,12 @@ const ItemUsuarios = ({ usuario, setUsuarios }) => {
       </td>
       <td className="text-uppercase fw-semibold">{tipoUsuario}</td>
       <td>
-        <div className="d-flex justify-content-center">
+        <div className="d-flex gap-2 justify-content-center">
           <button className="btn btn-danger">
             <i className="bi bi-trash-fill" onClick={usuarioBorrar}></i>
+          </button>
+          <button className={`btn btn-success ${estadoModificado ? "" : "disabled"}`}>
+            <i className="bi bi-check2-circle" onClick={guardarCambios}></i>
           </button>
         </div>
       </td>
