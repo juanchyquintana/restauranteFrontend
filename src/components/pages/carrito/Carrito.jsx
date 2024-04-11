@@ -1,8 +1,9 @@
 import { Container, Table, Form, Button } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Mapa from "../../Mapa";
 import "leaflet/dist/leaflet.css";
 import "./carrito.css";
+import { obtenerProductoID } from "../../../helpers/producto";
 
 const Carrito = () => {
   const [datos, setDatos] = useState({
@@ -11,11 +12,34 @@ const Carrito = () => {
     delivery: false,
     calle: "",
   });
+  const [pedidoState, setPedidoState] = useState({})
+  const [productos, setProductos] = useState([])
   const pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
+  // console.log(pedido)
+  
 
   const actualizarCarrito = (direccion, lat, lng) => {
     setDatos({ ...datos, calle: direccion, lat: lat, lng: lng });
   };
+
+  const cargarProductos = async () => {
+    const productosArray = []
+    for (let i = 0; i < pedido.productos.length; i++){
+      try {
+        const productoObtenido = await obtenerProductoID(pedido?.productos[i].producto)
+        productosArray.push(productoObtenido)
+        setProductos(productosArray)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
+
+
+  useEffect(() => {
+    setPedidoState(pedido)
+    cargarProductos()
+  },[])
 
   return (
     <>
@@ -34,7 +58,7 @@ const Carrito = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {pedido?.productos.map((producto, i) => (
+                  {productos?.map((producto, i) => (
                     <tr className="align-text-bottom text-center" key={i}>
                       <td>{producto.nombre}</td>
                       <td>
@@ -44,12 +68,13 @@ const Carrito = () => {
                           className="img-tabla"
                         />
                       </td>
-                      <td>$250</td>
+                      <td>${producto.precio}</td>
                       <td>
                         <Form className="d-flex justify-content-center">
                           <Form.Control
                             type="number"
                             className="text-center input-tabla"
+                            defaultValue={pedidoState.productos[i].cantidad}
                           />
                         </Form>
                       </td>
@@ -61,7 +86,7 @@ const Carrito = () => {
                       colSpan={5}
                       className="text-end fw-bold pe-lg-5 bg-dark text-white"
                     >
-                      Total: $250
+                      Total: ${pedidoState.total}
                     </td>
                   </tr>
                 </tbody>

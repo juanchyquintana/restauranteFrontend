@@ -50,7 +50,6 @@ const Mapa = ({ datos, actualizarCarrito }) => {
           .then((resultados) => {
             const resultado = resultados[0];
             const calle = `${resultado.label}`;
-            console.log(resultado)
             actualizarDireccion(calle, resultado.x, resultado.y);
           });
       });
