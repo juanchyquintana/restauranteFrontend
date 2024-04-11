@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 
 const SeccionMenu = () => {
   const [productos, setProductos] = useState([]);
-  const [objetoPedido, setObjetoPedido] = useState({});
   let pedido = {
     usuario: "",
     fecha: "",
