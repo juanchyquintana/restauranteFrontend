@@ -22,12 +22,19 @@ const Carrito = () => {
     setDatos({ ...datos, calle: direccion, lat: lat, lng: lng });
   };
   
-  const actualizarCantidad = (e, id) => {
+  const actualizarCantidad = (e, id, precio) => {
     const productoEncontrado = pedido.productos.find((elemento)=> { return elemento.producto === id})
     console.log(e.target.value)
-    productoEncontrado.cantidad = e.target.value
-    sessionStorage.setItem("pedido", JSON.stringify(pedido))
-    setPedidoState(pedido)
+    if (e.target.value > 0 && e.target.value <= 15){
+      pedido.total = pedido.total + precio
+      productoEncontrado.cantidad = e.target.value
+      sessionStorage.setItem("pedido", JSON.stringify(pedido))
+      setPedidoState(pedido)
+    } else {
+      productoEncontrado.cantidad = 1
+      sessionStorage.setItem("pedido", JSON.stringify(pedido))
+      setPedidoState(pedido)
+    }
   }
 
   const cargarProductos = async () => {
@@ -83,7 +90,9 @@ const Carrito = () => {
                             type="number"
                             className="text-center input-tabla"
                             value={pedidoState.productos[i].cantidad}
-                            onChange={(e) => actualizarCantidad(e, producto._id)}
+                            onChange={(e) => actualizarCantidad(e, producto._id, producto.precio)}
+                            min={1}
+                            max={15}
                           />
                         </Form>
                       </td>
