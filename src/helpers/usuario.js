@@ -47,6 +47,9 @@ export const borrarUsuario = async (id) => {
   try {
     const respuesta = await fetch(`${usuarioURL}/usuarios/${id}`, {
       method: "DELETE",
+      headers: {
+        'x-token': JSON.parse(sessionStorage.getItem('usuarioLotus')).token
+      }
     });
 
     return respuesta;
