@@ -6,6 +6,7 @@ import bannerComida from "./bannerImg/comidaChina.jpg";
 import bannerBebida from "./bannerImg/bebidaChina.jpg";
 import { obtenerProductos } from "../../../helpers/producto";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2/src/sweetalert2.js";
 
 const SeccionMenu = () => {
   const [productos, setProductos] = useState([]);
@@ -18,13 +19,13 @@ const SeccionMenu = () => {
     telefonoContacto: "",
     notas: "",
     total: 0,
-  }
+  };
 
-  const agregarAlCarrito = (e, productoID, precio) => {
+  const agregarAlCarrito = (e, productoID, precio, nombreProducto) => {
     e.preventDefault();
     const cantidadIngresada = parseInt(e.target.cantidad.value);
 
-    if (cantidadIngresada > 0) {
+    if (cantidadIngresada > 0 && cantidadIngresada <= 15) {
       const productoEncontrado = pedido.productos.find((elemento) => {
         return elemento.producto === productoID;
       });
@@ -35,13 +36,34 @@ const SeccionMenu = () => {
       } else {
         pedido.productos.push({
           producto: productoID,
-          cantidad: cantidadIngresada
-        })
+          cantidad: cantidadIngresada,
+        });
       }
-      pedido.total = pedido.total + parseInt(precio) * cantidadIngresada
-      sessionStorage.setItem("pedido", JSON.stringify(pedido))
+      cantidadIngresada === 1
+        ? Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Se añadio ${cantidadIngresada} x ${nombreProducto} al carrito`,
+            showConfirmButton: true,
+          })
+        : Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Se añadieron ${cantidadIngresada} x ${nombreProducto} al carrito`,
+            showConfirmButton: true,
+          });
+
+      pedido.total = pedido.total + parseInt(precio) * cantidadIngresada;
+      sessionStorage.setItem("pedido", JSON.stringify(pedido));
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: `Ingrese una cantidad válida`,
+        showConfirmButton: true,
+      });
     }
-  }
+  };
 
   const cargarProductos = async () => {
     try {
@@ -77,13 +99,21 @@ const SeccionMenu = () => {
 
                     <form
                       className="d-flex align-items-center justify-content-between"
-                      onSubmit={(e) => agregarAlCarrito(e, producto._id, producto.precio)}
+                      onSubmit={(e) =>
+                        agregarAlCarrito(
+                          e,
+                          producto._id,
+                          producto.precio,
+                          producto.nombre
+                        )
+                      }
                     >
                       <Button variant="primary">ver mas</Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
                         min={0}
+                        max={15}
                         defaultValue={1}
                         name="cantidad"
                       />
