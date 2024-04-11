@@ -43,16 +43,50 @@ export const leerUsuariosAPI = async () => {
   }
 };
 
+export const leerUsuarioPorId = async (id) => {
+  try {
+    const respuesta = await fetch(`${usuarioURL}/usuarios/${id}`);
+    const resultado = await respuesta.json();
+
+    return resultado;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const borrarUsuario = async (id) => {
   try {
     const respuesta = await fetch(`${usuarioURL}/usuarios/${id}`, {
       method: "DELETE",
       headers: {
-        'x-token': JSON.parse(sessionStorage.getItem('usuarioLotus')).token
-      }
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioLotus")).token,
+      },
     });
 
     return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const actualizarEstado = async (id, estado) => {
+  try {
+    const usuario = await leerUsuarioPorId(id);
+    if (!usuario) {
+      return { error: "Usuario No Encontrado" };
+    }
+
+    const nuevoUsuario = { ...usuario, estado };
+    const respuesta = await fetch(`${usuarioURL}/usuarios/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioLotus")).token,
+      },
+      body: JSON.stringify(nuevoUsuario),
+    });
+
+    return respuesta.json();
   } catch (error) {
     console.log(error);
   }

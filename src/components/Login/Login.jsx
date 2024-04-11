@@ -1,11 +1,11 @@
-import { Button, Form } from "react-bootstrap";
 import backgroundImg from "../../assets/Login/backgroundImg.webp";
 import formImg from "../../assets/Login/formImage.webp";
-import "./login.css";
-import { useForm } from "react-hook-form";
 import { loginUsuario } from "../../helpers/usuario";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2'
+import "./login.css";
 
 const Login = ({ setUsuarioLogueado }) => {
   const {
@@ -19,17 +19,36 @@ const Login = ({ setUsuarioLogueado }) => {
   const login = async (usuario) => {
     try {
       const respuesta = await loginUsuario(usuario);
-      console.log(respuesta)
-      if (respuesta.status === 200) {
-        const datos = await respuesta.json();
+      const datos = await respuesta.json();
+      console.log(datos)
+      if(datos.estado === 'inactivo') {
+        Swal.fire({
+          position: "center",
+          icon: "info",
+          title: "¡Lo Sentimos!",
+          text: "Su cuenta se encuentra momentáneamente inactiva",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        
+        navegacion("/ingresar");
+        return
+      }
 
+      if (respuesta.status === 200) {
         sessionStorage.setItem(
           "usuarioLotus",
           JSON.stringify({ email: datos.email, token: datos.token, tipoUsuario: datos.tipoUsuario })
         );
         setUsuarioLogueado(datos);
 
-        Swal.fire("¡Bienvenido!", "Has iniciado sesión correctamente", "success");
+        Swal.fire({
+          position: "center",
+          icon: `success`,
+          title: `"¡Bienvenido! Has iniciado sesión correctamente`,
+          showConfirmButton: false,
+          timer: 1500
+        });
 
         if (datos.tipoUsuario === "admin") {
           navegacion("/administrador");
@@ -38,7 +57,14 @@ const Login = ({ setUsuarioLogueado }) => {
         }
 
       } else {
-        Swal.fire("Ocurrió un error", "Correo o contraseña incorrectos", "error");
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Ocurrió un error",
+          text: "Correo o contraseña incorrectos",
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     } catch (error) {
       console.log(error)
