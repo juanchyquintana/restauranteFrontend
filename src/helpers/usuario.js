@@ -34,15 +34,23 @@ export const loginUsuario = async (usuario) => {
 
 export const leerUsuariosAPI = async () => {
   try {
-    const respuesta = await fetch(`${usuarioURL}/usuarios`)
-    const resultado = await respuesta.json()
+    const respuesta = await fetch(`${usuarioURL}/usuarios`);
+    const resultado = await respuesta.json();
 
-    return resultado
+    return resultado;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const borrarUsuario = async () => {
-  
-}
+export const borrarUsuario = async (id) => {
+  try {
+    const respuesta = await fetch(`${usuarioURL}/usuarios/${id}`, {
+      method: "DELETE",
+    });
+
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+};
