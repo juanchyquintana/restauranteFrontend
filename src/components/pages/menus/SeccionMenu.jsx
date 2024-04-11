@@ -38,9 +38,9 @@ const SeccionMenu = () => {
           producto: productoID,
           cantidad: cantidadIngresada
         })
-        
       }
-      
+      pedido.total = pedido.total + parseInt(precio) * cantidadIngresada
+      sessionStorage.setItem("pedido", JSON.stringify(pedido))
     }
   }
 
@@ -78,7 +78,7 @@ const SeccionMenu = () => {
 
                     <form
                       className="d-flex align-items-center justify-content-between"
-                      onSubmit={(e) => agregarAlCarrito(e, producto._id)}
+                      onSubmit={(e) => agregarAlCarrito(e, producto._id, producto.precio)}
                     >
                       <Button variant="primary">ver mas</Button>
                       <input
