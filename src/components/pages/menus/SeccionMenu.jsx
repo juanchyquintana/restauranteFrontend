@@ -30,28 +30,35 @@ const SeccionMenu = () => {
         return elemento.producto === productoID;
       });
 
-      if (productoEncontrado) {
+      if (productoEncontrado && productoEncontrado.cantidad < 15) {
+        const cantidadPrevia = productoEncontrado.cantidad;
         productoEncontrado.cantidad =
           productoEncontrado.cantidad + cantidadIngresada;
+        if (productoEncontrado.cantidad >= 15) {
+          productoEncontrado.cantidad = 15;
+          swalProductoAgregado(true, cantidadPrevia, nombreProducto);
+        } else {
+          swalProductoAgregado(false, cantidadIngresada, nombreProducto);
+        }
+      } else if (productoEncontrado && productoEncontrado.cantidad >= 15) {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Se llegó al límite de 15 unidades para ${nombreProducto}`,
+          showConfirmButton: true,
+        });
       } else {
         pedido.productos.push({
           producto: productoID,
           cantidad: cantidadIngresada,
         });
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Se agregaron ${cantidadIngresada} x ${nombreProducto} al carrito`,
+          showConfirmButton: true,
+        });
       }
-      cantidadIngresada === 1
-        ? Swal.fire({
-            position: "center",
-            icon: "success",
-            title: `Se añadio ${cantidadIngresada} x ${nombreProducto} al carrito`,
-            showConfirmButton: true,
-          })
-        : Swal.fire({
-            position: "center",
-            icon: "success",
-            title: `Se añadieron ${cantidadIngresada} x ${nombreProducto} al carrito`,
-            showConfirmButton: true,
-          });
 
       pedido.total = pedido.total + parseInt(precio) * cantidadIngresada;
       sessionStorage.setItem("pedido", JSON.stringify(pedido));
@@ -63,6 +70,40 @@ const SeccionMenu = () => {
         showConfirmButton: true,
       });
     }
+  };
+
+  const swalProductoAgregado = (limiteAlcanzado, cantidad, nombreProducto) => {
+    limiteAlcanzado === true
+      ? cantidad === 1
+        ? Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Se añadio ${
+              15 - cantidad
+            } x ${nombreProducto} al carrito, debido a que se llegó al límite de 15 unidades por producto`,
+            showConfirmButton: true,
+          })
+        : Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Se añadieron ${
+              15 - cantidad
+            } x ${nombreProducto} al carrito, debido a que se llegó al límite de 15 unidades por producto`,
+            showConfirmButton: true,
+          })
+      : cantidad === 1
+      ? Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Se añadio ${cantidad} x ${nombreProducto} al carrito.`,
+          showConfirmButton: true,
+        })
+      : Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Se añadieron ${cantidad} x ${nombreProducto} al carrito.`,
+          showConfirmButton: true,
+        });
   };
 
   const cargarProductos = async () => {
