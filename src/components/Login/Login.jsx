@@ -1,13 +1,13 @@
-import { Button, Form } from "react-bootstrap";
 import backgroundImg from "../../assets/Login/backgroundImg.webp";
 import formImg from "../../assets/Login/formImage.webp";
-import "./login.css";
-import { useForm } from "react-hook-form";
 import { loginUsuario } from "../../helpers/usuario";
+import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2'
+import "./login.css";
 
-const Login = ({ setUsuarioLogueado }) => {
+const Login = ({ setUsuarioLogueado, usuarioLogueado }) => {
   const {
     register,
     handleSubmit,
@@ -19,7 +19,6 @@ const Login = ({ setUsuarioLogueado }) => {
   const login = async (usuario) => {
     try {
       const respuesta = await loginUsuario(usuario);
-      console.log(respuesta)
       if (respuesta.status === 200) {
         const datos = await respuesta.json();
 
@@ -29,7 +28,13 @@ const Login = ({ setUsuarioLogueado }) => {
         );
         setUsuarioLogueado(datos);
 
-        Swal.fire("¡Bienvenido!", "Has iniciado sesión correctamente", "success");
+        Swal.fire({
+          position: "center",
+          icon: `success`,
+          title: `"¡Bienvenido! Has iniciado sesión correctamente`,
+          showConfirmButton: false,
+          timer: 1500
+        });
 
         if (datos.tipoUsuario === "admin") {
           navegacion("/administrador");
@@ -39,6 +44,15 @@ const Login = ({ setUsuarioLogueado }) => {
 
       } else {
         Swal.fire("Ocurrió un error", "Correo o contraseña incorrectos", "error");
+
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: "Ocurrió un error",
+          text: "Correo o contraseña incorrectos",
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     } catch (error) {
       console.log(error)
