@@ -8,11 +8,11 @@ const Mapa = ({ datos, actualizarCarrito }) => {
   const [lng, setLng] = useState(datos.lng || -65.2044388);
   const [calle, setCalle] = useState("");
 
-  const actualizarDireccion = (direccion) => {
+  const actualizarDireccion = (direccion, lat, lng) => {
     setCalle(direccion);
 
     if (actualizarCarrito) {
-      actualizarCarrito(direccion);
+      actualizarCarrito(direccion, lat, lng);
     }
   };
 
@@ -50,8 +50,8 @@ const Mapa = ({ datos, actualizarCarrito }) => {
           .then((resultados) => {
             const resultado = resultados[0];
             const calle = `${resultado.label}`;
-            setCalle(calle);
-            actualizarDireccion(calle);
+            console.log(resultado)
+            actualizarDireccion(calle, resultado.x, resultado.y);
           });
       });
 
@@ -72,8 +72,8 @@ const Mapa = ({ datos, actualizarCarrito }) => {
         onChange={(e) => setCalle(e.target.value)}
         readOnly
       />
-      <input type="hidden" name="calle" id="calle" value={calle} />
-      <input type="hidden" name="lat" id="lat" value={lat} />
+      <input type="hidden" name="calle" id="calle" value={calle}/>
+      <input type="hidden" name="lat" id="lat" value={lat}/>
       <input type="hidden" name="lng" id="lng" value={lng} />
     </div>
   );

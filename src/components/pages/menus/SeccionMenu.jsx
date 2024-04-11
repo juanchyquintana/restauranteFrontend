@@ -10,7 +10,7 @@ import Swal from "sweetalert2/src/sweetalert2.js";
 
 const SeccionMenu = () => {
   const [productos, setProductos] = useState([]);
-  let pedido = {
+  let pedido = JSON.parse(sessionStorage.getItem("pedido")) || {
     usuario: "",
     fecha: "",
     productos: [],
@@ -130,7 +130,7 @@ const SeccionMenu = () => {
         <h2 className="bannerTitulo">食品 Comidas</h2>
         <Container className="my-4  pb-4">
           <div className="row ">
-            {productos.map((producto) => (
+            {productos?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
                 <Card>
                   <Card.Img variant="top" src={producto.imagen} />
@@ -180,7 +180,7 @@ const SeccionMenu = () => {
         </div>
         <Container className="my-4 ">
           <div className="row ">
-            {productos.map((producto) => (
+            {productos?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
                 <Card>
                   <Card.Img variant="top" src={producto.imagen} />
