@@ -23,7 +23,10 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Menu />
+        <Menu 
+          usuarioLogueado={usuarioLogueado}
+          setUsuarioLogueado={setUsuarioLogueado}
+        ></Menu>
         <Routes>
           <Route exact path="/" element={<Inicio />} />
           <Route exact path="/registrarse" element={<Registrarse />} />
@@ -42,7 +45,7 @@ function App() {
             }
           />
           <Route exact path="/menu" element={<SeccionMenu />} />
-          <Route exact path="/cocina" element={<Cocina />} />
+          
           <Route exact path="/carrito" element={<Carrito />} />
           <Route exact path="/contacto" element={<Contacto />} />
           <Route exact path="/reseñas" element={<Reviews />} />
