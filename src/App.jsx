@@ -14,6 +14,7 @@ import Carrito from "./components/pages/carrito/Carrito";
 import SeccionMenu from "./components/pages/menus/SeccionMenu";
 import RutasAdministrador from "./components/routes/RutasAdministrador";
 import { useState } from "react";
+import RutasProtegidas from "./components/routes/RutasProtegidas";
 
 function App() {
   const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || {};
@@ -34,7 +35,11 @@ function App() {
           <Route
             exact
             path="/administrador/*"
-            element={<RutasAdministrador />}
+            element={
+              <RutasProtegidas>
+                <RutasAdministrador />
+              </RutasProtegidas>
+            }
           />
           <Route exact path="/menu" element={<SeccionMenu />} />
           <Route exact path="/cocina" element={<Cocina />} />
