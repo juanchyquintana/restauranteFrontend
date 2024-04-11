@@ -13,7 +13,7 @@ const Carrito = () => {
   });
 
   const actualizarCarrito = (direccion) => {
-    setDatos({ ...datos, delivery: true, calle: direccion });
+    setDatos({ ...datos, calle: direccion });
   };
 
   return (
@@ -46,7 +46,6 @@ const Carrito = () => {
                     <Form.Control
                       type="number"
                       className="text-center input-tabla"
-                      value={1}
                     />
                   </Form>
                 </td>
@@ -77,7 +76,7 @@ const Carrito = () => {
         )}
 
         <Container className="d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
-          <Button>Realizar pedido</Button>
+          <Button type="submit">Realizar pedido</Button>
         </Container>
       </Container>
     </section>

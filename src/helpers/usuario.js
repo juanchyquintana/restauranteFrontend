@@ -1,4 +1,4 @@
-const usuarioURL = import.meta.env.VITE_API_USUARIO;
+const usuarioURL = import.meta.env.VITE_API_RESTAURANTE;
 
 export const registrarUsuario = async (usuario) => {
   try {
