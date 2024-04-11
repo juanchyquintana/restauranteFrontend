@@ -31,3 +31,29 @@ export const loginUsuario = async (usuario) => {
     return;
   }
 };
+
+export const leerUsuariosAPI = async () => {
+  try {
+    const respuesta = await fetch(`${usuarioURL}/usuarios`);
+    const resultado = await respuesta.json();
+
+    return resultado;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const borrarUsuario = async (id) => {
+  try {
+    const respuesta = await fetch(`${usuarioURL}/usuarios/${id}`, {
+      method: "DELETE",
+      headers: {
+        'x-token': JSON.parse(sessionStorage.getItem('usuarioLotus')).token
+      }
+    });
+
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+};
