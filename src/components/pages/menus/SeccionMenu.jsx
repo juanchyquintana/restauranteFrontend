@@ -9,49 +9,40 @@ import { useEffect, useState } from "react";
 
 const SeccionMenu = () => {
   const [productos, setProductos] = useState([]);
-  const [objetoPedido, setObjetoPedido] = useState({
+  const [objetoPedido, setObjetoPedido] = useState({});
+  let pedido = {
     usuario: "",
     fecha: "",
-    productos: [
-      {
-        producto: "66143e1d455d3009291cb58a",
-        cantidad: 1,
-      },
-    ],
+    productos: [],
     estado: "pendiente",
     tipoEntrega: "bar",
-    telefonoContacto: "123456789",
-    notas: "El sushi sin salmón",
+    telefonoContacto: "",
+    notas: "",
     total: 0,
-  });
+  }
 
   const agregarAlCarrito = (e, productoID, precio) => {
     e.preventDefault();
     const cantidadIngresada = parseInt(e.target.cantidad.value);
 
     if (cantidadIngresada > 0) {
-      const productoEncontrado = objetoPedido.productos.find((elemento) => {
+      const productoEncontrado = pedido.productos.find((elemento) => {
         return elemento.producto === productoID;
       });
 
       if (productoEncontrado) {
-        productoEncontrado.cantidad = productoEncontrado.cantidad + cantidadIngresada;
+        productoEncontrado.cantidad =
+          productoEncontrado.cantidad + cantidadIngresada;
       } else {
-        setObjetoPedido(objetoActual => ({
-          ...objetoActual,
-          productos: [
-            ...objetoActual.productos,
-            {
-              producto: productoID,
-              cantidad: cantidadIngresada
-            }
-          ]
-        }))
+        pedido.productos.push({
+          producto: productoID,
+          cantidad: cantidadIngresada
+        })
+        
       }
-
-      console.log(objetoPedido.productos);
+      
     }
-  };
+  }
 
   const cargarProductos = async () => {
     try {
