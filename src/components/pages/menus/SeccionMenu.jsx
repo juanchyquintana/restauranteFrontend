@@ -27,12 +27,30 @@ const SeccionMenu = () => {
 
   const agregarAlCarrito = (e, productoID, precio) => {
     e.preventDefault();
-    console.log(objetoPedido.productos);
+    const cantidadIngresada = parseInt(e.target.cantidad.value);
 
-    const verificarExistente = objetoPedido.productos.filter((elemento) => {
-      return elemento.producto === productoID;
-    });
-    console.log(verificarExistente.length);
+    if (cantidadIngresada > 0) {
+      const productoEncontrado = objetoPedido.productos.find((elemento) => {
+        return elemento.producto === productoID;
+      });
+
+      if (productoEncontrado) {
+        productoEncontrado.cantidad = productoEncontrado.cantidad + cantidadIngresada;
+      } else {
+        setObjetoPedido(objetoActual => ({
+          ...objetoActual,
+          productos: [
+            ...objetoActual.productos,
+            {
+              producto: productoID,
+              cantidad: cantidadIngresada
+            }
+          ]
+        }))
+      }
+
+      console.log(objetoPedido.productos);
+    }
   };
 
   const cargarProductos = async () => {
@@ -76,7 +94,7 @@ const SeccionMenu = () => {
                         type="number"
                         className="agregar text-center ms-2"
                         min={0}
-                        defaultValue={0}
+                        defaultValue={1}
                         name="cantidad"
                       />
                       <Button className="bg-success ms-2" type="submit">
