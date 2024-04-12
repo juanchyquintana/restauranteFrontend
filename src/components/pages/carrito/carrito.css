@@ -13,4 +13,8 @@
 .map-container {
     height: 450px; /* o la altura deseada */
     width: 100%; /* o el ancho deseado */
-  }
+}
+
+.notas{
+    resize: none;
+}

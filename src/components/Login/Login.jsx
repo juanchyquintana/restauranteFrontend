@@ -38,7 +38,7 @@ const Login = ({ setUsuarioLogueado }) => {
       if (respuesta.status === 200) {
         sessionStorage.setItem(
           "usuarioLotus",
-          JSON.stringify({ email: datos.email, token: datos.token, tipoUsuario: datos.tipoUsuario })
+          JSON.stringify({ email: datos.email, token: datos.token, tipoUsuario: datos.tipoUsuario, id: datos.id })
         );
         setUsuarioLogueado(datos);
 

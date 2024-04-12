@@ -10,8 +10,9 @@ import Swal from "sweetalert2/src/sweetalert2.js";
 
 const SeccionMenu = () => {
   const [productos, setProductos] = useState([]);
+  const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || false
   let pedido = JSON.parse(sessionStorage.getItem("pedido")) || {
-    usuario: "",
+    usuario: usuario?.id,
     fecha: "",
     productos: [],
     estado: "pendiente",
@@ -23,14 +24,13 @@ const SeccionMenu = () => {
 
   const agregarAlCarrito = (e, productoID, precio, nombreProducto) => {
     e.preventDefault();
-    console.log(pedido.productos[1]);
     const cantidadIngresada = parseInt(e.target.cantidad.value);
 
     if (cantidadIngresada > 0 && cantidadIngresada <= 15) {
       const productoEncontrado = pedido.productos.find((elemento) => {
         return elemento.producto === productoID;
       });
-      const cantidadProductoEncontrado = parseInt(productoEncontrado.cantidad);
+      const cantidadProductoEncontrado = parseInt(productoEncontrado?.cantidad);
       if (productoEncontrado && productoEncontrado.cantidad < 15) {
         const cantidadPrevia = cantidadProductoEncontrado;
         productoEncontrado.cantidad = cantidadProductoEncontrado + cantidadIngresada;

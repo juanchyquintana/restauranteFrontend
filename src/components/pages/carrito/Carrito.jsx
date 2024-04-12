@@ -15,6 +15,7 @@ const Carrito = () => {
   const [pedidoState, setPedidoState] = useState({});
   const [productos, setProductos] = useState([]);
   const pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
+  
 
   const actualizarCarrito = (direccion, lat, lng) => {
     setDatos({ ...datos, calle: direccion, lat: lat, lng: lng });
@@ -26,12 +27,12 @@ const Carrito = () => {
     });
     if (e.target.value > 0 && e.target.value <= 15) {
       productoEncontrado.cantidad = e.target.value;
-      actualizarTotal()
+      actualizarTotal();
       sessionStorage.setItem("pedido", JSON.stringify(pedido));
       setPedidoState(pedido);
     } else {
       productoEncontrado.cantidad = 1;
-      actualizarTotal()
+      actualizarTotal();
       sessionStorage.setItem("pedido", JSON.stringify(pedido));
       setPedidoState(pedido);
     }
@@ -39,12 +40,12 @@ const Carrito = () => {
 
   const actualizarTotal = () => {
     let total = 0;
-    for(let i = 0; i < pedido?.productos?.length; i++){
-      total += pedido?.productos[i]?.cantidad * productos[i]?.precio
+    for (let i = 0; i < pedido?.productos?.length; i++) {
+      total += pedido?.productos[i]?.cantidad * productos[i]?.precio;
     }
-    pedido.total = total
-    setPedidoState(pedido)
-  }
+    pedido.total = total;
+    setPedidoState(pedido);
+  };
 
   const cargarProductos = async () => {
     const productosArray = [];
@@ -140,10 +141,25 @@ const Carrito = () => {
             </div>
 
             {datos.delivery && (
-              <Mapa datos={datos} actualizarCarrito={actualizarCarrito} />
+              <>
+              <div className="">
+                <Form className="d-flex flex-column mb-4">
+                  <Form.Group className="mb-3">
+                    <Form.Label className="fw-bold" name="telefonoContacto">Telefono contacto</Form.Label>
+                    <Form.Control type="tel" pattern="" placeholder="Telefono"/>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label className="fw-bold">Notas del pedido</Form.Label>
+                    <Form.Control className="notas" as="textarea" name="notas" rows={4} minLength={10} maxLength={300} placeholder="Información sobre el pedido, o la dirección"/>
+                  </Form.Group>
+                </Form>
+
+                <Mapa datos={datos} actualizarCarrito={actualizarCarrito} />
+              </div>
+              </>
             )}
 
-            <Container className="d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
+            <Container className="mt-4 d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
               <Button type="submit">Realizar pedido</Button>
             </Container>
           </Container>
