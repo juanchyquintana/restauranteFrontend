@@ -25,21 +25,26 @@ const Carrito = () => {
       return elemento.producto === id;
     });
     if (e.target.value > 0 && e.target.value <= 15) {
-      let cantidadActual = productoEncontrado.cantidad;
-      if (e.target.value > cantidadActual) {
-        pedido.total = pedido.total + ((e.target.value - cantidadActual) * precio)
-      } else {
-        pedido.total = pedido.total - ((cantidadActual - e.target.value) * precio);
-      }
       productoEncontrado.cantidad = e.target.value;
+      actualizarTotal()
       sessionStorage.setItem("pedido", JSON.stringify(pedido));
       setPedidoState(pedido);
     } else {
       productoEncontrado.cantidad = 1;
+      actualizarTotal()
       sessionStorage.setItem("pedido", JSON.stringify(pedido));
       setPedidoState(pedido);
     }
+    
   };
+
+  const actualizarTotal = () => {
+    let total = 0;
+    for(let i = 0; i < pedido.productos.length; i++){
+      total += pedido.productos[i].cantidad * productos[i].precio
+    }
+    pedido.total = total
+  }
 
   const cargarProductos = async () => {
     const productosArray = [];
