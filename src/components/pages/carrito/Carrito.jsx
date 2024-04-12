@@ -40,10 +40,11 @@ const Carrito = () => {
 
   const actualizarTotal = () => {
     let total = 0;
-    for(let i = 0; i < pedido.productos.length; i++){
-      total += pedido.productos[i].cantidad * productos[i].precio
+    for(let i = 0; i < pedido?.productos?.length; i++){
+      total += pedido?.productos[i]?.cantidad * productos[i]?.precio
     }
     pedido.total = total
+    setPedidoState(pedido)
   }
 
   const cargarProductos = async () => {
