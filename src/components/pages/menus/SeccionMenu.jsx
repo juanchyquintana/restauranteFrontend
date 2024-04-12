@@ -153,7 +153,7 @@ const SeccionMenu = () => {
                       <input
                         type="number"
                         className="agregar text-center ms-2"
-                        min={0}
+                        min={1}
                         max={15}
                         defaultValue={1}
                         name="cantidad"

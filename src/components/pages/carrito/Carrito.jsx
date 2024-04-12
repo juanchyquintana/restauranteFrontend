@@ -15,7 +15,6 @@ const Carrito = () => {
   const [pedidoState, setPedidoState] = useState({});
   const [productos, setProductos] = useState([]);
   const pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
-  // console.log(pedido)
 
   const actualizarCarrito = (direccion, lat, lng) => {
     setDatos({ ...datos, calle: direccion, lat: lat, lng: lng });
@@ -25,13 +24,12 @@ const Carrito = () => {
     const productoEncontrado = pedido.productos.find((elemento) => {
       return elemento.producto === id;
     });
-    console.log(e.target.value);
     if (e.target.value > 0 && e.target.value <= 15) {
       let cantidadActual = productoEncontrado.cantidad;
       if (e.target.value > cantidadActual) {
-        pedido.total = pedido.total + precio;
+        pedido.total = pedido.total + ((e.target.value - cantidadActual) * precio)
       } else {
-        pedido.total = pedido.total - precio;
+        pedido.total = pedido.total - ((cantidadActual - e.target.value) * precio);
       }
       productoEncontrado.cantidad = e.target.value;
       sessionStorage.setItem("pedido", JSON.stringify(pedido));

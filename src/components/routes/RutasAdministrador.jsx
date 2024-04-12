@@ -3,6 +3,7 @@ import Administrador from "../pages/Administrador";
 import NuevoProducto from "../NuevoProducto";
 import Error404 from "../pages/error404/Error404";
 import PanelUsuarios from "../pages/PanelUsuarios";
+import Cocina from "../pages/cocina/Cocina";
 
 const RutasAdministrador = () => {
   return (
@@ -15,6 +16,7 @@ const RutasAdministrador = () => {
           element={<NuevoProducto editar={false} titulo="Agregar Nuevo Plato" />}
         />
         <Route exact path="/panel-usuarios" element={<PanelUsuarios />} />
+        <Route exact path="/cocina" element={<Cocina />} />
         <Route exact path="*" element={<Error404 />}/>
       </Routes>
     </>
