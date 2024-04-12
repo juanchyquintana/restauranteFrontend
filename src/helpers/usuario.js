@@ -85,7 +85,6 @@ export const actualizarEstado = async (id, estado) => {
       },
       body: JSON.stringify(nuevoUsuario),
     });
-
     return respuesta.json();
   } catch (error) {
     console.log(error);

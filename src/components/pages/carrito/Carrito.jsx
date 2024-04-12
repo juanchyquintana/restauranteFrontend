@@ -4,6 +4,7 @@ import Mapa from "../../Mapa";
 import "leaflet/dist/leaflet.css";
 import "./carrito.css";
 import { obtenerProductoID } from "../../../helpers/producto";
+import { crearPedido } from "../../../helpers/pedidos";
 
 const Carrito = () => {
   const [datos, setDatos] = useState({
@@ -15,19 +16,49 @@ const Carrito = () => {
   const [pedidoState, setPedidoState] = useState({});
   const [productos, setProductos] = useState([]);
   const pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
+  
 
   const realizarPedido = () => {
-    if (!datos.delivery) {
-      const { usuario, productos, estado, tipoEntrega } = pedidoState;
-      const nuevoObjeto = {
-        usuario: usuario,
-        productos: productos,
-        estado: estado,
-        tipoEntrega: tipoEntrega,
-      };
-      console.log(nuevoObjeto);
+    const nuevoObjeto = crearObjetoPedido()
+    if (!datos.delivery) {  
+      nuevoObjeto.tipoEntrega = 'bar'
+      postPedido(nuevoObjeto)
+    } else {
+      const nuevoObjeto = crearObjetoPedido()
+      nuevoObjeto.calle = datos?.calle
+      nuevoObjeto.lng = datos?.lng,
+      nuevoObjeto.lat = datos?.lat
+      nuevoObjeto.tipoEntrega = 'delivery'
+      nuevoObjeto.telefonoContacto = pedidoState.telefonoContacto
+      console.log(nuevoObjeto)
+      postPedido(nuevoObjeto)
     }
   };
+
+  const crearObjetoPedido = () => {
+    const fechaHoraActual = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
+    const { usuario, productos, estado, total } = pedidoState;
+    const nuevoObjeto = {
+      usuario: usuario,
+      productos: productos,
+      estado: estado,
+      fecha: fechaHoraActual,
+      total: total
+    };
+    if (pedidoState?.notas?.length > 0 && pedidoState?.notas?.length <= 300){
+      nuevoObjeto.notas = pedidoState?.notas
+    }
+    return nuevoObjeto
+  }
+
+  const postPedido = async (pedido) => {
+    try {
+      const respuesta = await crearPedido(pedido)
+      console.log(respuesta)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const actualizarInputs = (e) => {
     const {name, value} = e.target
