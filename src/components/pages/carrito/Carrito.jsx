@@ -5,67 +5,105 @@ import "leaflet/dist/leaflet.css";
 import "./carrito.css";
 import { obtenerProductoID } from "../../../helpers/producto";
 import { crearPedido } from "../../../helpers/pedidos";
+import Swal from "sweetalert2/src/sweetalert2.js";
 
 const Carrito = () => {
   const [datos, setDatos] = useState({
     lat: -26.8301695,
     lng: -65.2044388,
     delivery: false,
-    calle: "",
+    calle:
+      "65, 25 de Mayo de 1810, Centro, San Miguel de Tucumán, Departamento Capital, Tucumán, T4000, Argentina",
   });
   const [pedidoState, setPedidoState] = useState({});
   const [productos, setProductos] = useState([]);
   const pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
-  
 
-  const realizarPedido = () => {
-    const nuevoObjeto = crearObjetoPedido()
-    if (!datos.delivery) {  
-      nuevoObjeto.tipoEntrega = 'bar'
-      postPedido(nuevoObjeto)
+  const realizarPedido = async (e) => {
+    e.preventDefault();
+    const nuevoObjeto = crearObjetoPedido();
+    if (!datos.delivery) {
+      nuevoObjeto.tipoEntrega = "bar";
+      const infoPedido = await postPedido(nuevoObjeto);
+        if (infoPedido.status === 201) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `El pedido fue crado correctamente.`,
+            showConfirmButton: true,
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
+            showConfirmButton: true,
+          });
+        }
     } else {
-      const nuevoObjeto = crearObjetoPedido()
-      nuevoObjeto.calle = datos?.calle
-      nuevoObjeto.lng = datos?.lng,
-      nuevoObjeto.lat = datos?.lat
-      nuevoObjeto.tipoEntrega = 'delivery'
-      nuevoObjeto.telefonoContacto = pedidoState.telefonoContacto
-      console.log(nuevoObjeto)
-      postPedido(nuevoObjeto)
+      const nuevoObjeto = crearObjetoPedido();
+      nuevoObjeto.calle = datos?.calle;
+      (nuevoObjeto.lng = datos?.lng), (nuevoObjeto.lat = datos?.lat);
+      nuevoObjeto.tipoEntrega = "delivery";
+      nuevoObjeto.telefonoContacto = pedidoState.telefonoContacto;
+      if (
+        nuevoObjeto.telefonoContacto.length > 6 &&
+        nuevoObjeto.telefonoContacto.length <= 20
+      ) {
+        const infoPedido = await postPedido(nuevoObjeto);
+        if (infoPedido.status === 201) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `El pedido fue crado correctamente. Será enviado a ${nuevoObjeto.calle}`,
+            showConfirmButton: true,
+          });
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
+            showConfirmButton: true,
+          });
+        }
+      }
     }
   };
 
   const crearObjetoPedido = () => {
-    const fechaHoraActual = new Date().toLocaleString('es-AR', { timeZone: 'America/Argentina/Buenos_Aires' });
+    const fechaHoraActual = new Date().toLocaleString("es-AR", {
+      timeZone: "America/Argentina/Buenos_Aires",
+    });
     const { usuario, productos, estado, total } = pedidoState;
     const nuevoObjeto = {
       usuario: usuario,
       productos: productos,
       estado: estado,
       fecha: fechaHoraActual,
-      total: total
+      total: total,
     };
-    if (pedidoState?.notas?.length > 0 && pedidoState?.notas?.length <= 300){
-      nuevoObjeto.notas = pedidoState?.notas
+    if (pedidoState?.notas?.length > 0 && pedidoState?.notas?.length <= 300) {
+      nuevoObjeto.notas = pedidoState?.notas;
     }
-    return nuevoObjeto
-  }
+    return nuevoObjeto;
+  };
 
   const postPedido = async (pedido) => {
     try {
-      const respuesta = await crearPedido(pedido)
-      console.log(respuesta)
+      const respuesta = await crearPedido(pedido);
+      return respuesta;
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const actualizarInputs = (e) => {
-    const {name, value} = e.target
-    setPedidoState(prevState => ({
-      ...prevState, [name]: value
-    }))
-  }
+    const { name, value } = e.target;
+    setPedidoState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const actualizarCarrito = (direccion, lat, lng) => {
     setDatos({ ...datos, calle: direccion, lat: lat, lng: lng });
@@ -207,35 +245,44 @@ const Carrito = () => {
               />
             </div>
 
-            {datos.delivery && (
+            {datos.delivery ? (
               <>
                 <div className="">
-                  <Form className="d-flex flex-column mb-4">
+                  <Form
+                    className="d-flex flex-column mb-4"
+                    onSubmit={(e) => realizarPedido(e)}
+                  >
                     <Form.Group className="mb-3">
                       <Form.Label className="fw-bold" name="telefonoContacto">
                         Telefono contacto
                       </Form.Label>
                       <Form.Control
                         type="tel"
-                        pattern=""
                         placeholder="Telefono"
                         name="telefonoContacto"
                         value={pedidoState.telefonoContacto}
+                        required
+                        min={6}
+                        max={20}
                         onChange={(e) => actualizarInputs(e)}
                       />
                     </Form.Group>
-                  </Form>
 
-                  <Mapa datos={datos} actualizarCarrito={actualizarCarrito} />
+                    <Mapa datos={datos} actualizarCarrito={actualizarCarrito} />
+
+                    <Container className="mt-4 d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
+                      <Button type="submit">Realizar pedido</Button>
+                    </Container>
+                  </Form>
                 </div>
               </>
+            ) : (
+              <Container className="mt-4 d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
+                <Button type="submit" onClick={realizarPedido}>
+                  Realizar pedido
+                </Button>
+              </Container>
             )}
-
-            <Container className="mt-4 d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
-              <Button type="submit" onClick={realizarPedido}>
-                Realizar pedido
-              </Button>
-            </Container>
           </Container>
         </section>
       ) : (

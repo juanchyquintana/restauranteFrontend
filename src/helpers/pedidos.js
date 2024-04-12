@@ -10,7 +10,7 @@ export const crearPedido = async (pedido) => {
             },
             body: JSON.stringify(pedido)
         })
-        return respuesta.json()
+        return respuesta
     } catch (error) {
         console.log(error)
     }
