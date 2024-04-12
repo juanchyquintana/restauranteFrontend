@@ -15,7 +15,26 @@ const Carrito = () => {
   const [pedidoState, setPedidoState] = useState({});
   const [productos, setProductos] = useState([]);
   const pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
-  
+
+  const realizarPedido = () => {
+    if (!datos.delivery) {
+      const { usuario, productos, estado, tipoEntrega } = pedidoState;
+      const nuevoObjeto = {
+        usuario: usuario,
+        productos: productos,
+        estado: estado,
+        tipoEntrega: tipoEntrega,
+      };
+      console.log(nuevoObjeto);
+    }
+  };
+
+  const actualizarInputs = (e) => {
+    const {name, value} = e.target
+    setPedidoState(prevState => ({
+      ...prevState, [name]: value
+    }))
+  }
 
   const actualizarCarrito = (direccion, lat, lng) => {
     setDatos({ ...datos, calle: direccion, lat: lat, lng: lng });
@@ -129,6 +148,23 @@ const Carrito = () => {
                 </tbody>
               </Table>
 
+              <Form className="mt-3">
+                <Form.Group>
+                  <Form.Label className="fw-bold">Notas del pedido</Form.Label>
+                  <Form.Control
+                    className="notas"
+                    as="textarea"
+                    name="notas"
+                    rows={4}
+                    minLength={10}
+                    maxLength={300}
+                    placeholder="Información sobre el pedido"
+                    value={pedidoState.notas}
+                    onChange={(e) => actualizarInputs(e)}
+                  />
+                </Form.Group>
+              </Form>
+
               <Form.Check
                 type="checkbox"
                 label="¿Delivery?"
@@ -142,25 +178,32 @@ const Carrito = () => {
 
             {datos.delivery && (
               <>
-              <div className="">
-                <Form className="d-flex flex-column mb-4">
-                  <Form.Group className="mb-3">
-                    <Form.Label className="fw-bold" name="telefonoContacto">Telefono contacto</Form.Label>
-                    <Form.Control type="tel" pattern="" placeholder="Telefono"/>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label className="fw-bold">Notas del pedido</Form.Label>
-                    <Form.Control className="notas" as="textarea" name="notas" rows={4} minLength={10} maxLength={300} placeholder="Información sobre el pedido, o la dirección"/>
-                  </Form.Group>
-                </Form>
+                <div className="">
+                  <Form className="d-flex flex-column mb-4">
+                    <Form.Group className="mb-3">
+                      <Form.Label className="fw-bold" name="telefonoContacto">
+                        Telefono contacto
+                      </Form.Label>
+                      <Form.Control
+                        type="tel"
+                        pattern=""
+                        placeholder="Telefono"
+                        name="telefonoContacto"
+                        value={pedidoState.telefonoContacto}
+                        onChange={(e) => actualizarInputs(e)}
+                      />
+                    </Form.Group>
+                  </Form>
 
-                <Mapa datos={datos} actualizarCarrito={actualizarCarrito} />
-              </div>
+                  <Mapa datos={datos} actualizarCarrito={actualizarCarrito} />
+                </div>
               </>
             )}
 
             <Container className="mt-4 d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
-              <Button type="submit">Realizar pedido</Button>
+              <Button type="submit" onClick={realizarPedido}>
+                Realizar pedido
+              </Button>
             </Container>
           </Container>
         </section>
