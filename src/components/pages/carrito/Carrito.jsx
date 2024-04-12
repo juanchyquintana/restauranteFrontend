@@ -12,49 +12,56 @@ const Carrito = () => {
     delivery: false,
     calle: "",
   });
-  const [pedidoState, setPedidoState] = useState({})
-  const [productos, setProductos] = useState([])
+  const [pedidoState, setPedidoState] = useState({});
+  const [productos, setProductos] = useState([]);
   const pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
   // console.log(pedido)
-  
 
   const actualizarCarrito = (direccion, lat, lng) => {
     setDatos({ ...datos, calle: direccion, lat: lat, lng: lng });
   };
-  
+
   const actualizarCantidad = (e, id, precio) => {
-    const productoEncontrado = pedido.productos.find((elemento)=> { return elemento.producto === id})
-    console.log(e.target.value)
-    if (e.target.value > 0 && e.target.value <= 15){
-      pedido.total = pedido.total + precio
-      productoEncontrado.cantidad = e.target.value
-      sessionStorage.setItem("pedido", JSON.stringify(pedido))
-      setPedidoState(pedido)
+    const productoEncontrado = pedido.productos.find((elemento) => {
+      return elemento.producto === id;
+    });
+    console.log(e.target.value);
+    if (e.target.value > 0 && e.target.value <= 15) {
+      let cantidadActual = productoEncontrado.cantidad;
+      if (e.target.value > cantidadActual) {
+        pedido.total = pedido.total + precio;
+      } else {
+        pedido.total = pedido.total - precio;
+      }
+      productoEncontrado.cantidad = e.target.value;
+      sessionStorage.setItem("pedido", JSON.stringify(pedido));
+      setPedidoState(pedido);
     } else {
-      productoEncontrado.cantidad = 1
-      sessionStorage.setItem("pedido", JSON.stringify(pedido))
-      setPedidoState(pedido)
+      productoEncontrado.cantidad = 1;
+      sessionStorage.setItem("pedido", JSON.stringify(pedido));
+      setPedidoState(pedido);
     }
-  }
+  };
 
   const cargarProductos = async () => {
-    const productosArray = []
-    for (let i = 0; i < pedido?.productos?.length; i++){
+    const productosArray = [];
+    for (let i = 0; i < pedido?.productos?.length; i++) {
       try {
-        const productoObtenido = await obtenerProductoID(pedido?.productos[i].producto)
-        productosArray.push(productoObtenido)
-        setProductos(productosArray)
+        const productoObtenido = await obtenerProductoID(
+          pedido?.productos[i].producto
+        );
+        productosArray.push(productoObtenido);
+        setProductos(productosArray);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-  }
-
+  };
 
   useEffect(() => {
-    setPedidoState(pedido)
-    cargarProductos()
-  },[])
+    setPedidoState(pedido);
+    cargarProductos();
+  }, []);
 
   return (
     <>
@@ -90,13 +97,21 @@ const Carrito = () => {
                             type="number"
                             className="text-center input-tabla"
                             value={pedidoState.productos[i].cantidad}
-                            onChange={(e) => actualizarCantidad(e, producto._id, producto.precio)}
+                            onChange={(e) =>
+                              actualizarCantidad(
+                                e,
+                                producto._id,
+                                producto.precio
+                              )
+                            }
                             min={1}
                             max={15}
                           />
                         </Form>
                       </td>
-                      <td>${pedidoState.productos[i].cantidad * producto.precio}</td>
+                      <td>
+                        ${pedidoState.productos[i].cantidad * producto.precio}
+                      </td>
                     </tr>
                   ))}
                   <tr>
