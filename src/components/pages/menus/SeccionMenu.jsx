@@ -23,18 +23,18 @@ const SeccionMenu = () => {
 
   const agregarAlCarrito = (e, productoID, precio, nombreProducto) => {
     e.preventDefault();
+    console.log(pedido.productos[1]);
     const cantidadIngresada = parseInt(e.target.cantidad.value);
 
     if (cantidadIngresada > 0 && cantidadIngresada <= 15) {
       const productoEncontrado = pedido.productos.find((elemento) => {
         return elemento.producto === productoID;
       });
-
+      const cantidadProductoEncontrado = parseInt(productoEncontrado.cantidad);
       if (productoEncontrado && productoEncontrado.cantidad < 15) {
-        const cantidadPrevia = productoEncontrado.cantidad;
-        productoEncontrado.cantidad =
-          productoEncontrado.cantidad + cantidadIngresada;
-        if (productoEncontrado.cantidad >= 15) {
+        const cantidadPrevia = cantidadProductoEncontrado;
+        productoEncontrado.cantidad = cantidadProductoEncontrado + cantidadIngresada;
+        if (productoEncontrado.cantidad > 15) {
           productoEncontrado.cantidad = 15;
           swalProductoAgregado(true, cantidadPrevia, nombreProducto);
         } else {

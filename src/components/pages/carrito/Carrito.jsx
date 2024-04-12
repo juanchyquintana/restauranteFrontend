@@ -35,7 +35,6 @@ const Carrito = () => {
       sessionStorage.setItem("pedido", JSON.stringify(pedido));
       setPedidoState(pedido);
     }
-    
   };
 
   const actualizarTotal = () => {
