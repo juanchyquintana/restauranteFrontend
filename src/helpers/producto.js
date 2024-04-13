@@ -44,6 +44,7 @@ export const crearProducto = async (productoNuevo) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'x-token': JSON.parse(sessionStorage.getItem('usuarioLotus')).token
       },
       body: JSON.stringify(productoNuevo),
     });

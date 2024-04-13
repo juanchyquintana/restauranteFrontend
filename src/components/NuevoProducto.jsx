@@ -20,15 +20,15 @@ const NuevoProducto = ({ editar, titulo }) => {
     if(respuesta.status === 201){
       Swal.fire({
         title: "Producto Creado!",
-        text: `El producto "${producto.nombrePlato}" fue creado correctamente!`,
+        text: `El producto "${producto.nombre}" fue creado correctamente!`,
         icon: "success"
       });
       reset();
     }else{
       Swal.fire({
         title: "Ocurrio un error!",
-        text: `El producto "${producto.nombrePlato}" no pudo ser creado! intente nuevamente en unos minutos`,
-        icon: "success"
+        text: `El producto "${producto.nombre}" no pudo ser creado! intente nuevamente en unos minutos`,
+        icon: "error"
       });
     }
   };
@@ -45,7 +45,7 @@ const NuevoProducto = ({ editar, titulo }) => {
               <Form.Control
                 type="text"
                 placeholder="Ej: Sopa Wan Tan, Rollitos de primavera, Zongzi, Jiaozi..."
-                {...register("nombrePlato", {
+                {...register("nombre", {
                   required: "El Nombre del Plato es Obligatorio",
                   minLength: {
                     value: 2,
@@ -62,7 +62,7 @@ const NuevoProducto = ({ editar, titulo }) => {
             </Form.Group>
 
             <Form.Text className="text-danger">
-              {errors.nombrePlato?.message}
+              {errors.nombre?.message}
             </Form.Text>
 
             <Form.Group className="my-3">
@@ -121,12 +121,12 @@ const NuevoProducto = ({ editar, titulo }) => {
                     <option value="" hidden>
                       -- Seleccione una Opción --
                     </option>
-                    <option value="entradas">Entradas</option>
-                    <option value="platos-principales">
+                    <option value="Entradas">Entradas</option>
+                    <option value="Platos Principales">
                       Platos Principales
                     </option>
-                    <option value="postres">Postres</option>
-                    <option value="bebidas">Bebidas</option>
+                    <option value="Postres">Postres</option>
+                    <option value="Bebidas">Bebidas</option>
                   </Form.Select>
                 </Form.Group>
 
