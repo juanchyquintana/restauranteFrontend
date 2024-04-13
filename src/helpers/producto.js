@@ -1,5 +1,5 @@
 const restauranteURL = import.meta.env.VITE_API_RESTAURANTE;
-console.log(productoURL);
+console.log(restauranteURL);
 
 
 export const obtenerProductos = async () => {
@@ -40,7 +40,7 @@ export const borrarProductoAPI = async (id) => {
 
 export const crearProducto = async (productoNuevo) => {
   try {
-    const respuesta = await fetch(restauranteURL, {
+    const respuesta = await fetch(`${restauranteURL}/productos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
