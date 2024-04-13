@@ -1,7 +1,10 @@
 import { Button, Card } from "react-bootstrap";
 import "./cardProdCocina.css";
 
-const CardProductoCocina = ({ pedido }) => {
+const CardProductoCocina = ({ pedido, actualizarPedido }) => {
+
+  
+
   return (
     <Card className="rounded-0 h-100" id="cardContainer">
       <Card.Body className="">
@@ -38,7 +41,7 @@ const CardProductoCocina = ({ pedido }) => {
         </Card.Body>
 
         <Card.Footer className="d-flex justify-content-end bg-light">
-          <Button variant="primary" onClick={() => console.log()}>
+          <Button variant="primary" onClick={() => actualizarPedido(pedido._id)}>
             Comenzar
           </Button>
         </Card.Footer>

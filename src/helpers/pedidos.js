@@ -25,7 +25,7 @@ export const obtenerPedidos = async () => {
     }
 }
 
-export const editarPedidos = async (id, pedido) => {
+export const editarPedido = async (id, pedido) => {
     try {
         const respuesta = await fetch(`${RESTAURANTE_URL}/pedidos/${id}`,{
             method: 'PUT',
