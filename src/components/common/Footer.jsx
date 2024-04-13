@@ -6,23 +6,23 @@ const Footer = () => {
   return (
     <footer className="text-center bg-green text-black  contenedorFooter">
       <div className="text-center ">
-        <div class="row m-0">
-          <div className="col-12 col-sm-12 col-md-12 col-lg-4">
+        <div className="row m-0">
+          <div className="col-12 col-sm-12 col-lg-4">
             <a
               href="#"
               className="contenedorLogo d-flex justify-content-center"
             >
-              <img src={logoFooter} alt="Logo" class="imgLogoFooter img-fluid " />
+              <img src={logoFooter} alt="Logo" className="imgLogoFooter img-fluid " />
             </a>
             <div>
               <ul className="listaFooter">
-                <li className=" list-unstyled">
+                <li className="list-unstyled">
                   <h4 className="text-light fw-bold tituloLista">Acerca de</h4>
                 </li>
                 <li className="mt-3 list-unstyled">
                   <a
                     href="#"
-                    class="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light listaAyuda"
+                    className="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light listaAyuda"
                   >
                     Acerca de Nosotros
                   </a>
@@ -38,7 +38,7 @@ const Footer = () => {
               </ul>
               <div className="d-flex flex-column">
                 <p className="text-light">Síguenos en nuestras redes:</p>
-                <div class="d-flex justify-content-center">
+                <div className="d-flex justify-content-center">
                   <a href="#">
                     <i className="bi bi-instagram fs-3 m-2 colorIcon"></i>
                   </a>
@@ -75,7 +75,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="col-12 col-sm-12 col-md-4 col-lg-4">
+          <div className="col-12 col-sm-12 col-lg-4 d-flex flex-column justify-content-center">
             <a
               href="#"
               className="contenedorLogo d-flex justify-content-center"
