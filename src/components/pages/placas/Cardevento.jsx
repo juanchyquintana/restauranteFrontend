@@ -8,7 +8,7 @@ import Evento3 from "./img/closeup-tea-set-served-against-red-background-flowers
 const Cardevento = () => {
     return (
       <Row>
-      <Container className='d-flex justify-content-between'>
+      {/* <Container className='d-flex justify-content-between'>
         <Col sm={1} md={1} lg={3} >
         <Card className='mt-5 h-100'>
         <Card.Img variant="top" src={Evento} className='imagenEvento' />
@@ -56,7 +56,7 @@ const Cardevento = () => {
         </Card.Body>
       </Card>
         </Col>
-      </Container>
+      </Container> */}
       </Row>
         
     );

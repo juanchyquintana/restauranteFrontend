@@ -2,10 +2,25 @@ import { useEffect, useState } from "react";
 import ItemProductos from "../ItemProductos.jsx";
 import { Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { leerProductos } from "../../helpers/producto.js";
 
 const Administrador = () => {
-  // const [productos, setProductos] = useState([]);
-  
+  const [productos, setProductos] = useState([]);
+
+  useEffect(() => {
+    consultarBD();
+  }, []);
+
+  const consultarBD = async () => {
+    try {
+      const respuesta = await leerProductos();
+      setProductos(respuesta);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -35,11 +50,10 @@ const Administrador = () => {
             </thead>
 
             <tbody>
-              <ItemProductos />
+              {productos.map((producto) => (
+                <ItemProductos key={producto._id} producto={producto} setProductos={setProductos} />
+              ))}
 
-              {/* {
-                productos.map((producto)=>  <ItemProductos key={producto._id} producto={producto} setProductos={setProductos}></ItemProductos>)
-              } */}
             </tbody>
           </Table>
         </section>

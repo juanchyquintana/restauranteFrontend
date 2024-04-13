@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap");
+
+.contenedorFooter {
+  width: 100%;
+  background: #000000;
+}
+
+.imgLogoFooter {
+  display: flex;
+  justify-content: start;
+  width: 80%;
+}
+
+.imgLogoFooter2 {
+  display: flex;
+  justify-content: start;
+}
+
+.row p {
+  font-size: 25px;
+}
+
+.listaAyuda {
+  font-weight: 300;
+  font-size: 15px;
+}
+.listaFooter {
+  padding: 0;
+}
+.colorIcon {
+  background: linear-gradient(-755deg, #f71c1ce0, #dacf6f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+li {
+  text-decoration: none;
+}
+
+@media screen and (min-width: 540px) {
+  .imgLogoFooter {
+    width: 70%;
+  }
+
+  .listaAyuda {
+    font-weight: 300;
+    font-size: 20px;
+  }
+  .tituloLista {
+    font-size: 30px;
+  }
+}

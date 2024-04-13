@@ -1,4 +1,4 @@
-const usuarioURL = import.meta.env.VITE_API_USUARIO;
+const usuarioURL = import.meta.env.VITE_API_RESTAURANTE;
 
 export const registrarUsuario = async (usuario) => {
   try {
@@ -85,7 +85,6 @@ export const actualizarEstado = async (id, estado) => {
       },
       body: JSON.stringify(nuevoUsuario),
     });
-
     return respuesta.json();
   } catch (error) {
     console.log(error);

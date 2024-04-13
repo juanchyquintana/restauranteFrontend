@@ -6,13 +6,13 @@ import L from "leaflet";
 const Mapa = ({ datos, actualizarCarrito }) => {
   const [lat, setLat] = useState(datos.lat || -26.8301695);
   const [lng, setLng] = useState(datos.lng || -65.2044388);
-  const [calle, setCalle] = useState("");
+  const [calle, setCalle] = useState("65, 25 de Mayo de 1810, Centro, San Miguel de Tucumán, Departamento Capital, Tucumán, T4000, Argentina");
 
-  const actualizarDireccion = (direccion) => {
+  const actualizarDireccion = (direccion, lat, lng) => {
     setCalle(direccion);
 
     if (actualizarCarrito) {
-      actualizarCarrito(direccion);
+      actualizarCarrito(direccion, lat, lng);
     }
   };
 
@@ -50,8 +50,7 @@ const Mapa = ({ datos, actualizarCarrito }) => {
           .then((resultados) => {
             const resultado = resultados[0];
             const calle = `${resultado.label}`;
-            setCalle(calle);
-            actualizarDireccion(calle);
+            actualizarDireccion(calle, resultado.x, resultado.y);
           });
       });
 
@@ -72,8 +71,8 @@ const Mapa = ({ datos, actualizarCarrito }) => {
         onChange={(e) => setCalle(e.target.value)}
         readOnly
       />
-      <input type="hidden" name="calle" id="calle" value={calle} />
-      <input type="hidden" name="lat" id="lat" value={lat} />
+      <input type="hidden" name="calle" id="calle" value={calle}/>
+      <input type="hidden" name="lat" id="lat" value={lat}/>
       <input type="hidden" name="lng" id="lng" value={lng} />
     </div>
   );
