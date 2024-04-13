@@ -25,13 +25,11 @@ const Cocina = () => {
     <section className="mainPage nav-espacio bg-light pb-5">
       <Container>
         <div className="row">
-          <div className="col-md-4">
-            {pedidos?.map((pedido, i) => (
-              <div className="mb-3" key={i}>
-                <CardProductoCocina pedido={pedido}/>
-              </div>
-            ))}
-          </div>
+          {pedidos?.map((pedido, i) => (
+            <div className="mb-3 col-md-6 col-lg-4">
+              <CardProductoCocina pedido={pedido} key={i} />
+            </div>
+          ))}
         </div>
       </Container>
     </section>

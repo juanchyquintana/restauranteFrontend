@@ -2,12 +2,9 @@ import { Button, Card } from "react-bootstrap";
 import "./cardProdCocina.css";
 
 const CardProductoCocina = ({ pedido }) => {
-
-
-
   return (
-    <Card className="rounded-0" id="cardContainer">
-      <Card.Body>
+    <Card className="rounded-0 h-100" id="cardContainer">
+      <Card.Body className="">
         <Card.Title className="d-flex gap-2 flex-wrap">
           <p className="p-2 bg-success text-white rounded-1 m-0">
             {pedido?.tipoEntrega}
@@ -31,20 +28,21 @@ const CardProductoCocina = ({ pedido }) => {
             </div>
           ))}
           {pedido?.notas?.length > 0 ? (
-                <li className="mt-4 bg-light border p-1">
-                  <span className="fw-bold">Notas:</span> {pedido.notas}
-                </li>
-              ) : (
-                <></>
-              )}
+            <li className="mt-4 bg-light border p-2">
+              <span className="fw-bold">Notas:</span> {pedido.notas}
+            </li>
+          ) : (
+            <></>
+          )}
         </ul>
+        </Card.Body>
 
-        <div className="d-flex justify-content-end">
-          <Button variant="secondary" onClick={() => console.log()}>
+        <Card.Footer className="d-flex justify-content-end bg-light">
+          <Button variant="primary" onClick={() => console.log()}>
             Comenzar
           </Button>
-        </div>
-      </Card.Body>
+        </Card.Footer>
+
     </Card>
   );
 };
