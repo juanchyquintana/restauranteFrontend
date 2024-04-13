@@ -15,3 +15,12 @@ export const crearPedido = async (pedido) => {
         console.log(error)
     }
 }
+
+export const obtenerPedidos = async () => {
+    try {
+        const respuesta = await fetch(`${RESTAURANTE_URL}/pedidos`)
+        return respuesta.json()
+    } catch (error) {
+        console.log(error)
+    }
+}

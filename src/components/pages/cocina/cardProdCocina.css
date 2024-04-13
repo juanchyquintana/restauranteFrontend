@@ -3,7 +3,14 @@
     max-width: 340px;
 }
 
+
 .card-img{
     aspect-ratio: 3/2;
     object-fit: cover;
+}
+
+@media all and (max-width: 567px){
+    #tituloCard{
+        font-size: 18px
+    }
 }

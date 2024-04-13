@@ -1,60 +1,36 @@
 import { Button, Card, Container } from "react-bootstrap";
 import "./cocina.css";
 import CardProductoCocina from "./CardProdCocina";
+import { obtenerPedidos } from "../../../helpers/pedidos";
+import { useEffect, useState } from "react";
 
 const Cocina = () => {
+  const [pedidos, setPedidos] = useState([])
+
+  const getPedidos = async () => {
+    try {
+      const respuesta = await obtenerPedidos();
+      setPedidos(respuesta)
+      console.log(respuesta)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getPedidos()
+  },[])
+
   return (
-    <section className="mainPage bg-light">
-      <Container className="cocina-container overflow-hidden mb-5">
-        <h2 className="mb-4">Pedidos pendientes: 2</h2>
-        <Container fluid>
-          <Card className="mb-3">
-            <Card.Body className="card-padre-body">
-              <Card.Title className="mb-3">Pedido 19</Card.Title>
-              <Container fluid className="d-flex p-0 gap-4">
-                <CardProductoCocina />
-                <CardProductoCocina />
-              </Container>
-              
-            </Card.Body>
-            <Card.Footer className="d-flex justify-content-between align-items-center">
-                <p className="m-0 btn btn-success">5:03</p>
-                <Button>Finalizar</Button>
-            </Card.Footer>
-          </Card>
-          
-          <Card className="mb-3">
-            <Card.Body className="card-padre-body">
-              <Card.Title className="mb-3">Pedido 18</Card.Title>
-              <Container fluid className="d-flex p-0 gap-4">
-                <CardProductoCocina />
-                <CardProductoCocina />
-              </Container>
-              
-            </Card.Body>
-            <Card.Footer className="d-flex justify-content-between align-items-center">
-                <p className="m-0 btn btn-warning">22:17</p>
-                <Button>Finalizar</Button>
-            </Card.Footer>
-          </Card>
-
-          <Card className="mb-3">
-            <Card.Body className="card-padre-body">
-              <Card.Title className="mb-3">Pedido 17</Card.Title>
-              <Container fluid className="d-flex p-0 gap-4">
-                <CardProductoCocina />
-                <CardProductoCocina />
-              </Container>
-              
-            </Card.Body>
-            <Card.Footer className="d-flex justify-content-between align-items-center">
-                <p className="m-0 btn btn-danger">35:58</p>
-                <Button>Finalizar</Button>
-            </Card.Footer>
-          </Card>
-
-          
-        </Container>
+    <section className="mainPage nav-espacio bg-light pb-5">
+      <Container>
+        <div className="row">
+          <div className="col-md-4">
+            {pedidos?.map((pedido, i) => (
+              <CardProductoCocina pedido={pedido} key={i}/>
+            ))}
+          </div>
+        </div>
       </Container>
     </section>
   );
