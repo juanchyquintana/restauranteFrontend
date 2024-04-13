@@ -2,17 +2,20 @@ import { Button, Card } from "react-bootstrap";
 import "./cardProdCocina.css";
 
 const CardProductoCocina = ({ pedido }) => {
+
+
+
   return (
-    <Card id="card-container" className="rounded-0">
+    <Card className="rounded-0" id="cardContainer">
       <Card.Body>
         <Card.Title className="d-flex gap-2 flex-wrap">
-          <p className="p-2 bg-success text-white rounded-1">
+          <p className="p-2 bg-success text-white rounded-1 m-0">
             {pedido?.tipoEntrega}
           </p>
-          <p className="p-2 bg-success text-white rounded-1">
+          <p className="p-2 bg-success text-white rounded-1 m-0">
             {pedido?.estado}
           </p>
-          <p className="p-2 bg-success text-white rounded-1">5:02</p>
+          <p className="p-2 bg-success text-white rounded-1 m-0">5:02</p>
         </Card.Title>
         <ul className="list-unstyled py-4">
           {pedido?.productos?.map((objetoPedido, i) => (

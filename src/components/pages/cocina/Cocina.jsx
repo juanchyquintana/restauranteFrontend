@@ -5,21 +5,21 @@ import { obtenerPedidos } from "../../../helpers/pedidos";
 import { useEffect, useState } from "react";
 
 const Cocina = () => {
-  const [pedidos, setPedidos] = useState([])
+  const [pedidos, setPedidos] = useState([]);
 
   const getPedidos = async () => {
     try {
       const respuesta = await obtenerPedidos();
-      setPedidos(respuesta)
-      console.log(respuesta)
+      setPedidos(respuesta);
+      console.log(respuesta);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
-    getPedidos()
-  },[])
+    getPedidos();
+  }, []);
 
   return (
     <section className="mainPage nav-espacio bg-light pb-5">
@@ -27,7 +27,9 @@ const Cocina = () => {
         <div className="row">
           <div className="col-md-4">
             {pedidos?.map((pedido, i) => (
-              <CardProductoCocina pedido={pedido} key={i}/>
+              <div className="mb-3" key={i}>
+                <CardProductoCocina pedido={pedido}/>
+              </div>
             ))}
           </div>
         </div>

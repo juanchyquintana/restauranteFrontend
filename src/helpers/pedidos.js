@@ -24,3 +24,19 @@ export const obtenerPedidos = async () => {
         console.log(error)
     }
 }
+
+export const editarPedidos = async (id, pedido) => {
+    try {
+        const respuesta = await fetch(`${RESTAURANTE_URL}/pedidos/${id}`,{
+            method: 'PUT',
+            headers:{
+                "Content-Type": "application/json",
+                "x-token": JSON.parse(sessionStorage.getItem("usuarioLotus")).token
+            },
+            body: JSON.stringify(pedido)
+        })
+        return respuesta
+    } catch (error) {
+        console.log(error)
+    }
+} 
