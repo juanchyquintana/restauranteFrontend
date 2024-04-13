@@ -19,3 +19,16 @@ export const obtenerProductoID = async (id) => {
         console.log(error)
     }
 }
+
+export const leerProductos = async () => {
+  try {
+    const respuesta = await fetch(restauranteURL);
+    const listaProductos = await respuesta.json();
+
+    return listaProductos;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
