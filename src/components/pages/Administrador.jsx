@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
 import ItemProductos from "../ItemProductos.jsx";
 import { Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Administrador = () => {
+  // const [productos, setProductos] = useState([]);
+  
   return (
     <>
       <Container>
@@ -33,6 +36,10 @@ const Administrador = () => {
 
             <tbody>
               <ItemProductos />
+
+              {/* {
+                productos.map((producto)=>  <ItemProductos key={producto._id} producto={producto} setProductos={setProductos}></ItemProductos>)
+              } */}
             </tbody>
           </Table>
         </section>
