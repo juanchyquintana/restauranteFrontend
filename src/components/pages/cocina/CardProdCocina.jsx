@@ -2,20 +2,36 @@ import { Button, Card } from "react-bootstrap";
 import "./cardProdCocina.css";
 
 const CardProductoCocina = ({ pedido, actualizarPedido }) => {
+  const estiloBotonActualizar = (estado) => {
+    if (estado === 'pendiente'){
+      return 'primary'
+    }
+    if (estado === 'en proceso'){
+      return 'danger'
+    }
+  }
 
-  
+  const estiloEstado = (estado) => {
+    if (estado === 'pendiente'){
+      return 'bg-warning'
+    }
+    if (estado === 'en proceso'){
+      return 'bg-success'
+    }
+  }
+
 
   return (
     <Card className="rounded-0 h-100" id="cardContainer">
       <Card.Body className="">
         <Card.Title className="d-flex gap-2 flex-wrap">
-          <p className="p-2 bg-success text-white rounded-1 m-0">
+          <p className={`p-2 bg-secondary text-white rounded-1 m-0`}>
             {pedido?.tipoEntrega}
           </p>
-          <p className="p-2 bg-success text-white rounded-1 m-0">
+          <p className={`p-2 ${estiloEstado(pedido.estado)} text-white rounded-1 m-0`}>
             {pedido?.estado}
           </p>
-          <p className="p-2 bg-success text-white rounded-1 m-0">5:02</p>
+          <p className={`p-2 bg-success text-white rounded-1 m-0`}>5:02</p>
         </Card.Title>
         <ul className="list-unstyled py-4">
           {pedido?.productos?.map((objetoPedido, i) => (
@@ -41,8 +57,9 @@ const CardProductoCocina = ({ pedido, actualizarPedido }) => {
         </Card.Body>
 
         <Card.Footer className="d-flex justify-content-end bg-light">
-          <Button variant="primary" onClick={() => actualizarPedido(pedido._id)}>
-            Comenzar
+          <Button variant={estiloBotonActualizar(pedido.estado)} onClick={() => actualizarPedido(pedido._id)}>
+            {pedido.estado === 'pendiente' && ('Comenzar')}
+            {pedido.estado === 'en proceso' && ('Finalizar')}
           </Button>
         </Card.Footer>
 

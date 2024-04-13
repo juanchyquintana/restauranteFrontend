@@ -32,7 +32,7 @@ const Cocina = () => {
           confirmButton: "btn-confirm",
           denyButton: "btn-deny",
         },
-        buttonsStyling: false
+        buttonsStyling: false,
       }).then(async (result) => {
         if (result.isConfirmed) {
           pedidoEstado.estado = "terminado";
@@ -45,6 +45,7 @@ const Cocina = () => {
               showConfirmButton: false,
               timer: 1500,
             });
+            getPedidos();
           } else {
             Swal.fire({
               position: "center",
@@ -58,7 +59,6 @@ const Cocina = () => {
           Swal.fire("El pedido sigue en proceso", "", "info");
         }
       });
-      getPedidos();
     }
     if (pedidoEstado.estado === "pendiente") {
       console.log(copiaPedidos);
@@ -96,23 +96,32 @@ const Cocina = () => {
 
   useEffect(() => {
     getPedidos();
+    console.log(pedidos.length)
   }, []);
 
   return (
     <section className="mainPage nav-espacio bg-light pb-5">
       <Container>
         <div className="row">
-          {pedidos?.map((pedido, i) =>
-            pedido.estado !== "terminado" ? (
-              <div className="mb-3 mb-md-4 col-md-6 col-lg-4" key={i}>
-                <CardProductoCocina
-                  pedido={pedido}
-                  actualizarPedido={actualizarPedido}
-                />
-              </div>
-            ) : (
-              <div key={i}></div>
-            )
+          {pedidos?.length > 0 ? (
+            <>
+              {pedidos?.map((pedido, i) =>
+                pedido.estado !== "terminado" ? (
+                  <div className="mb-3 mb-md-4 col-md-6 col-lg-4" key={i}>
+                    <CardProductoCocina
+                      pedido={pedido}
+                      actualizarPedido={actualizarPedido}
+                    />
+                  </div>
+                ) : (
+                  <div key={i}></div>
+                )
+              )}
+            </>
+          ) : (
+            <div>
+              <h2>No hay pedidos pendientes.</h2>
+            </div>
           )}
         </div>
       </Container>
