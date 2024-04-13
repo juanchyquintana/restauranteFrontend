@@ -25,21 +25,21 @@ const Carrito = () => {
     if (!datos.delivery) {
       nuevoObjeto.tipoEntrega = "bar";
       const infoPedido = await postPedido(nuevoObjeto);
-        if (infoPedido.status === 201) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: `El pedido fue crado correctamente.`,
-            showConfirmButton: true,
-          });
-        } else {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
-            showConfirmButton: true,
-          });
-        }
+      if (infoPedido.status === 201) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `El pedido fue crado correctamente.`,
+          showConfirmButton: true,
+        });
+      } else {
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
+          showConfirmButton: true,
+        });
+      }
     } else {
       const nuevoObjeto = crearObjetoPedido();
       nuevoObjeto.calle = datos?.calle;
@@ -97,6 +97,16 @@ const Carrito = () => {
     }
   };
 
+  const borrarProducto = (id) => {
+    const nuevoArray = pedido.productos.filter(
+      (elemento) => elemento.producto !== id
+    );
+    pedido.productos = nuevoArray;
+    actualizarTotal();
+    setPedidoState(pedido);
+    cargarProductos();
+  };
+
   const actualizarInputs = (e) => {
     const { name, value } = e.target;
     setPedidoState((prevState) => ({
@@ -113,8 +123,12 @@ const Carrito = () => {
     const productoEncontrado = pedido.productos.find((elemento) => {
       return elemento.producto === id;
     });
+    const productosStateCant = productos.find((elemento) => {
+      return elemento._id === id;
+    });
     if (e.target.value > 0 && e.target.value <= 15) {
       productoEncontrado.cantidad = e.target.value;
+      productosStateCant.cantidad = e.target.value;
       actualizarTotal();
       sessionStorage.setItem("pedido", JSON.stringify(pedido));
       setPedidoState(pedido);
@@ -143,6 +157,7 @@ const Carrito = () => {
           pedido?.productos[i].producto
         );
         productosArray.push(productoObtenido);
+        productosArray[i].cantidad = pedido?.productos[i].cantidad;
         setProductos(productosArray);
       } catch (error) {
         console.log(error);
@@ -188,7 +203,7 @@ const Carrito = () => {
                           <Form.Control
                             type="number"
                             className="text-center input-tabla"
-                            value={pedidoState.productos[i].cantidad}
+                            value={producto.cantidad}
                             onChange={(e) =>
                               actualizarCantidad(
                                 e,
@@ -199,11 +214,15 @@ const Carrito = () => {
                             min={1}
                             max={15}
                           />
+                          <Button
+                            className="ms-2 btn-danger"
+                            onClick={() => borrarProducto(producto._id)}
+                          >
+                            <i className="bi bi-cart-x-fill"></i>
+                          </Button>
                         </Form>
                       </td>
-                      <td>
-                        ${pedidoState.productos[i].cantidad * producto.precio}
-                      </td>
+                      <td>${producto.cantidad * producto.precio}</td>
                     </tr>
                   ))}
                   <tr>

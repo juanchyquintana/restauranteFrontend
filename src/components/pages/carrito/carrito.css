@@ -6,7 +6,7 @@
 }
 
 .input-tabla{
-   width: auto;
+   min-width: 65px;
    max-width: 100px;
 }
 
