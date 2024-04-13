@@ -1,16 +1,16 @@
 import { Link } from "react-router-dom";
 
-const ItemProductos = () => {
+const ItemProductos = (producto) => {
 
   return (
     <tr>
-      <td>nombreProducto</td>
-      <td>estado</td>
-      <td>precio</td>
+      <td>{producto.nombre}</td>
+      <td>{producto.estado}</td>
+      <td>{producto.precio}</td>
       <td>categoria</td>
       <td>
         <img
-          src={'imagen'}
+          src={producto.imagen}
           alt={`Esta es la imagen de `}
           className="w-25 img-fluid"
         />
