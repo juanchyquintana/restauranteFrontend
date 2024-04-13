@@ -41,7 +41,7 @@ const ItemProductos = ({producto, setProductos}) => {
       <td>{producto.nombre}</td>
       <td>{producto.estado}</td>
       <td>{producto.precio}</td>
-      <td>categoria</td>
+      <td>{producto.categoria}</td>
       <td>
         <img
           src={producto.imagen}

@@ -1,4 +1,6 @@
-const restauranteURL = import.meta.env.VITE_API_RESTAURANTE
+const restauranteURL = import.meta.env.VITE_API_RESTAURANTE;
+console.log(productoURL);
+
 
 export const obtenerProductos = async () => {
     try {
@@ -30,9 +32,24 @@ export const borrarProductoAPI = async (id) => {
     });
     console.log(respuesta);
     return respuesta;
+
   } catch (error) {
     console.log(error);
   }
 };
 
+export const crearProducto = async (productoNuevo) => {
+  try {
+    const respuesta = await fetch(restauranteURL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productoNuevo),
+    });
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
