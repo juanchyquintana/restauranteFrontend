@@ -47,7 +47,7 @@ const SeccionMenu = () => {
             <div className="col-md-4 col-lg-3 mb-3 ">
               <Card>
                 <Card.Img
-                  variant="top"
+                  variant=" top "
                   src="https://cadenaser.com/resizer/xRCT4u61WV8B6FPDIZ9sVEsJP1M=/736x552/filters:format(jpg):quality(70)/cloudfront-eu-central-1.images.arcpublishing.com/prisaradio/6YDRXOMYH5LOLD7S6G2YINMS74.jpg"
                 />
                 <Card.Body>
