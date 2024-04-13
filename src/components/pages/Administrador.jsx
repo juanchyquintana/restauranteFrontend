@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import ItemProductos from "../ItemProductos.jsx";
 import { Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { leerProductos } from "../../helpers/producto.js";
 
 const Administrador = () => {

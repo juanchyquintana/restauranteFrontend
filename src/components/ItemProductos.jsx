@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import { borrarProductoAPI } from "../helpers/producto";
+import { borrarProductoAPI, leerProductos } from "../helpers/producto";
 
 const ItemProductos = ({producto, setProductos}) => {
 
@@ -23,7 +23,7 @@ const ItemProductos = ({producto, setProductos}) => {
            text: `El producto "${producto.nombre}" fue eliminado correctamente`,
            icon: "success"
          });
-         const listaProductos = await leerProductosAPI()
+         const listaProductos = await leerProductos()
          setProductos(listaProductos);
        }else{
         Swal.fire({
