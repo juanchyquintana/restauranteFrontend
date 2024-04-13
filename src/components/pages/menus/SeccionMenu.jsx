@@ -1,16 +1,17 @@
-import { Container } from "react-bootstrap";
+import { obtenerProductos } from "../../../helpers/producto";
+import bannerComida from "./bannerImg/comidaChina.jpg";
+import bannerBebida from "./bannerImg/bebidaChina.jpg";
+import Swal from "sweetalert2/src/sweetalert2.js";
+import { Container, Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./seccionMenu.css";
-import bannerComida from "./bannerImg/comidaChina.jpg";
-import bannerBebida from "./bannerImg/bebidaChina.jpg";
-import { obtenerProductos } from "../../../helpers/producto";
-import { useEffect, useState } from "react";
-import Swal from "sweetalert2/src/sweetalert2.js";
 
 const SeccionMenu = () => {
   const [productos, setProductos] = useState([]);
-  const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || false
+  const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || false;
+
   let pedido = JSON.parse(sessionStorage.getItem("pedido")) || {
     usuario: usuario?.id,
     fecha: "",
@@ -33,7 +34,8 @@ const SeccionMenu = () => {
       const cantidadProductoEncontrado = parseInt(productoEncontrado?.cantidad);
       if (productoEncontrado && productoEncontrado.cantidad < 15) {
         const cantidadPrevia = cantidadProductoEncontrado;
-        productoEncontrado.cantidad = cantidadProductoEncontrado + cantidadIngresada;
+        productoEncontrado.cantidad =
+          cantidadProductoEncontrado + cantidadIngresada;
         if (productoEncontrado.cantidad > 15) {
           productoEncontrado.cantidad = 15;
           swalProductoAgregado(true, cantidadPrevia, nombreProducto);
@@ -129,7 +131,7 @@ const SeccionMenu = () => {
         />
         <h2 className="bannerTitulo">食品 Comidas</h2>
         <Container className="my-4  pb-4">
-          <div className="row ">
+          <Row>
             {productos?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
                 <Card>
@@ -137,7 +139,6 @@ const SeccionMenu = () => {
                   <Card.Body>
                     <Card.Title>{producto.nombre}</Card.Title>
                     <Card.Text className="d-flex">{producto.detalle}</Card.Text>
-
                     <form
                       className="d-flex align-items-center justify-content-between"
                       onSubmit={(e) =>
@@ -149,7 +150,7 @@ const SeccionMenu = () => {
                         )
                       }
                     >
-                      <Button variant="primary">ver mas</Button>
+                      <Button variant="primary">Ver Más</Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
@@ -166,9 +167,10 @@ const SeccionMenu = () => {
                 </Card>
               </div>
             ))}
-          </div>
+          </Row>
         </Container>
       </section>
+
       <section>
         <div className="bannerContenedor2">
           <img
@@ -179,7 +181,7 @@ const SeccionMenu = () => {
           <h2 className="titulo">饮料 Bebidas</h2>
         </div>
         <Container className="my-4 ">
-          <div className="row ">
+          <Row>
             {productos?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
                 <Card>
@@ -187,23 +189,35 @@ const SeccionMenu = () => {
                   <Card.Body>
                     <Card.Title>{producto.nombre}</Card.Title>
                     <Card.Text className="d-flex">{producto.detalle}</Card.Text>
-
-                    <div className="d-flex align-items-center justify-content-between">
-                      <Button variant="primary">ver mas</Button>
+                    <form
+                      className="d-flex align-items-center justify-content-between"
+                      onSubmit={(e) =>
+                        agregarAlCarrito(
+                          e,
+                          producto._id,
+                          producto.precio,
+                          producto.nombre
+                        )
+                      }
+                    >
+                      <Button variant="primary">Ver Más</Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
-                        min={0}
+                        min={1}
+                        max={15}
+                        defaultValue={1}
+                        name="cantidad"
                       />
-                      <Button className="bg-success ms-2">
+                      <Button className="bg-success ms-2" type="submit">
                         <i className="bi bi-plus-circle"></i>
                       </Button>
-                    </div>
+                    </form>
                   </Card.Body>
                 </Card>
               </div>
             ))}
-          </div>
+          </Row>
         </Container>
       </section>
     </>
