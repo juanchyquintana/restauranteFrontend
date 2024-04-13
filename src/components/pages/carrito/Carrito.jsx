@@ -6,6 +6,7 @@ import "./carrito.css";
 import { obtenerProductoID } from "../../../helpers/producto";
 import { crearPedido } from "../../../helpers/pedidos";
 import Swal from "sweetalert2/src/sweetalert2.js";
+import { useNavigate } from 'react-router-dom';
 
 const Carrito = () => {
   const [datos, setDatos] = useState({
@@ -17,7 +18,8 @@ const Carrito = () => {
   });
   const [pedidoState, setPedidoState] = useState({});
   const [productos, setProductos] = useState([]);
-  const pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
+  let pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
+  const navegar = useNavigate()
 
   const realizarPedido = async (e) => {
     e.preventDefault();
@@ -32,6 +34,9 @@ const Carrito = () => {
           title: `El pedido fue crado correctamente.`,
           showConfirmButton: true,
         });
+        sessionStorage.removeItem("pedido")
+        pedido = false
+        navegar("/menu")
       } else {
         Swal.fire({
           position: "center",
@@ -39,6 +44,7 @@ const Carrito = () => {
           title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
           showConfirmButton: true,
         });
+        console.log(nuevoObjeto)
       }
     } else {
       const nuevoObjeto = crearObjetoPedido();
@@ -58,6 +64,9 @@ const Carrito = () => {
             title: `El pedido fue crado correctamente. Será enviado a ${nuevoObjeto.calle}`,
             showConfirmButton: true,
           });
+          sessionStorage.removeItem("pedido")
+          pedido = false
+          navegar("/menu")
         } else {
           Swal.fire({
             position: "center",
@@ -65,15 +74,15 @@ const Carrito = () => {
             title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
             showConfirmButton: true,
           });
+          console.log(nuevoObjeto)
         }
       }
     }
   };
 
   const crearObjetoPedido = () => {
-    const fechaHoraActual = new Date().toLocaleString("es-AR", {
-      timeZone: "America/Argentina/Buenos_Aires",
-    });
+    const fechaHoraActual = new Date()
+    fechaHoraActual.setHours(fechaHoraActual.getHours() - 3)
     const { usuario, productos, estado, total } = pedidoState;
     const nuevoObjeto = {
       usuario: usuario,
@@ -176,7 +185,7 @@ const Carrito = () => {
 
   return (
     <>
-      {pedido ? (
+      {pedido && pedido.productos.length > 0 ? (
         <section className="mainPage nav-espacio bg-light d-flex justify-content-center">
           <Container className="">
             <div>
