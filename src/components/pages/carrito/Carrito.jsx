@@ -6,7 +6,7 @@ import "./carrito.css";
 import { obtenerProductoID } from "../../../helpers/producto";
 import { crearPedido } from "../../../helpers/pedidos";
 import Swal from "sweetalert2/src/sweetalert2.js";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 
 const Carrito = () => {
   const [datos, setDatos] = useState({
@@ -19,7 +19,7 @@ const Carrito = () => {
   const [pedidoState, setPedidoState] = useState({});
   const [productos, setProductos] = useState([]);
   let pedido = JSON.parse(sessionStorage.getItem("pedido")) || false;
-  const navegar = useNavigate()
+  const navegar = useNavigate();
 
   const realizarPedido = async (e) => {
     e.preventDefault();
@@ -34,9 +34,9 @@ const Carrito = () => {
           title: `El pedido fue crado correctamente.`,
           showConfirmButton: true,
         });
-        sessionStorage.removeItem("pedido")
-        pedido = false
-        navegar("/menu")
+        sessionStorage.removeItem("pedido");
+        pedido = false;
+        navegar("/menu");
       } else {
         Swal.fire({
           position: "center",
@@ -44,7 +44,7 @@ const Carrito = () => {
           title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
           showConfirmButton: true,
         });
-        console.log(nuevoObjeto)
+        console.log(nuevoObjeto);
       }
     } else {
       const nuevoObjeto = crearObjetoPedido();
@@ -64,9 +64,9 @@ const Carrito = () => {
             title: `El pedido fue crado correctamente. Será enviado a ${nuevoObjeto.calle}`,
             showConfirmButton: true,
           });
-          sessionStorage.removeItem("pedido")
-          pedido = false
-          navegar("/menu")
+          sessionStorage.removeItem("pedido");
+          pedido = false;
+          navegar("/menu");
         } else {
           Swal.fire({
             position: "center",
@@ -74,15 +74,15 @@ const Carrito = () => {
             title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
             showConfirmButton: true,
           });
-          console.log(nuevoObjeto)
+          console.log(nuevoObjeto);
         }
       }
     }
   };
 
   const crearObjetoPedido = () => {
-    const fechaHoraActual = new Date()
-    fechaHoraActual.setHours(fechaHoraActual.getHours() - 3)
+    const fechaHoraActual = new Date();
+    fechaHoraActual.setHours(fechaHoraActual.getHours() - 3);
     const { usuario, productos, estado, total } = pedidoState;
     const nuevoObjeto = {
       usuario: usuario,
@@ -111,10 +111,10 @@ const Carrito = () => {
       (elemento) => elemento.producto !== id
     );
     const producto = productos.filter((elemento) => {
-      return elemento._id === id
-    })
+      return elemento._id === id;
+    });
     pedido.productos = nuevoArray;
-    pedido.total = pedido.total - (producto[0]?.cantidad * producto[0]?.precio)
+    pedido.total = pedido.total - producto[0]?.cantidad * producto[0]?.precio;
     setPedidoState(pedido);
     sessionStorage.setItem("pedido", JSON.stringify(pedido));
     cargarProductos();
@@ -300,7 +300,13 @@ const Carrito = () => {
                       />
                     </Form.Group>
 
-                    <Mapa datos={datos} actualizarCarrito={actualizarCarrito} />
+                    <div>
+                      <h4>Ubicá tu dirección en el mapa</h4>
+                      <Mapa
+                        datos={datos}
+                        actualizarCarrito={actualizarCarrito}
+                      />
+                    </div>
 
                     <Container className="mt-4 d-flex justify-content-center justify-content-md-end gap-3 text-center justify-items-center bg-white p-2">
                       <Button type="submit">Realizar pedido</Button>
@@ -320,6 +326,9 @@ const Carrito = () => {
       ) : (
         <Container className="mainPage nav-espacio">
           <h2>No hay productos agregados al carrito</h2>
+          <Link to="/menu" className="mt-3 btn btn-primary">
+            Volver al menú
+          </Link>
         </Container>
       )}
     </>

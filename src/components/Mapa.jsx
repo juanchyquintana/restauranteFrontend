@@ -6,7 +6,7 @@ import L from "leaflet";
 const Mapa = ({ datos, actualizarCarrito }) => {
   const [lat, setLat] = useState(datos.lat || -26.8301695);
   const [lng, setLng] = useState(datos.lng || -65.2044388);
-  const [calle, setCalle] = useState("");
+  const [calle, setCalle] = useState("65, 25 de Mayo de 1810, Centro, San Miguel de Tucumán, Departamento Capital, Tucumán, T4000, Argentina");
 
   const actualizarDireccion = (direccion, lat, lng) => {
     setCalle(direccion);
