@@ -1,5 +1,6 @@
 import { Button, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { crearProducto } from "../helpers/producto";
 
 const NuevoProducto = ({ editar, titulo }) => {
   const {
@@ -10,9 +11,11 @@ const NuevoProducto = ({ editar, titulo }) => {
     setValue,
   } = useForm();
 
-  const productoValidado = () => {
-    console.log("Validado");
+  const productoValidado = (producto) => {
+    console.log(producto);
     reset();
+
+    crearProducto(producto)
   };
 
   return (
