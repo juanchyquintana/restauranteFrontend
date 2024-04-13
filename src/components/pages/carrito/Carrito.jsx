@@ -101,8 +101,11 @@ const Carrito = () => {
     const nuevoArray = pedido.productos.filter(
       (elemento) => elemento.producto !== id
     );
+    const producto = productos.filter((elemento) => {
+      return elemento._id === id
+    })
     pedido.productos = nuevoArray;
-    actualizarTotal();
+    pedido.total = pedido.total - (producto[0]?.cantidad * producto[0]?.precio)
     setPedidoState(pedido);
     cargarProductos();
   };
@@ -143,7 +146,7 @@ const Carrito = () => {
   const actualizarTotal = () => {
     let total = 0;
     for (let i = 0; i < pedido?.productos?.length; i++) {
-      total += pedido?.productos[i]?.cantidad * productos[i]?.precio;
+      total += productos[i]?.cantidad * productos[i]?.precio;
     }
     pedido.total = total;
     setPedidoState(pedido);
