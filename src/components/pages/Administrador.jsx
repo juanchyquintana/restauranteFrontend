@@ -2,18 +2,17 @@ import { useEffect, useState } from "react";
 import ItemProductos from "../ItemProductos.jsx";
 import { Container, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { leerProductos } from "../../helpers/producto.js";
+import { obtenerProductos } from "../../helpers/producto.js";
 
 const Administrador = () => {
   const [productos, setProductos] = useState([]);
 
   useEffect(() => {
-    consultarBD();
+    consultarBD();  
   }, []);
-
   const consultarBD = async () => {
     try {
-      const respuesta = await leerProductos();
+      const respuesta = await obtenerProductos();
       setProductos(respuesta);
     } catch (error) {
       console.log(error);
