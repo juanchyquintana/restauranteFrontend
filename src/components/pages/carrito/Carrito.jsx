@@ -107,6 +107,7 @@ const Carrito = () => {
     pedido.productos = nuevoArray;
     pedido.total = pedido.total - (producto[0]?.cantidad * producto[0]?.precio)
     setPedidoState(pedido);
+    sessionStorage.setItem("pedido", JSON.stringify(pedido));
     cargarProductos();
   };
 
@@ -161,11 +162,11 @@ const Carrito = () => {
         );
         productosArray.push(productoObtenido);
         productosArray[i].cantidad = pedido?.productos[i].cantidad;
-        setProductos(productosArray);
       } catch (error) {
         console.log(error);
       }
     }
+    setProductos(productosArray);
   };
 
   useEffect(() => {
