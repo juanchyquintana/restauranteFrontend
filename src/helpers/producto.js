@@ -20,12 +20,16 @@ export const obtenerProductoID = async (id) => {
     }
 }
 
-export const leerProductos = async () => {
+export const borrarProductoAPI = async (id) => {
   try {
-    const respuesta = await fetch(restauranteURL);
-    const listaProductos = await respuesta.json();
-
-    return listaProductos;
+    const respuesta = await fetch(`${restauranteURL}/productos/${id}`, {
+      method: "DELETE",
+      headers: {
+      'x-token': JSON.parse(sessionStorage.getItem('usuarioLotus')).token
+      }
+    });
+    console.log(respuesta);
+    return respuesta;
   } catch (error) {
     console.log(error);
   }
