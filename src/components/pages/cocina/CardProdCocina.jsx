@@ -1,7 +1,7 @@
 import { Button, Card } from "react-bootstrap";
 import "./cardProdCocina.css";
 
-const CardProductoCocina = ({ pedido, actualizarPedido }) => {
+const CardProductoCocina = ({ pedido, actualizarPedido, contadores, orden }) => {
   const estiloBotonActualizar = (estado) => {
     if (estado === 'pendiente'){
       return 'primary'
@@ -57,7 +57,7 @@ const CardProductoCocina = ({ pedido, actualizarPedido }) => {
         </Card.Body>
 
         <Card.Footer className="d-flex justify-content-between bg-light">
-        <p className={`p-2 bg-success text-white rounded-1 m-0`}>5:02</p>
+        <p className={`p-2 bg-success text-white rounded-1 m-0`}>{contadores[orden]}</p>
           <Button variant={estiloBotonActualizar(pedido.estado)} onClick={() => actualizarPedido(pedido._id)}>
             {pedido.estado === 'pendiente' && ('Comenzar')}
             {pedido.estado === 'en proceso' && ('Finalizar')}

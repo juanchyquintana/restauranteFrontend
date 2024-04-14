@@ -4,9 +4,11 @@ import CardProductoCocina from "./CardProdCocina";
 import { editarPedido, obtenerPedidos } from "../../../helpers/pedidos";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2/src/sweetalert2.js";
+import moment from 'moment-timezone';
 
 const Cocina = () => {
   const [pedidos, setPedidos] = useState([]);
+  const [contadores, setContadores] = useState([])
 
   const getPedidos = async () => {
     try {
@@ -95,8 +97,39 @@ const Cocina = () => {
   };
 
   useEffect(() => {
+    const fechas = [];
+    const fechaActual = moment.tz('America/Argentina/Buenos_Aires').toDate();
+
+    for (let i = 0; i < pedidos.length; i++) {
+      const fecha = pedidos[i]?.fecha;
+      if (fecha) {
+        fechas?.push(new Date(fecha));
+      }
+    }
+
+    setInterval(() => {
+      let diferencias = [];
+      let contado = [];
+      for (let fechaIn of fechas) {
+        const diferencia = fechaActual - fechaIn;
+        diferencias.push(diferencia);
+      }
+      let stringDiferencia = []
+      for (let i = 0; i < diferencias.length; i++) {
+        const horas = Math.floor(diferencias[i] / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencias[i] / (1000 * 60)) % 60);
+        const segundos = Math.floor((diferencias[i] / 1000) % 60);
+        stringDiferencia.push(`${horas}:${minutos}:${segundos}`)
+      }
+      setContadores(stringDiferencia)
+
+    }, 5000);
+  }, [contadores]);
+
+  useEffect(() => {
     getPedidos();
-    console.log(pedidos.length)
+
+    // console.log(pedidos)
   }, []);
 
   return (
@@ -111,6 +144,8 @@ const Cocina = () => {
                     <CardProductoCocina
                       pedido={pedido}
                       actualizarPedido={actualizarPedido}
+                      contadores={contadores}
+                      orden={i}
                     />
                   </div>
                 ) : (

@@ -11,6 +11,11 @@
 }
 
 .nav-espacio{
-  padding-top: 80px;
+  padding-top: 120px;
 }
 
+@media all and (max-width: 576px){
+  .nav-espacio{
+    padding-top: 80px;
+  }
+}
