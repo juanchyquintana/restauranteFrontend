@@ -1,0 +1,36 @@
+.ganancias-container{
+    position: relative;
+}
+
+
+.imagen-contenedora{
+    z-index: 5;
+}
+
+.img-form-div{
+    overflow: hidden;
+    height: 100%;
+}
+
+.img-ganancias{
+    object-fit: cover;
+    width: 100%;
+}
+
+@media all and (min-width: 768px){    
+    .imagen-contenedora{
+        max-width: 70vw;
+    }
+}
+
+@media all and (min-width: 351px) and (max-width: 767px){    
+    .imagen-contenedora{
+        max-width: 80vw;
+    }
+}
+
+@media all and (max-width: 350px){    
+    .imagen-contenedora{
+        max-width: 90vw;
+    }
+}
