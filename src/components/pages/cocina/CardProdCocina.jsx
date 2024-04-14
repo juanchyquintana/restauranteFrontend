@@ -57,7 +57,7 @@ const CardProductoCocina = ({ pedido, actualizarPedido, contadores, orden }) => 
         </Card.Body>
 
         <Card.Footer className="d-flex justify-content-between bg-light">
-        <p className={`p-2 bg-success text-white rounded-1 m-0`}>{contadores[orden]}</p>
+        <p className={`p-2 bg-success text-white rounded-1 m-0`}>{contadores[orden] ? contadores[orden] : 'Cargando'}</p>
           <Button variant={estiloBotonActualizar(pedido.estado)} onClick={() => actualizarPedido(pedido._id)}>
             {pedido.estado === 'pendiente' && ('Comenzar')}
             {pedido.estado === 'en proceso' && ('Finalizar')}
