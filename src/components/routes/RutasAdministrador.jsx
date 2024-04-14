@@ -15,9 +15,14 @@ const RutasAdministrador = () => {
           path="/agregar-producto"
           element={<NuevoProducto editar={false} titulo="Agregar Nuevo Plato" />}
         />
+        <Route
+          exact
+          path="/editar-producto/:id"
+          element={<NuevoProducto editar={true} titulo="Editar Plato" />}
+        />
         <Route exact path="/panel-usuarios" element={<PanelUsuarios />} />
         <Route exact path="/cocina" element={<Cocina />} />
-        <Route exact path="*" element={<Error404 />}/>
+        <Route exact path="*" element={<Error404 />} />
       </Routes>
     </>
   );
