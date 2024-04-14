@@ -98,7 +98,8 @@ const Cocina = () => {
 
   useEffect(() => {
     const fechas = [];
-    const fechaActual = moment.tz('America/Argentina/Buenos_Aires').toDate();
+    let fechaActual = moment.tz('America/Argentina/Buenos_Aires').toDate();
+    fechaActual.setHours(fechaActual.getHours() - 3);
 
     for (let i = 0; i < pedidos.length; i++) {
       const fecha = pedidos[i]?.fecha;
@@ -123,7 +124,7 @@ const Cocina = () => {
       }
       setContadores(stringDiferencia)
 
-    }, 5000);
+    }, 7000);
   }, [contadores]);
 
   useEffect(() => {
