@@ -1,5 +1,8 @@
 import { Button, Container, Form, Row } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import { crearProducto } from "../helpers/producto";
+
 
 const NuevoProducto = ({ editar, titulo }) => {
   const {
@@ -10,9 +13,24 @@ const NuevoProducto = ({ editar, titulo }) => {
     setValue,
   } = useForm();
 
-  const productoValidado = () => {
-    console.log("Validado");
-    reset();
+  const productoValidado = async (producto) => {
+    console.log(producto);
+    
+    const respuesta = await crearProducto(producto);
+    if(respuesta.status === 201){
+      Swal.fire({
+        title: "Producto Creado!",
+        text: `El producto "${producto.nombre}" fue creado correctamente!`,
+        icon: "success"
+      });
+      reset();
+    }else{
+      Swal.fire({
+        title: "Ocurrio un error!",
+        text: `El producto "${producto.nombre}" no pudo ser creado! intente nuevamente en unos minutos`,
+        icon: "error"
+      });
+    }
   };
 
   return (
@@ -27,7 +45,7 @@ const NuevoProducto = ({ editar, titulo }) => {
               <Form.Control
                 type="text"
                 placeholder="Ej: Sopa Wan Tan, Rollitos de primavera, Zongzi, Jiaozi..."
-                {...register("nombrePlato", {
+                {...register("nombre", {
                   required: "El Nombre del Plato es Obligatorio",
                   minLength: {
                     value: 2,
@@ -44,7 +62,7 @@ const NuevoProducto = ({ editar, titulo }) => {
             </Form.Group>
 
             <Form.Text className="text-danger">
-              {errors.nombrePlato?.message}
+              {errors.nombre?.message}
             </Form.Text>
 
             <Form.Group className="my-3">
@@ -103,12 +121,12 @@ const NuevoProducto = ({ editar, titulo }) => {
                     <option value="" hidden>
                       -- Seleccione una Opción --
                     </option>
-                    <option value="entradas">Entradas</option>
-                    <option value="platos-principales">
+                    <option value="Entradas">Entradas</option>
+                    <option value="Platos Principales">
                       Platos Principales
                     </option>
-                    <option value="postres">Postres</option>
-                    <option value="bebidas">Bebidas</option>
+                    <option value="Postres">Postres</option>
+                    <option value="Bebidas">Bebidas</option>
                   </Form.Select>
                 </Form.Group>
 
