@@ -13,14 +13,15 @@ import Swal from "sweetalert2";
 import ItemPedidos from "../ItemPedidos";
 
 const PanelGanancias = () => {
-  const [gananciasDia, setGananciasDia] = useState(0);
+  const [ganancias, setGanancias] = useState(0);
   const [cantidadPedidos, setCantidadPedidos] = useState(0);
   const [fechaActual, setFechaActual] = useState("");
   const [pedidos, setPedidos] = useState([]);
 
   const obtenerGanancias = async () => {
     const ganancias = await obtenerGananciasDia();
-    setGananciasDia(ganancias);
+    console.log(ganancias)
+    setGanancias(ganancias);
   };
 
   const pedidoCantidad = async () => {
@@ -55,20 +56,28 @@ const PanelGanancias = () => {
 
     await Swal.fire({
       title: "Caja cerrada",
-      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${gananciasDia}\nCantidad de pedidos: ${cantidadPedidos}`,
+      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${ganancias}\nCantidad de pedidos: ${cantidadPedidos}`,
       icon: "success",
       confirmButtonText: "Aceptar",
     });
 
     const datosCaja = {
-      gananciasDia,
+      ganancias,
       cantidadPedidos,
       fechaCierreCaja: fecha.getTime(),
     };
+    console.log(datosCaja)
     localStorage.setItem("datosCaja", JSON.stringify(datosCaja));
 
-    await cerrarCaja();
-    setGananciasDia(0);
+    try {
+      const respuesta = await cerrarCaja(datosCaja);
+      console.log(respuesta)
+      const datos = respuesta.json()
+      console.log(datos)
+    } catch (error) {
+      console.log(error)
+    }
+    setGanancias(0);
     setCantidadPedidos(0);
     setPedidos([]);
   };
@@ -84,7 +93,7 @@ const PanelGanancias = () => {
     const datosCajaGuardados = localStorage.getItem("datosCaja");
     if (datosCajaGuardados) {
       const datosCaja = JSON.parse(datosCajaGuardados);
-      setGananciasDia(datosCaja.gananciasDia);
+      setGanancias(datosCaja.ganancias);
       setCantidadPedidos(datosCaja.cantidadPedidos);
     }
   }, []);
@@ -116,7 +125,7 @@ const PanelGanancias = () => {
                 <span className="fw-bold fs-3 text-uppercase">
                   {fechaActual}
                 </span>
-                <span className="fw-bold fs-3">${gananciasDia}</span>
+                <span className="fw-bold fs-3">${ganancias}</span>
               </div>
 
               <div className="d-flex flex-column justify-content-center mb-3">
