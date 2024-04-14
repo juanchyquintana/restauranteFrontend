@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./seccionMenu.css";
+import { Link } from "react-router-dom";
 
 const SeccionMenu = () => {
   const [productos, setProductos] = useState([]);
@@ -150,7 +151,7 @@ const SeccionMenu = () => {
                         )
                       }
                     >
-                      <Button variant="primary">Ver Más</Button>
+                      <Button variant="primary" as={Link} to={`/detalleProducto/${producto._id}`}>Ver Más</Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
