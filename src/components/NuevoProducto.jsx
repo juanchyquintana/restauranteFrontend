@@ -1,7 +1,7 @@
 import { Button, Container, Form, Row } from "react-bootstrap";
+import { crearProducto } from "../helpers/producto";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { crearProducto } from "../helpers/producto";
 
 
 const NuevoProducto = ({ editar, titulo }) => {
@@ -14,23 +14,26 @@ const NuevoProducto = ({ editar, titulo }) => {
   } = useForm();
 
   const productoValidado = async (producto) => {
-    console.log(producto);
-    
-    const respuesta = await crearProducto(producto);
-    if(respuesta.status === 201){
-      Swal.fire({
-        title: "Producto Creado!",
-        text: `El producto "${producto.nombre}" fue creado correctamente!`,
-        icon: "success"
-      });
-      reset();
-    }else{
-      Swal.fire({
-        title: "Ocurrio un error!",
-        text: `El producto "${producto.nombre}" no pudo ser creado! intente nuevamente en unos minutos`,
-        icon: "error"
-      });
+    if(editar) {
+      
+    } else {
+      const respuesta = await crearProducto(producto);
+      if(respuesta.status === 201){
+        Swal.fire({
+          title: "Producto Creado!",
+          text: `El producto "${producto.nombre}" fue creado correctamente!`,
+          icon: "success"
+        });
+        reset();
+      }else{
+        Swal.fire({
+          title: "Ocurrio un error!",
+          text: `El producto "${producto.nombre}" no pudo ser creado! intente nuevamente en unos minutos`,
+          icon: "error"
+        });
+      }
     }
+    
   };
 
   return (
