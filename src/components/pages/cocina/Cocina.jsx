@@ -63,7 +63,6 @@ const Cocina = () => {
       });
     }
     if (pedidoEstado.estado === "pendiente") {
-      console.log(copiaPedidos);
       pedidoEstado.estado = "en proceso";
       const respuesta = await putPedido(id, pedidoEstado);
       if (respuesta.status === 200) {
