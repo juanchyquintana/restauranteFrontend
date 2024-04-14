@@ -20,7 +20,6 @@ const PanelGanancias = () => {
 
   const obtenerGanancias = async () => {
     const ganancias = await obtenerGananciasDia();
-    console.log(ganancias)
     setGanancias(ganancias);
   };
 
@@ -70,13 +69,11 @@ const PanelGanancias = () => {
     localStorage.setItem("datosCaja", JSON.stringify(datosCaja));
 
     try {
-      const respuesta = await cerrarCaja(datosCaja);
-      console.log(respuesta)
-      const datos = respuesta.json()
-      console.log(datos)
+      await cerrarCaja(datosCaja);
     } catch (error) {
       console.log(error)
     }
+
     setGanancias(0);
     setCantidadPedidos(0);
     setPedidos([]);
@@ -98,11 +95,11 @@ const PanelGanancias = () => {
     }
   }, []);
 
-  const total = pedidos.reduce((acc, pedido) => {
+  const totalGanancias = pedidos.reduce((total, pedido) => {
     if (pedido.estado === 'entregado' || pedido.estado === 'terminado') {
-      return acc + pedido.total;
+      return total + pedido.total;
     }
-    return acc;
+    return total;
   }, 0);
 
   return (
@@ -125,7 +122,7 @@ const PanelGanancias = () => {
                 <span className="fw-bold fs-3 text-uppercase">
                   {fechaActual}
                 </span>
-                <span className="fw-bold fs-3">${ganancias}</span>
+                <span className="fw-bold fs-3">${totalGanancias}</span>
               </div>
 
               <div className="d-flex flex-column justify-content-center mb-3">
