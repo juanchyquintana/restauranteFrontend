@@ -1,0 +1,85 @@
+.ganancias-container {
+  position: relative;
+}
+
+.banner {
+  object-fit: cover;
+  height: 395px;
+  width: 100%;
+  position: relative;
+  filter: blur(2px) brightness(0.5);
+}
+
+.imagen-contenedora {
+  z-index: 5;
+}
+
+.img-form-div {
+  overflow: hidden;
+  height: 100%;
+}
+
+.img-ganancias {
+  object-fit: cover;
+  width: 100%;
+}
+
+.bannerTitulo {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-family: "Roboto", sans-serif;
+  font-size: 6vw;
+  text-align: center;
+}
+@media screen and (max-width: 280px) {
+  .bannerTitulo {
+    display: flex;
+    justify-content: center;
+    font-size: 15vw;
+    top: 20%;
+  }
+}
+@media screen and (min-width: 280px) and (max-width: 576px) {
+  .bannerTitulo {
+    display: flex;
+    justify-content: center;
+    font-size: 15vw;
+  }
+}
+@media screen and (min-width: 577px) and (max-width: 1024px) {
+  .bannerTitulo {
+    font-size: 10vw;
+  }
+}
+@media screen and (min-width: 1025px) and (max-width: 1400px) {
+  .bannerTitulo {
+    font-size: 8vw;
+    top: 5%;
+  }
+}
+@media screen and (min-width: 1401px) {
+  .bannerTitulo {
+    font-size: 5vw;
+    top: 15%;
+  }
+}
+
+@media all and (min-width: 768px) {
+  .imagen-contenedora {
+    max-width: 70vw;
+  }
+}
+@media all and (min-width: 351px) and (max-width: 767px) {
+  .imagen-contenedora {
+    max-width: 80vw;
+  }
+}
+
+@media all and (max-width: 350px) {
+  .imagen-contenedora {
+    max-width: 90vw;
+  }
+}

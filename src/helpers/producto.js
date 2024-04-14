@@ -1,6 +1,4 @@
 const restauranteURL = import.meta.env.VITE_API_RESTAURANTE;
-console.log(restauranteURL);
-
 
 export const obtenerProductos = async () => {
     try {
