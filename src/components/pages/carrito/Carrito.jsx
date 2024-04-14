@@ -31,7 +31,7 @@ const Carrito = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: `El pedido fue crado correctamente.`,
+          title: `El pedido fue creado correctamente.`,
           showConfirmButton: true,
         });
         sessionStorage.removeItem("pedido");
@@ -61,7 +61,7 @@ const Carrito = () => {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: `El pedido fue crado correctamente. Será enviado a ${nuevoObjeto.calle}`,
+            title: `El pedido fue creado correctamente. Será enviado a ${nuevoObjeto.calle}`,
             showConfirmButton: true,
           });
           sessionStorage.removeItem("pedido");
