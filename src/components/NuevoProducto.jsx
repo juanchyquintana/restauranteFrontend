@@ -1,8 +1,13 @@
 import { Button, Container, Form, Row } from "react-bootstrap";
-import { crearProducto, editarProducto } from "../helpers/producto";
+import {
+  crearProducto,
+  editarProducto,
+  obtenerProductoID,
+} from "../helpers/producto";
 import { useParams, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { useEffect } from "react";
 
 const NuevoProducto = ({ editar, titulo }) => {
   const {
@@ -14,7 +19,7 @@ const NuevoProducto = ({ editar, titulo }) => {
   } = useForm();
 
   const navegacion = useNavigate();
-  const { id } = useParams()
+  const { id } = useParams();
 
   const productoValidado = async (producto) => {
     const { nombre } = producto;
@@ -36,9 +41,7 @@ const NuevoProducto = ({ editar, titulo }) => {
           icon: "error",
         });
       }
-
     } else {
-
       const respuesta = await crearProducto(producto);
       if (respuesta.status === 201) {
         Swal.fire({
@@ -56,6 +59,31 @@ const NuevoProducto = ({ editar, titulo }) => {
       }
     }
   };
+
+  const cargarDatosFormularioEditar = async () => {
+    try {
+      const respuesta = await obtenerProductoID(id);
+      if (respuesta.status === 200) {
+        const resultado = await respuesta.json();
+        const { nombre, precio, imagen, categoria, estado, detalle } = resultado;
+
+        setValue("nombre", nombre);
+        setValue("precio", precio);
+        setValue("imagen", imagen);
+        setValue("categoria", categoria);
+        setValue("estado", estado);
+        setValue("detalle", detalle);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (editar) {
+      cargarDatosFormularioEditar();
+    }
+  }, []);
 
   return (
     <section className="my-4">

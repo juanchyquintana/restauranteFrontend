@@ -12,9 +12,8 @@ export const obtenerProductos = async () => {
 
 export const obtenerProductoID = async (id) => {
   try {
-    const response = await fetch(`${restauranteURL}/productos/${id}`);
-    const datos = await response.json();
-    return datos;
+    const respuesta = await fetch(`${restauranteURL}/pedidos/${id}`);
+    return respuesta;
   } catch (error) {
     console.log(error);
   }
@@ -53,7 +52,7 @@ export const crearProducto = async (productoNuevo) => {
 
 export const editarProducto = async (productoEditado, id) => {
   try {
-    const respuesta = await fetch(`${restauranteURL}/${id}`, {
+    const respuesta = await fetch(`${restauranteURL}/productos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
