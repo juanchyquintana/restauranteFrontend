@@ -1,14 +1,16 @@
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Container, Row, Table } from "react-bootstrap";
 import {
   obtenerGananciasDia,
   cerrarCaja,
   obtenerCantidadPedidosDia,
+  obtenerPedidos,
 } from "../../helpers/pedidos";
 import { useEffect, useState } from "react";
 import bambu from "../../assets/bambu-fondo.jpg";
 import banner from "../../assets/chicosConversando.jpg";
 import "./panelganancias.css";
 import Swal from "sweetalert2";
+import ItemPedidos from "../ItemPedidos";
 
 const PanelGanancias = () => {
   const [gananciasDia, setGananciasDia] = useState(0);
@@ -26,10 +28,20 @@ const PanelGanancias = () => {
     setCantidadPedidos(cantidad);
   };
 
-  // const obtenerPedidosDelDia = async () => {
-  //   const pedidosDelDia = await obtenerPedidos();
-  //   setPedidos(pedidosDelDia);
-  // };
+  const obtenerPedidosDelDia = async () => {
+    const pedidosDelDia = await obtenerPedidos();
+    
+    const pedidosHoy = pedidosDelDia.filter((pedido) => {
+      const fechaPedido = new Date(pedido.fecha);
+      const fechaActual = new Date();
+      return (
+        fechaPedido.getDate() === fechaActual.getDate() &&
+        fechaPedido.getMonth() === fechaActual.getMonth() &&
+        fechaPedido.getFullYear() === fechaActual.getFullYear()
+      );
+    });
+    setPedidos(pedidosHoy);
+  };
 
   const formatearFecha = (fecha) => {
     const opciones = { year: "numeric", month: "long", day: "numeric" };
@@ -64,7 +76,7 @@ const PanelGanancias = () => {
   useEffect(() => {
     obtenerGanancias();
     pedidoCantidad();
-    // obtenerPedidosDelDia();
+    obtenerPedidosDelDia();
 
     const fechaFormateada = formatearFecha(fecha);
     setFechaActual(fechaFormateada);
@@ -76,6 +88,13 @@ const PanelGanancias = () => {
       setCantidadPedidos(datosCaja.cantidadPedidos);
     }
   }, []);
+
+  const total = pedidos.reduce((acc, pedido) => {
+    if (pedido.estado === 'entregado' || pedido.estado === 'terminado') {
+      return acc + pedido.total;
+    }
+    return acc;
+  }, 0);
 
   return (
     <section>
@@ -116,14 +135,35 @@ const PanelGanancias = () => {
           </Row>
         </div>
 
-        {/* <div className="d-flex flex-column justify-content-center mb-3">
-        <h1 className="display-6">Pedidos de la Fecha: </h1>
-        {pedidos.map((pedido) => (
-          <div key={pedido.id}>
-            {pedido.nombre} - {pedido.cantidad}
+        <div className="d-flex flex-column justify-content-center my-5">
+          <h1 className="display-6">Pedidos de la Fecha: </h1>
+
+          <div>
+            <Table responsive striped bordered variant="dark">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Fecha</th>
+                  <th>Tipo Entrega</th>
+                  <th>Total</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody>
+                {pedidos?.length > 0
+                  ? pedidos.map((pedido) =>
+                      pedido.estado === "entregado" || pedido.estado === "terminado"  ? (
+                        <ItemPedidos 
+                          key={pedido._id}
+                          pedido={pedido}
+                        />
+                      ) : null
+                    )
+                  : null}
+              </tbody>
+            </Table>
           </div>
-        ))}
-      </div> */}
+        </div>
       </Container>
     </section>
   );
