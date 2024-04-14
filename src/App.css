@@ -20,8 +20,8 @@
   }
 }
 .texto-overflow {
-  width: 100%; /* Establece el ancho del contenedor */
-  overflow: hidden; /* Oculta el contenido que sobresale del contenedor */
-  white-space: wrap; /* Evita que el texto se envuelva en varias líneas */
-  text-overflow: ellipsis; /* Muestra puntos suspensivos (...) cuando el texto es demasiado largo */
+  width: 100%; 
+  overflow: hidden; 
+  white-space: wrap; 
+  text-overflow: ellipsis; 
 }
