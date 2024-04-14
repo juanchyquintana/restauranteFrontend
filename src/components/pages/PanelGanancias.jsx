@@ -13,6 +13,7 @@ const PanelGanancias = () => {
   const [gananciasDia, setGananciasDia] = useState(0);
   const [cantidadPedidos, setCantidadPedidos] = useState(0);
   const [fechaActual, setFechaActual] = useState("");
+  const [pedidos, setPedidos] = useState([]);
 
   const obtenerGanancias = async () => {
     const ganancias = await obtenerGananciasDia();
@@ -23,6 +24,11 @@ const PanelGanancias = () => {
     const cantidad = await obtenerCantidadPedidosDia();
     setCantidadPedidos(cantidad);
   };
+
+  // const obtenerPedidosDelDia = async () => {
+  //   const pedidosDelDia = await obtenerPedidos();
+  //   setPedidos(pedidosDelDia);
+  // };
 
   const formatearFecha = (fecha) => {
     const opciones = { year: "numeric", month: "long", day: "numeric" };
@@ -41,17 +47,23 @@ const PanelGanancias = () => {
       confirmButtonText: "Aceptar",
     });
 
-    const datosCaja = { gananciasDia, cantidadPedidos, fechaCierreCaja: fecha.getTime() };
+    const datosCaja = {
+      gananciasDia,
+      cantidadPedidos,
+      fechaCierreCaja: fecha.getTime(),
+    };
     localStorage.setItem("datosCaja", JSON.stringify(datosCaja));
 
     await cerrarCaja();
     setGananciasDia(0);
     setCantidadPedidos(0);
+    setPedidos([]);
   };
 
   useEffect(() => {
     obtenerGanancias();
     pedidoCantidad();
+    // obtenerPedidosDelDia();
 
     const fechaFormateada = formatearFecha(fecha);
     setFechaActual(fechaFormateada);
@@ -94,6 +106,15 @@ const PanelGanancias = () => {
           </div>
         </Row>
       </div>
+
+      {/* <div className="d-flex flex-column justify-content-center mb-3">
+        <h1 className="display-6">Pedidos de la Fecha: </h1>
+        {pedidos.map((pedido) => (
+          <div key={pedido.id}>
+            {pedido.nombre} - {pedido.cantidad}
+          </div>
+        ))}
+      </div> */}
     </Container>
   );
 };
