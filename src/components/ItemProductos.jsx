@@ -54,7 +54,7 @@ const ItemProductos = ({producto, setProductos}) => {
           <button className="btn btn-danger" onClick={borrarProducto}>
             <i className="bi bi-trash-fill" ></i>
           </button>
-          <Link className="btn btn-warning" to={`/administrador/editar-producto/`}>
+          <Link className="btn btn-warning" to={`/administrador/editar-producto/${producto._id}`}>
             <i className="bi bi-pencil-square"></i>
           </Link>
         </div>
