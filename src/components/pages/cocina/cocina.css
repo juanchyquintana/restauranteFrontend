@@ -2,6 +2,14 @@
     min-height: 80vh;
 }
 
+.banner {
+  object-fit: cover;
+  height: 395px;
+  width: 100%;
+  position: relative;
+  filter: blur(2px) brightness(0.5);
+}
+
 .card-padre-body{
     overflow: auto;
 }

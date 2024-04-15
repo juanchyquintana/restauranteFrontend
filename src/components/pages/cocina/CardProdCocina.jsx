@@ -48,7 +48,7 @@ const CardProductoCocina = ({
               pedido.estado
             )} text-white rounded-1 m-0`}
           >
-            {pedido?.estado}
+            {pedido?.estado.toUpperCase()}
           </p>
         </Card.Title>
         <ul className="list-unstyled py-4">
@@ -75,12 +75,13 @@ const CardProductoCocina = ({
       </Card.Body>
 
       <Card.Footer className="d-flex justify-content-between" id={estiloFooter(milisegundos[orden])}>
-        <p className={`p-2 text-white rounded-1 m-0`}>
+        <p className="p-2 text-white rounded-1 m-0 fw-bold">
           {contadores[orden] ? contadores[orden] : "Cargando"}
         </p>
         <Button
           variant={estiloBotonActualizar(pedido.estado)}
           onClick={() => actualizarPedido(pedido._id)}
+          className="fw-bold"
         >
           {pedido.estado === "pendiente" && "Comenzar"}
           {pedido.estado === "en proceso" && "Finalizar"}

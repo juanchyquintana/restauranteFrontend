@@ -5,6 +5,7 @@ import { editarPedido, obtenerPedidos } from "../../../helpers/pedidos";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2/src/sweetalert2.js";
 import moment from "moment-timezone";
+import banner from '../../../assets/cocina/banner-cocina.jpg'
 
 const Cocina = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -144,7 +145,11 @@ const Cocina = () => {
 
 
   return (
-    <section className="mainPage nav-espacio bg-light pb-5">
+    <section className="mainPage  bg-light pb-5">
+      <div className="banner-container mb-5">
+        <img className="banner" src={banner} alt="plato con comida china" />
+        <h2 className="bannerTitulo mt-5">廚房 Cocina</h2>
+      </div>
       <Container>
         <div className="row">
           {pedidos?.length > 0 ? (
