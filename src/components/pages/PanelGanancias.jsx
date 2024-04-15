@@ -1,6 +1,5 @@
 import { Button, Container, Row, Table } from "react-bootstrap";
 import {
-  obtenerGananciasDia,
   cerrarCaja,
   obtenerCantidadPedidosDia,
   obtenerPedidos,
