@@ -9,11 +9,19 @@ import moment from "moment-timezone";
 const Cocina = () => {
   const [pedidos, setPedidos] = useState([]);
   const [contadores, setContadores] = useState([]);
+  const [milisegundos, setMilisegundos] = useState([])
 
   const getPedidos = async () => {
     try {
       const respuesta = await obtenerPedidos();
-      setPedidos(respuesta);
+      const arrayFiltro = ['en proceso', 'pendiente']
+      const arrayProductosFiltrados = []
+      const productosFiltrados = await respuesta.reduce((acumulador, pedido) => {
+        if (pedido.estado === 'pendiente' || pedido.estado === 'en proceso'){
+          arrayProductosFiltrados.push(pedido)
+        }
+      })
+      setPedidos(arrayProductosFiltrados);
     } catch (error) {
       console.log(error);
     }
@@ -111,9 +119,12 @@ const Cocina = () => {
           fechas.push(new Date(fecha));
         }
       }
-  
+
+      let milisegundos = []
+
       const stringHoras = fechas.map((fechaIn) => {
         const diferencia = fechaActual - fechaIn;
+        milisegundos.push(diferencia)
         const horas = Math.floor(diferencia / (1000 * 60 * 60));
         const minutos = Math.floor((diferencia / (1000 * 60)) % 60);
   
@@ -123,7 +134,8 @@ const Cocina = () => {
           return minutos < 10 ? `${horas}h:0${minutos}m` : `${horas}h:${minutos}m`;
         }
       });
-  
+
+      setMilisegundos(milisegundos)
       setContadores(stringHoras);
     }, 10000);
   
@@ -145,6 +157,7 @@ const Cocina = () => {
                       actualizarPedido={actualizarPedido}
                       contadores={contadores}
                       orden={i}
+                      milisegundos={milisegundos}
                     />
                   </div>
                 ) : (

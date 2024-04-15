@@ -3,6 +3,9 @@
     max-width: 340px;
 }
 
+#pedidoAlerta{
+    background-color: rgb(253, 64, 64);
+}
 
 .card-img{
     aspect-ratio: 3/2;
