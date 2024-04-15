@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Container, Card, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { Container, Card, Row, Col, Button } from "react-bootstrap";
+import { Link, useParams } from "react-router-dom";
 import { obtenerProductoK } from "../../../helpers/producto"; 
 import Swal from "sweetalert2/src/sweetalert2";
 
@@ -27,7 +27,7 @@ const cargarDetalle = async()=>{
 }
   return (
     <Container className="my-5 mainSection nav-espacio">
-      <Card>
+      <Card className="mt-5 mt-md-0">
         <Row className="align-items-center">
           <Col md={6} >
             <Card.Img
@@ -47,6 +47,9 @@ const cargarDetalle = async()=>{
               <br className='mb-3'/>
               <span className="primary-font fw-semibold ">Precio: ${producto.precio}</span></Card.Text>
             </Card.Body>
+            <div className="text-end m-3">
+              <Button as={Link} to={"/menu"}>Atras</Button>
+            </div>
           </Col>
         </Row>
       </Card>
