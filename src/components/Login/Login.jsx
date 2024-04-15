@@ -20,7 +20,6 @@ const Login = ({ setUsuarioLogueado }) => {
     try {
       const respuesta = await loginUsuario(usuario);
       const datos = await respuesta.json();
-      console.log(datos)
       if(datos.estado === 'inactivo') {
         Swal.fire({
           position: "center",

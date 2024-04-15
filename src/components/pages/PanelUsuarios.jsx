@@ -21,9 +21,9 @@ const PanelUsuarios = () => {
 
   return (
     <section>
-      <div className="banner-container">
+      <div className="banner-container nav-espacio">
         <img className="banner" src={banner} alt="plato con comida china" />
-        <h2 className="bannerTitulo mt-5">Panel Usuarios</h2>
+        <h2 className="bannerTitulo mt-5 nav-espacio">Panel Usuarios</h2>
       </div>
 
       <Container className="mainPage">

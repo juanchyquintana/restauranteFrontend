@@ -70,8 +70,6 @@ const PanelGanancias = () => {
       fechaCierreCaja: fecha.getTime(),
     };
 
-    console.log(datosCaja);
-
     try {
       await cerrarCaja(datosCaja);
       localStorage.setItem("cajaCerrada", "true");

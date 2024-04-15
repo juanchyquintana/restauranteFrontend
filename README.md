@@ -1,14 +1,14 @@
 # Lotus Restaurante - Comida China
 
-¡Bienvenido al backend de Lotus Restaurante!
+¡Bienvenido al frontend de Lotus Restaurante!
 
-Este proyecto es el backend de un sistema de gestión para un restaurante de cocina China llamado Lotus Restaurante. Aquí encontrarás toda la lógica y funcionalidad necesarias para administrar los pedidos, menús, clientes y empleados del restaurante.
+Este proyecto es el frontend de un sistema de gestión para un restaurante de cocina China llamado Lotus Restaurante. Aquí encontrarás la interfaz de usuario y todas las funcionalidades necesarias para que los usuarios administren los pedidos, menús, clientes y empleados del restaurante de forma intuitiva y eficiente.
 
 ## Enlace del Proyecto: 
 1. [Lotus Restaurante - Backend](https://github.com/juanchyquintana/restauranteBackend)
 2. [Lotus Restaurante - Frontend](https://github.com/juanchyquintana/restauranteFrontend)
 
-![Logo del Proyecto](./assets/lotus.png)
+![Logo del Proyecto](./src/assets/lotus.png)
 
 ## Participantes del Proyecto 😄
 - Dylan Ruben Navarro✅
@@ -41,7 +41,7 @@ Este proyecto es el backend de un sistema de gestión para un restaurante de coc
 
 Asegúrate de configurar las siguientes variables de entorno en un archivo .env en la raíz del proyecto:
 
-1. VITE_API_RESTAURANTE=
+1. VITE_API_RESTAURANTE=http://tuEnv.com/api
 
 ## Funcionalidades principales⚙
 - Gestión de usuarios: permite registrar y autenticar usuarios (empleados y clientes).

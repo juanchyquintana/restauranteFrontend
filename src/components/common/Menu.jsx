@@ -14,6 +14,8 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const navegacion = useNavigate();
   const location = useLocation();
   const currentlUrl = location.pathname
+  const widthAlIniciar = window.innerWidth
+
   window.addEventListener('resize', () => {
   const windowWidth = window.innerWidth;
   if (windowWidth < 992){
@@ -73,7 +75,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   }, []);
 
     return (
-      <Navbar expand="lg" variant='dark' bg={`${navbarEstilo()}`} className={`py-3 fixed-top navbar-custom text-white bg-body- fs-4 ${scrolled ? 'bg-black shadow' : ''}`}>
+      <Navbar expand="lg" variant='dark' bg={`${widthAlIniciar < 992 ? 'black' : navbarEstilo()}`} className={`py-3 fixed-top navbar-custom text-white bg-body- fs-4 ${scrolled ? 'bg-black shadow' : ''}`}>
           <Container fluid className=''>
             <Navbar.Brand href="#home">{
               <img src={brandImg} alt="logo Lotus" className='navbarLogo'/>
@@ -89,21 +91,13 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                   usuarioLogueado.tipoUsuario === "admin" ? (
                     <>
                       <NavDropdown title="Administrador" id="navbarScrollingDropdown">
-                      < NavDropdown.Item>
-                          <Link to="/administrador/" className='text-black link link-underline-opacity-0 dropdown-item text-center'>Agregar productos</Link>
-                        </NavDropdown.Item>
-                        <NavDropdown.Item >
-                          <Link to="/administrador/panel-usuarios" className='text-black link-underline-opacity-0 dropdown-item text-center'>Panel Usuario</Link>
-                        </NavDropdown.Item>
-                        <NavDropdown.Item>
-                          <Link to="/administrador/ganancias" className='text-black link link-underline-opacity-0 dropdown-item text-center'>Ganancias</Link>
-                        </NavDropdown.Item>
-                        <NavDropdown.Item href="#action4">
-                          <Link to="/administrador/cocina" className='text-black link link-underline-opacity-0 dropdown-item text-center'>Cocina</Link>
-                        </NavDropdown.Item>
+                          <Link to="/administrador/" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Agregar productos</Link>
+                          <Link to="/administrador/panel-usuarios" className='text-black link-underline-opacity-0 dropdown-item text-center nav-link'>Panel Usuario</Link>
+                          <Link to="/administrador/ganancias" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Ganancias</Link>
+                          <Link to="/administrador/cocina" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Cocina</Link>
                       </NavDropdown>
                       <Button className="text-light nav-link" variant="link" onClick={logout}>
-                        <i className="bi bi-box-arrow-left fs-2"></i>
+                        <i className="bi bi-box-arrow-left fs-2 iconos-nav"></i> Cerrar sesión
                       </Button>
                     </>
                   ) : (
@@ -116,7 +110,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                         Carrito
                       </Link> 
                       <Button className="text-light nav-link" variant="link" onClick={logout}>
-                      <i className="bi bi-box-arrow-left fs-2"></i>
+                      <i className="bi bi-box-arrow-left fs-2 iconos-nav"></i> Cerrar sesión
                       </Button>
                       </>
                     ):(

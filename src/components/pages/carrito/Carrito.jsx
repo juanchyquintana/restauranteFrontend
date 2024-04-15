@@ -44,7 +44,6 @@ const Carrito = () => {
           title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
           showConfirmButton: true,
         });
-        console.log(nuevoObjeto);
       }
     } else {
       const nuevoObjeto = crearObjetoPedido();
@@ -74,7 +73,6 @@ const Carrito = () => {
             title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
             showConfirmButton: true,
           });
-          console.log(nuevoObjeto);
         }
       }
     }
@@ -186,7 +184,7 @@ const Carrito = () => {
   return (
     <>
       {pedido && pedido.productos.length > 0 ? (
-        <section className="mainPage nav-espacio bg-light d-flex justify-content-center">
+        <section className="mainPage bg-light d-flex justify-content-center nav-espacio">
           <Container className="">
             <div>
               <Table responsive striped bordered>

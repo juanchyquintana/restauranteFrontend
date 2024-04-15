@@ -11,10 +11,14 @@
 }
 
 .map-container {
-    height: 450px; /* o la altura deseada */
-    width: 100%; /* o el ancho deseado */
+    height: 450px;
+    width: 100%;
 }
 
 .notas{
     resize: none;
+}
+
+.mainPage{
+    margin-top: 120px;
 }

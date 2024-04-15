@@ -45,14 +45,14 @@ const Nosotros = () => {
   ];
 
   return (
-    <section id="about-us" className=" nav-espacio text-white">
+    <section id="about-us" className="text-white nav-espacio">
       <Container>
         <Row>
           <Col lg={6}>
             <Image src={nosotrosImg} alt="Sobre Nosotros" fluid />
           </Col>
           <Col lg={6} className=" text-dark">
-            <h2 className="tituloNosotros">Nuestra Historia</h2>
+            <h2 className="tituloNosotros mt-3">Nuestra Historia</h2>
             <p>
               Lotus es un restaurante chino familiar que ha estado sirviendo
               auténtica cocina china durante más de dos décadas. Nos
