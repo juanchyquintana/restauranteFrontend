@@ -71,7 +71,7 @@ const Login = ({ setUsuarioLogueado }) => {
   };
 
   return (
-    <section className="mainPage login-container p-0 m-0 d-flex flex-column justify-content-center">
+    <section className="mainPage login-container d-flex flex-column justify-content-center nav-espacio">
       <div className="background-img-container bg-black">
         <img src={backgroundImg} className="img-blur-ingreso" />
       </div>

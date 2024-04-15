@@ -5,7 +5,7 @@ import {
   obtenerPedidos,
 } from "../../helpers/pedidos";
 import { useEffect, useState } from "react";
-import bambu from "../../assets/bambu-fondo.jpg";
+import bambu from "../../assets/tonyMontana.jpg";
 import banner from "../../assets/chicosConversando.jpg";
 import "./panelganancias.css";
 import Swal from "sweetalert2";
@@ -116,10 +116,10 @@ const PanelGanancias = () => {
   }, [cajaCerrada]);
 
   return (
-    <section>
+    <section className="nav-espacio">
       <div className="banner-container">
         <img className="banner" src={banner} alt="plato con comida china" />
-        <h2 className="bannerTitulo mt-5">利润 Ganancias</h2>
+        <h2 className="bannerTitulo mt-5 nav-espacio">利润 Ganancias</h2>
       </div>
 
       <Container className="d-flex flex-column justify-content-center my-5 mainPage ganancias-containe">

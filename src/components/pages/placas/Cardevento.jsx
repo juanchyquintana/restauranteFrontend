@@ -51,7 +51,7 @@ const Cardevento = () => {
                 <Card.Title className="text-center textoEvento">{evento.title}</Card.Title>
                 <div className="d-flex justify-content-center">
                   <Button variant="primary" onClick={() => handleShow(evento)} className="textoBoton">
-                    conoce mas!!!
+                    ¡Conoce más!
                   </Button>
                 </div>
               </Card.Body>

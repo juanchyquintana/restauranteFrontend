@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 .banner-imagen {
-  background-image: url("./src/assets/camarero-restaurante-contemporaneo-inspiracion-asiatica-linternas-rojas_641878-2134.jpg");
+  /* background-image: url("./src/assets/camarero-restaurante-contemporaneo-inspiracion-asiatica-linternas-rojas_641878-2134.jpg"); */
   background-size: cover;
   height: 100vh;
   background-color: #f8f9fa;
@@ -16,18 +16,31 @@
   height: auto;
   object-fit: contain;
 }
+
+.banner1, .banner2, .banner3, .banner4{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.banner3{
+  z-index: -1!important;
+}
+
 @media screen and (max-width: 576px) {
   .logoInicio {
-    margin-top: 10%;
+    /* margin-top: 10%; */
     width: 100%;
     max-width: 500px;
     height: auto;
+    margin-top: 190px;
   }
+
 }
 
 @media screen and (min-width: 577px) and (max-width: 767px) {
   .logoInicio {
-    margin-top: 5%;
+    margin-top: 200px;
     width: 100%;
     max-width: 900px;
     height: auto;
@@ -35,7 +48,7 @@
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .logoInicio {
-    margin-top: 5%;
+    margin-top: 240px;
     width: 100%;
     max-width: 700px;
     height: auto;
@@ -44,7 +57,7 @@
 
 @media screen and (min-width: 1024px) and (max-width: 1400px) {
   .logoInicio {
-    margin-top: 3%;
+    margin-top: 500px;
     width: 50%;
     max-width: 700px;
     height: auto;
@@ -52,7 +65,7 @@
 }
 
 .banner-imagen2 {
-  background-image: url("./src/assets/chefs-trabajando-cocina-luz-roja-colgando-techo_902338-14584.jpg");
+  /* background-image: url("./src/assets/chefs-trabajando-cocina-luz-roja-colgando-techo_902338-14584.jpg"); */
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -122,7 +135,7 @@
   }
 }
 
-@media screen and (min-width: 1024px) and (max-width: 1400px) {
+@media screen and (min-width: 1024px) and (max-width: 1800px) {
   .estiloParrafo {
     margin-top: 3%;
     width: 50%;
@@ -132,9 +145,16 @@
   .contenido {
     font-size: 25px;
   }
+  .logoInicio{
+    margin-top: 0px;
+  }
+
+  .nav-espacio{
+    margin-top: 0px;
+  }
 }
 .banner-imagen4 {
-  background-image: url("./src/assets/low-angle-asian-paper-lanterns.jpg");
+  /* background-image: url("./src/assets/low-angle-asian-paper-lanterns.jpg"); */
   background-size: cover;
   height: 100vh;
   margin-top: 0;
