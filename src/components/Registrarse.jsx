@@ -2,7 +2,7 @@ import "../components/Login/login.css";
 import { Button, Container, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import backgroundImg from "./../assets/Login/backgroundImg.webp";
-import formImg from "./../assets/Login/formImage.webp";
+import formImg from "./../assets/Login/ComidaChinaLogin.jpg";
 import { registrarUsuario } from "../helpers/usuario";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
@@ -57,7 +57,7 @@ const Registrarse = () => {
         <div className="form-e-Img-Container container-fluid bg-light p-3 p-lg-0 rounded-3">
           <div className="row m-0">
             <div className="img-form-div col-lg-6 d-none d-lg-flex rounded-start-3 p-0">
-              <img src={formImg} className="form-img" />
+              <img src={formImg} className="form-img img-thumbnail mt-5" />
             </div>
 
             <div className="col-lg-6 py-3 d-flex flex-column  justify-content-center">
