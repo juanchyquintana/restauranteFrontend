@@ -1,5 +1,5 @@
 import backgroundImg from "../../assets/Login/backgroundImg.webp";
-import formImg from "../../assets/Login/formImage.webp";
+import formImg from "../../assets/Login/ComidaChinaLogin.jpg";
 import { loginUsuario } from "../../helpers/usuario";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
