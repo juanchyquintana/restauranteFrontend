@@ -4,7 +4,7 @@ import "./error404.css"
 
 const Error404 = () => {
     return (
-        <main className="mainSection">
+        <main className="mainSection nav-espacio">
            
            <div id="bg-404" className="d-flex justify-content-center align-content-center align-items-center">
            <svg xmlns="http://www.w3.org/2000/svg" width="500" height="500" viewBox="0 0 48 48" fill="none" >
