@@ -86,8 +86,8 @@ const PanelGanancias = () => {
   };
 
   const abrirCajaHandler = () => {
-    localStorage.removeItem('cajaCerrada');
-    setCajaCerrada(false)
+    localStorage.removeItem("cajaCerrada");
+    setCajaCerrada(false);
 
     Swal.fire({
       title: "Caja Abierta",
@@ -96,8 +96,8 @@ const PanelGanancias = () => {
       confirmButtonText: "Aceptar",
     });
 
-    window.location.reload()
-  }
+    window.location.reload();
+  };
 
   useEffect(() => {
     if (!cajaCerrada) {
