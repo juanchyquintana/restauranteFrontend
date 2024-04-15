@@ -65,8 +65,6 @@ export const cerrarCaja = async (datosCaja) => {
       body: JSON.stringify(datosCaja)
     });
 
-    // const datos = await respuesta.json();
-    // return datos;
     return respuesta
   } catch (error) {
     console.log(error);

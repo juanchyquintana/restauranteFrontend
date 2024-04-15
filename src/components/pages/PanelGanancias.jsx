@@ -17,20 +17,25 @@ const PanelGanancias = () => {
   const [cantidadPedidos, setCantidadPedidos] = useState(0);
   const [fechaActual, setFechaActual] = useState("");
   const [pedidos, setPedidos] = useState([]);
-
-  const obtenerGanancias = async () => {
-    const ganancias = await obtenerGananciasDia();
-    setGanancias(ganancias);
-  };
+  const [cajaCerrada, setCajaCerrada] = useState(
+    localStorage.getItem("cajaCerrada") === "true"
+  );
 
   const pedidoCantidad = async () => {
     const cantidad = await obtenerCantidadPedidosDia();
     setCantidadPedidos(cantidad);
   };
 
+  const totalGanancias = pedidos.reduce((total, pedido) => {
+    if (pedido.estado === "entregado" || pedido.estado === "terminado") {
+      return total + pedido.total;
+    }
+    return total;
+  }, 0);
+
   const obtenerPedidosDelDia = async () => {
     const pedidosDelDia = await obtenerPedidos();
-    
+
     const pedidosHoy = pedidosDelDia.filter((pedido) => {
       const fechaPedido = new Date(pedido.fecha);
       const fechaActual = new Date();
@@ -55,23 +60,25 @@ const PanelGanancias = () => {
 
     await Swal.fire({
       title: "Caja cerrada",
-      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${ganancias}\nCantidad de pedidos: ${cantidadPedidos}`,
+      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${totalGanancias}\n Cantidad de pedidos: ${cantidadPedidos}`,
       icon: "success",
       confirmButtonText: "Aceptar",
     });
 
     const datosCaja = {
-      ganancias,
+      ganancias: totalGanancias,
       cantidadPedidos,
       fechaCierreCaja: fecha.getTime(),
     };
-    console.log(datosCaja)
-    localStorage.setItem("datosCaja", JSON.stringify(datosCaja));
+
+    console.log(datosCaja);
 
     try {
       await cerrarCaja(datosCaja);
+      localStorage.setItem("cajaCerrada", "true");
+      setCajaCerrada(true);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
 
     setGanancias(0);
@@ -79,28 +86,37 @@ const PanelGanancias = () => {
     setPedidos([]);
   };
 
+  const abrirCajaHandler = () => {
+    localStorage.removeItem('cajaCerrada');
+    setCajaCerrada(false)
+
+    Swal.fire({
+      title: "Caja Abierta",
+      text: `La Caja ha sido Abierta`,
+      icon: "success",
+      confirmButtonText: "Aceptar",
+    });
+
+    window.location.reload()
+  }
+
   useEffect(() => {
-    obtenerGanancias();
-    pedidoCantidad();
-    obtenerPedidosDelDia();
+    if (!cajaCerrada) {
+      pedidoCantidad();
+      obtenerPedidosDelDia();
+    }
 
     const fechaFormateada = formatearFecha(fecha);
     setFechaActual(fechaFormateada);
-
-    const datosCajaGuardados = localStorage.getItem("datosCaja");
-    if (datosCajaGuardados) {
-      const datosCaja = JSON.parse(datosCajaGuardados);
-      setGanancias(datosCaja.ganancias);
-      setCantidadPedidos(datosCaja.cantidadPedidos);
-    }
   }, []);
 
-  const totalGanancias = pedidos.reduce((total, pedido) => {
-    if (pedido.estado === 'entregado' || pedido.estado === 'terminado') {
-      return total + pedido.total;
+  useEffect(() => {
+    if (cajaCerrada) {
+      setGanancias(0);
+      setCantidadPedidos(0);
+      setPedidos([]);
     }
-    return total;
-  }, 0);
+  }, [cajaCerrada]);
 
   return (
     <section>
@@ -131,6 +147,13 @@ const PanelGanancias = () => {
               </div>
 
               <Button
+                variant="success"
+                className="fw-bold text-uppercase mt-4"
+                onClick={abrirCajaHandler}
+              >
+                Abrir Caja
+              </Button>
+              <Button
                 variant="danger"
                 className="fw-bold text-uppercase mt-4"
                 onClick={cerrarCajaHandler}
@@ -158,11 +181,9 @@ const PanelGanancias = () => {
               <tbody>
                 {pedidos?.length > 0
                   ? pedidos.map((pedido) =>
-                      pedido.estado === "entregado" || pedido.estado === "terminado"  ? (
-                        <ItemPedidos 
-                          key={pedido._id}
-                          pedido={pedido}
-                        />
+                      pedido.estado === "entregado" ||
+                      pedido.estado === "terminado" ? (
+                        <ItemPedidos key={pedido._id} pedido={pedido} />
                       ) : null
                     )
                   : null}
