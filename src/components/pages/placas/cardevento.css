@@ -1,0 +1,66 @@
+.tamañoContenedor {
+  padding-top: 40px;
+}
+.tamañoCard {
+  padding: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .tamañoContenedor {
+    padding-top: 20px;
+  }
+  .tamañoCard {
+    padding: 1px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .tamañoContenedor {
+    padding-top: 80px;
+  }
+  .tamañoCard {
+    padding: 1px;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .tamañoContenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+  .tamañoCard {
+    padding: 100px;
+    margin-top: 1px;
+  }
+  .imagenEvento {
+    height: 15vh;
+    width: 100vh;
+  }
+  .textoEvento {
+    padding-top: 30px;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .tamañoContenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+  }
+}
+@media screen and (max-width: 667px) {
+    .tamañoContenedor {
+        padding-top: 10px;
+        padding-left: 500px;
+      }
+      .tamañoCard {
+        height: 20vh; 
+        width: 5vh;
+      }
+      .imagenEvento {
+        height: 20vh; 
+        width: 5vh;
+      }
+}
