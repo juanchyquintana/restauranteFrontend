@@ -202,7 +202,7 @@ const SeccionMenu = () => {
                         )
                       }
                     >
-                      <Button variant="primary">Ver Más</Button>
+                      <Button variant="primary" as={Link} to={`/detalleProducto/${producto._id}`}>Ver Más</Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
