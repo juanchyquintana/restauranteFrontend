@@ -105,7 +105,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                         </NavDropdown.Item>
                       </NavDropdown>
                       <Button className="text-light nav-link" variant="link" onClick={logout}>
-                        <i className="bi bi-box-arrow-left fs-2"></i>
+                        <i className="bi bi-box-arrow-left fs-2 iconos-nav"></i> Cerrar sesión
                       </Button>
                     </>
                   ) : (
@@ -118,7 +118,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                         Carrito
                       </Link> 
                       <Button className="text-light nav-link" variant="link" onClick={logout}>
-                      <i className="bi bi-box-arrow-left fs-2"></i>
+                      <i className="bi bi-box-arrow-left fs-2 iconos-nav"></i> Cerrar sesión
                       </Button>
                       </>
                     ):(

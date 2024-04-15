@@ -186,7 +186,7 @@ const Carrito = () => {
   return (
     <>
       {pedido && pedido.productos.length > 0 ? (
-        <section className="mainPage nav-espacio bg-light d-flex justify-content-center">
+        <section className="mainPage bg-light d-flex justify-content-center nav-espacio">
           <Container className="">
             <div>
               <Table responsive striped bordered>

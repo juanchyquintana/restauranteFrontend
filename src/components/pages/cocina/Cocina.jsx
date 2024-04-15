@@ -148,7 +148,7 @@ const Cocina = () => {
     <section className="mainPage  bg-light pb-5">
       <div className="banner-container mb-5">
         <img className="banner" src={banner} alt="plato con comida china" />
-        <h2 className="bannerTitulo mt-5">廚房 Cocina</h2>
+        <h2 className="bannerTitulo nav-espacio">廚房 Cocina</h2>
       </div>
       <Container>
         <div className="row">

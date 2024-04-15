@@ -36,10 +36,10 @@ const MisPedidos = () => {
     
   
     return (
-      <section className="mainPage  bg-light pb-5">
+      <section className="mainPage bg-light pb-5">
         <div className="banner-container mb-5">
           <img className="banner" src={banner} alt="plato con comida china" />
-          <h2 className="bannerTitulo mt-5">命令 Pedidos</h2>
+          <h2 className="bannerTitulo mt-5 nav-espacio">命令 Pedidos</h2>
         </div>
         <Container>
           <div className="row">

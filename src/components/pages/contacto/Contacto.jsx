@@ -20,13 +20,13 @@ const Contacto = () => {
   };
 
   return (
-    <section>
+    <section className="nav-espacio">
       <img
         className="banner"
         src={bannerContacto}
         alt="plato con comida china"
       />
-      <h2 className="bannerTitulo mt-5">门票 Contacto</h2>
+      <h2 className="bannerTitulo nav-espacio">门票 Contacto</h2>
 
       <Container id="mainContacto" className="my-5 shadow-lg rounded-3">
         <h1 className="display-4">Contacto </h1>
@@ -125,7 +125,6 @@ const Contacto = () => {
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d890.074740468244!2d-65.20445213048936!3d-26.83044190181348!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94225c106f2afc99%3A0xe97bef14f2ad881a!2sPlaza%20Independencia!5e0!3m2!1ses-419!2sar!4v1713158879727!5m2!1ses-419!2sar"
           width="600"
           height="450"
-          allowfullscreen=""
           loading="lazy"
           className="w-100 border-2 border-top border-black"
         ></iframe>

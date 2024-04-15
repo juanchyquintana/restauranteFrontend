@@ -151,13 +151,13 @@ const SeccionMenu = () => {
 
   return (
     <>
-      <section>
+      <section className="nav-espacio">
         <img
           className="banner"
           src={bannerComida}
           alt="plato con comida china"
         />
-        <h2 className="bannerTitulo">门票 Entradas</h2>
+        <h2 className="bannerTitulo nav-espacio">门票 Entradas</h2>
         <Container className="my-4 pb-4">
           <Row>
             {productosEntradas?.map((producto) => (

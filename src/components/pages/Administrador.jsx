@@ -23,9 +23,9 @@ const Administrador = () => {
   return (
     <>
       <section>
-        <div className="banner-container">
+        <div className="banner-container nav-espacio">
           <img className="banner" src={banner} alt="plato con comida china" />
-          <h2 className="bannerTitulo mt-5">Agregar Productos</h2>
+          <h2 className="bannerTitulo nav-espacio">Agregar Productos</h2>
         </div>
 
         <Container className="my-5">
