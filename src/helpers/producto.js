@@ -29,7 +29,6 @@ export const obtenerProductoID = async (id) => {
   }
 }
 
-
 export const borrarProductoAPI = async (id) => {
   try {
     const respuesta = await fetch(`${restauranteURL}/productos/${id}`, {

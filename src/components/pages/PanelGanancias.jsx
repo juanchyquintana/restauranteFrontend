@@ -1,6 +1,5 @@
 import { Button, Container, Row, Table } from "react-bootstrap";
 import {
-  obtenerGananciasDia,
   cerrarCaja,
   obtenerCantidadPedidosDia,
   obtenerPedidos,
@@ -17,21 +16,25 @@ const PanelGanancias = () => {
   const [cantidadPedidos, setCantidadPedidos] = useState(0);
   const [fechaActual, setFechaActual] = useState("");
   const [pedidos, setPedidos] = useState([]);
-
-  const obtenerGanancias = async () => {
-    const ganancias = await obtenerGananciasDia();
-    console.log(ganancias)
-    setGanancias(ganancias);
-  };
+  const [cajaCerrada, setCajaCerrada] = useState(
+    localStorage.getItem("cajaCerrada") === "true"
+  );
 
   const pedidoCantidad = async () => {
     const cantidad = await obtenerCantidadPedidosDia();
     setCantidadPedidos(cantidad);
   };
 
+  const totalGanancias = pedidos.reduce((total, pedido) => {
+    if (pedido.estado === "entregado" || pedido.estado === "terminado") {
+      return total + pedido.total;
+    }
+    return total;
+  }, 0);
+
   const obtenerPedidosDelDia = async () => {
     const pedidosDelDia = await obtenerPedidos();
-    
+
     const pedidosHoy = pedidosDelDia.filter((pedido) => {
       const fechaPedido = new Date(pedido.fecha);
       const fechaActual = new Date();
@@ -56,54 +59,63 @@ const PanelGanancias = () => {
 
     await Swal.fire({
       title: "Caja cerrada",
-      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${ganancias}\nCantidad de pedidos: ${cantidadPedidos}`,
+      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${totalGanancias}\n Cantidad de pedidos: ${cantidadPedidos}`,
       icon: "success",
       confirmButtonText: "Aceptar",
     });
 
     const datosCaja = {
-      ganancias,
+      ganancias: totalGanancias,
       cantidadPedidos,
       fechaCierreCaja: fecha.getTime(),
     };
-    console.log(datosCaja)
-    localStorage.setItem("datosCaja", JSON.stringify(datosCaja));
+
+    console.log(datosCaja);
 
     try {
-      const respuesta = await cerrarCaja(datosCaja);
-      console.log(respuesta)
-      const datos = respuesta.json()
-      console.log(datos)
+      await cerrarCaja(datosCaja);
+      localStorage.setItem("cajaCerrada", "true");
+      setCajaCerrada(true);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
+
     setGanancias(0);
     setCantidadPedidos(0);
     setPedidos([]);
   };
 
+  const abrirCajaHandler = () => {
+    localStorage.removeItem('cajaCerrada');
+    setCajaCerrada(false)
+
+    Swal.fire({
+      title: "Caja Abierta",
+      text: `La Caja ha sido Abierta`,
+      icon: "success",
+      confirmButtonText: "Aceptar",
+    });
+
+    window.location.reload()
+  }
+
   useEffect(() => {
-    obtenerGanancias();
-    pedidoCantidad();
-    obtenerPedidosDelDia();
+    if (!cajaCerrada) {
+      pedidoCantidad();
+      obtenerPedidosDelDia();
+    }
 
     const fechaFormateada = formatearFecha(fecha);
     setFechaActual(fechaFormateada);
-
-    const datosCajaGuardados = localStorage.getItem("datosCaja");
-    if (datosCajaGuardados) {
-      const datosCaja = JSON.parse(datosCajaGuardados);
-      setGanancias(datosCaja.ganancias);
-      setCantidadPedidos(datosCaja.cantidadPedidos);
-    }
   }, []);
 
-  const total = pedidos.reduce((acc, pedido) => {
-    if (pedido.estado === 'entregado' || pedido.estado === 'terminado') {
-      return acc + pedido.total;
+  useEffect(() => {
+    if (cajaCerrada) {
+      setGanancias(0);
+      setCantidadPedidos(0);
+      setPedidos([]);
     }
-    return acc;
-  }, 0);
+  }, [cajaCerrada]);
 
   return (
     <section>
@@ -125,7 +137,7 @@ const PanelGanancias = () => {
                 <span className="fw-bold fs-3 text-uppercase">
                   {fechaActual}
                 </span>
-                <span className="fw-bold fs-3">${ganancias}</span>
+                <span className="fw-bold fs-3">${totalGanancias}</span>
               </div>
 
               <div className="d-flex flex-column justify-content-center mb-3">
@@ -133,6 +145,13 @@ const PanelGanancias = () => {
                 <span className="fw-bold fs-3">{cantidadPedidos}</span>
               </div>
 
+              <Button
+                variant="success"
+                className="fw-bold text-uppercase mt-4"
+                onClick={abrirCajaHandler}
+              >
+                Abrir Caja
+              </Button>
               <Button
                 variant="danger"
                 className="fw-bold text-uppercase mt-4"
@@ -161,11 +180,9 @@ const PanelGanancias = () => {
               <tbody>
                 {pedidos?.length > 0
                   ? pedidos.map((pedido) =>
-                      pedido.estado === "entregado" || pedido.estado === "terminado"  ? (
-                        <ItemPedidos 
-                          key={pedido._id}
-                          pedido={pedido}
-                        />
+                      pedido.estado === "entregado" ||
+                      pedido.estado === "terminado" ? (
+                        <ItemPedidos key={pedido._id} pedido={pedido} />
                       ) : null
                     )
                   : null}
