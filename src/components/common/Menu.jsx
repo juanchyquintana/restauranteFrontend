@@ -15,7 +15,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const currentlUrl = location.pathname
   window.addEventListener('resize', () => {
   const windowWidth = window.innerWidth;
-  if (windowWidth < 991){
+  if (windowWidth < 992){
     setWindowSize(true)
   } else {
     setWindowSize(false)
@@ -106,7 +106,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                     ):(
                     <>
                       <Link to="/ingresar" className='text-light nav-link'><i className="bi bi-person fs-1 iconos-nav"></i> Ingresar</Link>
-                      <Link to="/registrarse" className='text-light nav-link'><i class="bi bi-pencil-square fs-2 iconos-nav"></i> Registro</Link>
+                      <Link to="/registrarse" className='text-light nav-link'><i className="bi bi-pencil-square fs-2 iconos-nav"></i> Registro</Link>
                     </>)
                   )
                 }
