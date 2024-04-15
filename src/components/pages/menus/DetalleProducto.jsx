@@ -26,7 +26,7 @@ const cargarDetalle = async()=>{
   }
 }
   return (
-    <Container className="my-5 mainSection">
+    <Container className="my-5 mainSection nav-espacio">
       <Card>
         <Row className="align-items-center">
           <Col md={6} >
