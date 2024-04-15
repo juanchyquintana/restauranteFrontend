@@ -13,9 +13,14 @@
 .nav-espacio{
   padding-top: 120px;
 }
-
 @media all and (max-width: 576px){
   .nav-espacio{
     padding-top: 80px;
   }
+}
+.texto-overflow {
+  width: 100%; 
+  overflow: hidden; 
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
 }

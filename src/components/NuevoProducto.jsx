@@ -1,8 +1,13 @@
 import { Button, Container, Form, Row } from "react-bootstrap";
+import {
+  crearProducto,
+  editarProducto,
+  obtenerProductoID,
+} from "../helpers/producto";
+import { useParams, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { crearProducto } from "../helpers/producto";
-
+import { useEffect } from "react";
 
 const NuevoProducto = ({ editar, titulo }) => {
   const {
@@ -13,25 +18,72 @@ const NuevoProducto = ({ editar, titulo }) => {
     setValue,
   } = useForm();
 
+  const navegacion = useNavigate();
+  const { id } = useParams();
+
   const productoValidado = async (producto) => {
-    console.log(producto);
-    
-    const respuesta = await crearProducto(producto);
-    if(respuesta.status === 201){
-      Swal.fire({
-        title: "Producto Creado!",
-        text: `El producto "${producto.nombre}" fue creado correctamente!`,
-        icon: "success"
-      });
-      reset();
-    }else{
-      Swal.fire({
-        title: "Ocurrio un error!",
-        text: `El producto "${producto.nombre}" no pudo ser creado! intente nuevamente en unos minutos`,
-        icon: "error"
-      });
+    const { nombre } = producto;
+
+    if (editar) {
+      const respuesta = await editarProducto(producto, id);
+      if (respuesta.status === 200) {
+        Swal.fire({
+          title: "Producto Editado",
+          text: `El ${nombre} se editó correctamente`,
+          icon: "success",
+        });
+
+        navegacion("/administrador");
+      } else {
+        Swal.fire({
+          title: "Error al Editar el Producto",
+          text: `El ${nombre} no pudo se puedo editar. Intente nuevamente`,
+          icon: "error",
+        });
+      }
+    } else {
+      const respuesta = await crearProducto(producto);
+      if (respuesta.status === 201) {
+        Swal.fire({
+          title: "Producto Creado!",
+          text: `El producto "${nombre}" fue creado correctamente!`,
+          icon: "success",
+        });
+        reset();
+      } else {
+        Swal.fire({
+          title: "Ocurrio un error!",
+          text: `El producto "${nombre}" no pudo ser creado! intente nuevamente en unos minutos`,
+          icon: "error",
+        });
+      }
     }
   };
+
+  const cargarDatosFormularioEditar = async () => {
+    try {
+      const respuesta = await obtenerProductoID(id);
+      if (respuesta.status === 200) {
+        const resultado = await respuesta.json();
+        const { nombre, precio, imagen, categoria, estado, detalle } = resultado;
+
+        setValue("nombre", nombre);
+        setValue("precio", precio);
+        setValue("imagen", imagen);
+        setValue("categoria", categoria);
+        setValue("estado", estado);
+        setValue("detalle", detalle);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (editar) {
+      cargarDatosFormularioEditar();
+    }
+  }, []);
 
   return (
     <section className="my-4">

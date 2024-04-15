@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import "./seccionMenu.css";
+import { Link } from "react-router-dom";
 
 const SeccionMenu = () => {
   const [productos, setProductos] = useState([]);
@@ -134,11 +135,12 @@ const SeccionMenu = () => {
           <Row>
             {productos?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
-                <Card>
+                <Card className="h-100">
                   <Card.Img variant="top" src={producto.imagen} />
-                  <Card.Body>
+
+                  <Card.Body className="d-flex flex-column">
                     <Card.Title>{producto.nombre}</Card.Title>
-                    <Card.Text className="d-flex">{producto.detalle}</Card.Text>
+                    <Card.Text className="d-flex texto-overflow flex-grow-1">{producto.detalle}</Card.Text>
                     <form
                       className="d-flex align-items-center justify-content-between"
                       onSubmit={(e) =>
@@ -150,7 +152,7 @@ const SeccionMenu = () => {
                         )
                       }
                     >
-                      <Button variant="primary">Ver Más</Button>
+                      <Button variant="primary" as={Link} to={`/detalleProducto/${producto._id}`}>Ver Más</Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
@@ -180,15 +182,15 @@ const SeccionMenu = () => {
           />
           <h2 className="titulo">饮料 Bebidas</h2>
         </div>
-        <Container className="my-4 ">
+        <Container className="my-4  pb-4">
           <Row>
             {productos?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
-                <Card>
+                <Card className="h-100">
                   <Card.Img variant="top" src={producto.imagen} />
-                  <Card.Body>
+                  <Card.Body className="d-flex flex-column">
                     <Card.Title>{producto.nombre}</Card.Title>
-                    <Card.Text className="d-flex">{producto.detalle}</Card.Text>
+                    <Card.Text className="d-flex texto-overflow flex-grow-1">{producto.detalle}</Card.Text>
                     <form
                       className="d-flex align-items-center justify-content-between"
                       onSubmit={(e) =>
@@ -200,7 +202,7 @@ const SeccionMenu = () => {
                         )
                       }
                     >
-                      <Button variant="primary">Ver Más</Button>
+                      <Button variant="primary" as={Link} to={`/detalleProducto/${producto._id}`}>Ver Más</Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
