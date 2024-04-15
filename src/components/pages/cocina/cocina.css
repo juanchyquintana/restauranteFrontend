@@ -1,10 +1,29 @@
-.cocina-container{
-    margin-top: 80px;
+.mainPage{
+    min-height: 80vh;
 }
 
 .card-padre-body{
     overflow: auto;
 }
+
+.btn-confirm {
+    background-color: rgb(245, 18, 18);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+  
+  .btn-deny {
+    background-color: rgb(6, 156, 206);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 5px;
+  }
+
 @media all and (max-width: 567px){
     
 }

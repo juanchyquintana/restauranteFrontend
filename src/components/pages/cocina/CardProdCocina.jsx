@@ -1,20 +1,82 @@
-import { Button, Card } from "react-bootstrap"
-import './cardProdCocina.css'
+import { Button, Card } from "react-bootstrap";
+import "./cardProdCocina.css";
 
-const CardProductoCocina = () => {
+const CardProductoCocina = ({
+  pedido,
+  actualizarPedido,
+  contadores,
+  orden,
+}) => {
+  const estiloBotonActualizar = (estado) => {
+    if (estado === "pendiente") {
+      return "primary";
+    }
+    if (estado === "en proceso") {
+      return "danger";
+    }
+  };
+
+  const estiloEstado = (estado) => {
+    if (estado === "pendiente") {
+      return "bg-warning";
+    }
+    if (estado === "en proceso") {
+      return "bg-success";
+    }
+  };
+
   return (
-    <Card id="card-container">
-      <Card.Img variant="top" src="https://images.pexels.com/photos/2098085/pexels-photo-2098085.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" className="card-img"/>
-      <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+    <Card className="rounded-0 h-100" id="cardContainer">
+      <Card.Body className="">
+        <Card.Title className="d-flex gap-2 flex-wrap">
+          <p className={`p-2 rounded-1 m-0`}>
+            {pedido?.tipoEntrega.toUpperCase()}
+          </p>
+          <p
+            className={`p-2 ${estiloEstado(
+              pedido.estado
+            )} text-white rounded-1 m-0`}
+          >
+            {pedido?.estado}
+          </p>
+        </Card.Title>
+        <ul className="list-unstyled py-4">
+          {pedido?.productos?.map((objetoPedido, i) => (
+            <div key={i}>
+              <li className="mb-2">
+                <div className="d-flex justify-content-between border-bottom">
+                  <p className="m-0 fw-bold">
+                    • {objetoPedido?.producto?.nombre}
+                  </p>
+                  <p className=" m-0 fw-bold">x{objetoPedido?.cantidad}</p>
+                </div>
+              </li>
+            </div>
+          ))}
+          {pedido?.notas?.length > 0 ? (
+            <li className="mt-4 bg-light border p-2">
+              <span className="fw-bold">Notas:</span> {pedido.notas}
+            </li>
+          ) : (
+            <></>
+          )}
+        </ul>
       </Card.Body>
-    </Card>
-  )
-}
 
-export default CardProductoCocina
+      <Card.Footer className="d-flex justify-content-between bg-light">
+        <p className={`p-2 bg-success text-white rounded-1 m-0`}>
+          {contadores[orden] ? contadores[orden] : "Cargando"}
+        </p>
+        <Button
+          variant={estiloBotonActualizar(pedido.estado)}
+          onClick={() => actualizarPedido(pedido._id)}
+        >
+          {pedido.estado === "pendiente" && "Comenzar"}
+          {pedido.estado === "en proceso" && "Finalizar"}
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
+};
+
+export default CardProductoCocina;
