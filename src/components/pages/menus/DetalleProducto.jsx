@@ -30,8 +30,8 @@ const cargarDetalle = async()=>{
   return (
     <Container className="my-5 mainSection">
       <Card>
-        <Row>
-          <Col md={6} className="align-items-center">
+        <Row className="align-items-center">
+          <Col md={6} >
             <Card.Img
               className=""
               alt={producto.nombre}
