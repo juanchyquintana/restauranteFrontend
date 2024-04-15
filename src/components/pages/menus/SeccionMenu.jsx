@@ -135,11 +135,11 @@ const SeccionMenu = () => {
           <Row>
             {productos?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
-                <Card>
+                <Card className="h-100">
                   <Card.Img variant="top" src={producto.imagen} />
-                  <Card.Body>
+                  <Card.Body  className="d-flex flex-column">
                     <Card.Title>{producto.nombre}</Card.Title>
-                    <Card.Text className="d-flex">{producto.detalle}</Card.Text>
+                    <Card.Text className="d-flex texto-overflow flex-grow-1">{producto.detalle}</Card.Text>
                     <form
                       className="d-flex align-items-center justify-content-between"
                       onSubmit={(e) =>
@@ -185,11 +185,11 @@ const SeccionMenu = () => {
           <Row>
             {productos?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
-                <Card>
+                <Card className="h-100">
                   <Card.Img variant="top" src={producto.imagen} />
-                  <Card.Body>
+                  <Card.Body className="d-flex flex-column">
                     <Card.Title>{producto.nombre}</Card.Title>
-                    <Card.Text className="d-flex">{producto.detalle}</Card.Text>
+                    <Card.Text className="d-flex texto-overflow flex-grow-1">{producto.detalle}</Card.Text>
                     <form
                       className="d-flex align-items-center justify-content-between"
                       onSubmit={(e) =>

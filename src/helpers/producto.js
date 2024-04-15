@@ -15,8 +15,7 @@ export const obtenerProductos = async () => {
 export const obtenerProductoID = async (id) => {
     try {
         const response = await fetch(`${restauranteURL}/productos/${id}`)
-        const datos = await response.json()
-        return datos
+        return response
     } catch (error) {
         console.log(error)
     }
