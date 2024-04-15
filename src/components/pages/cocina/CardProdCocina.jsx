@@ -1,11 +1,13 @@
 import { Button, Card } from "react-bootstrap";
 import "./cardProdCocina.css";
+import { useEffect } from "react";
 
 const CardProductoCocina = ({
   pedido,
   actualizarPedido,
   contadores,
   orden,
+  milisegundos
 }) => {
   const estiloBotonActualizar = (estado) => {
     if (estado === "pendiente") {
@@ -25,6 +27,15 @@ const CardProductoCocina = ({
     }
   };
 
+  const estiloFooter = (milisegundos) => {
+    if (milisegundos > 1800000) {
+      return "pedidoAlerta"
+    }
+    if (milisegundos < 1800000){
+      return "pedidoEnTiempo"
+    }
+  }
+
   return (
     <Card className="rounded-0 h-100" id="cardContainer">
       <Card.Body className="">
@@ -37,7 +48,7 @@ const CardProductoCocina = ({
               pedido.estado
             )} text-white rounded-1 m-0`}
           >
-            {pedido?.estado}
+            {pedido?.estado.toUpperCase()}
           </p>
         </Card.Title>
         <ul className="list-unstyled py-4">
@@ -63,13 +74,14 @@ const CardProductoCocina = ({
         </ul>
       </Card.Body>
 
-      <Card.Footer className="d-flex justify-content-between bg-light">
-        <p className={`p-2 bg-success text-white rounded-1 m-0`}>
+      <Card.Footer className="d-flex justify-content-between" id={estiloFooter(milisegundos[orden])}>
+        <p className="p-2 text-white rounded-1 m-0 fw-bold">
           {contadores[orden] ? contadores[orden] : "Cargando"}
         </p>
         <Button
           variant={estiloBotonActualizar(pedido.estado)}
           onClick={() => actualizarPedido(pedido._id)}
+          className="fw-bold"
         >
           {pedido.estado === "pendiente" && "Comenzar"}
           {pedido.estado === "en proceso" && "Finalizar"}

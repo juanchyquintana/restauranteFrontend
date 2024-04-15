@@ -3,6 +3,13 @@
     max-width: 340px;
 }
 
+#pedidoAlerta{
+    background-color: rgb(253, 31, 31);
+}
+
+#pedidoEnTiempo{
+    background-color: rgb(31, 192, 53);
+}
 
 .card-img{
     aspect-ratio: 3/2;

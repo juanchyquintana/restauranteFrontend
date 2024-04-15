@@ -1,22 +1,20 @@
 import { useEffect, useState } from "react";
 import { Container, Card, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import { obtenerProductoID } from "../../../helpers/producto"; 
+import { obtenerProductoK } from "../../../helpers/producto"; 
 import Swal from "sweetalert2/src/sweetalert2";
 
 const DetalleProducto = () => {
 const {id} = useParams();
 const [producto, setProducto] = useState({});
 useEffect(()=>{
-  //buscar el producto que quiero maquetar
   cargarDetalle();
 },[])
 
 const cargarDetalle = async()=>{
-  const respuesta = await obtenerProductoID(id)
+  const respuesta = await obtenerProductoK(id)
   console.log(respuesta)
   if(respuesta.status === 200){
-    //mostrar el producto en la card
     const datoProducto = await respuesta.json();
     setProducto(datoProducto);
   }else{
