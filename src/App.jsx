@@ -14,6 +14,7 @@ import SeccionMenu from "./components/pages/menus/SeccionMenu";
 import RutasAdministrador from "./components/routes/RutasAdministrador";
 import { useState } from "react";
 import RutasProtegidas from "./components/routes/RutasProtegidas";
+import DetalleProducto from "./components/pages/menus/DetalleProducto";
 
 function App() {
   const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || {};
@@ -49,6 +50,7 @@ function App() {
           <Route exact path="/contacto" element={<Contacto />} />
           <Route exact path="/reseñas" element={<Reviews />} />
           <Route exact path="/nosotros" element={<Nosotros />} />
+          <Route exact path="/detalleProducto/:id" element={<DetalleProducto />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
         <Footer />
