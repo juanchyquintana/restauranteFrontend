@@ -29,7 +29,7 @@ const SeccionMenu = () => {
   const agregarAlCarrito = (e, productoID, precio, nombreProducto) => {
     e.preventDefault();
 
-    if(!usuario) {
+    if (!usuario) {
       Swal.fire({
         position: "center",
         icon: "error",
@@ -372,7 +372,8 @@ const SeccionMenu = () => {
                   />
 
                   <Card.Body className="d-flex flex-column">
-                    <Card.Title className="fw-bold">
+                    <Card.Title className="fw-bold"
+                    >
                       {producto.nombre}
                       <div className="text-end">${producto.precio}</div>
                     </Card.Title>
