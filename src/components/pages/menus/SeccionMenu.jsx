@@ -171,6 +171,7 @@ const SeccionMenu = () => {
                   <Card.Body className="d-flex flex-column">
                     <Card.Title className="fw-bold">
                       {producto.nombre}
+                      <div className="text-end">${producto.precio}</div>
                     </Card.Title>
                     <hr />
                     <Card.Text id="detalle">{producto.detalle}</Card.Text>
@@ -237,6 +238,7 @@ const SeccionMenu = () => {
                   <Card.Body className="d-flex flex-column">
                     <Card.Title className="fw-bold">
                       {producto.nombre}
+                      <div className="text-end">${producto.precio}</div>
                     </Card.Title>
                     <hr />
                     <Card.Text id="detalle">{producto.detalle}</Card.Text>
@@ -304,6 +306,7 @@ const SeccionMenu = () => {
                   <Card.Body className="d-flex flex-column">
                     <Card.Title className="fw-bold">
                       {producto.nombre}
+                      <div className="text-end">${producto.precio}</div>
                     </Card.Title>
                     <hr />
                     <Card.Text id="detalle">{producto.detalle}</Card.Text>
@@ -371,6 +374,7 @@ const SeccionMenu = () => {
                   <Card.Body className="d-flex flex-column">
                     <Card.Title className="fw-bold">
                       {producto.nombre}
+                      <div className="text-end">${producto.precio}</div>
                     </Card.Title>
                     <hr />
                     <Card.Text id="detalle">{producto.detalle}</Card.Text>
