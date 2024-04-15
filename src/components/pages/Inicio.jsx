@@ -4,6 +4,10 @@ import Cardlink from "./placas/Cardlink";
 import "./inicio.css";
 import Reviews from "../Reseñas/Reviews";
 import LogoPortada from "./imagenLogo/lotusblanco.png";
+import banner1 from "../../../src/assets/banner1.jpg"
+import banner2 from "../../../src/assets/banner2.jpg"
+import banner3 from "../../../src/assets/banner3.jpg"
+import banner4 from "../../../src/assets/banner4.jpg"
 import { useEffect, useState } from "react";
 
 const Inicio = () => {
@@ -28,16 +32,18 @@ const Inicio = () => {
       )}
       {!cargando && (
         <>
-          <Container fluid className="p-0">
-            <section className="banner-imagen d-flex justify-content-center align-item-center">
+          <Container fluid className="p-0 position-relative">
+            <img src={banner1} alt="banner 1" className="position-absolute banner1"/>
+            <section className="banner-imagen d-flex justify-content-center align-item-center nav-espacio">
               <img
                 src={LogoPortada}
                 alt="logo del restaurante"
-                className="logoInicio"
+                className="logoInicio position-absolute mt-lg-4"
               />
             </section>
           </Container>
           <Container fluid className="p-0">
+          <img src={banner2} alt="banner 1" className="position-absolute banner1"/>
             <section className="banner-imagen2 position-relative d-flex">
               <div className="container">
                 <div className="row">
@@ -56,17 +62,19 @@ const Inicio = () => {
             </section>
           </Container>
 
-          <Container fluid className="p-0">
+          <Container fluid className="p-0 position-relative">
+          <img src={banner3} alt="banner 1" className="position-absolute banner3"/>
             <section className="banner-imagen3 ">
               <h2 className=" pt-1 text-center text-light textoIngreso">
                 Ingresa a nuestros menús
               </h2>
               
-              <Cardlink />
+              <Cardlink/>
             </section>
           </Container>
 
-          <Container fluid className=" p-0">
+          <Container fluid className="p-0">
+            <img src={banner4} alt="banner 1" className="position-absolute banner4"/>
             <section className="banner-imagen4">
               <h2 className="text-center text-light textoOpciones">
                 Conoce mas opciones
