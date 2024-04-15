@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 .banner-imagen {
   background-image: url("./src/assets/camarero-restaurante-contemporaneo-inspiracion-asiatica-linternas-rojas_641878-2134.jpg");
@@ -73,10 +73,18 @@
   justify-content: center;
   align-items: center;
 }
-.tituloSeccion{
-  font-family: "Roboto", sans-serif;
+.tituloSeccion {
+  font-family: "Quicksand", sans-serif;
   font-weight: 300;
   padding-top: 50px;
+}
+
+.textoIngreso {
+  color: #0c0909;
+  text-shadow: 0 0 10px #ee8207, 0 0 20px #ee8207, 0 0 30px #ee8207,
+    0 0 40px #ee8207, 0 0 50px #ee8207, 0 0 60px #ee8207, 0 0 70px #ee8207;
+  font-family: "Quicksand", sans-serif;
+  font-size: 50px;
 }
 
 @media screen and (max-width: 576px) {
@@ -130,4 +138,22 @@
   background-size: cover;
   height: 100vh;
   margin-top: 0;
+}
+.textoOpciones {
+  color: #0c0909;
+  text-shadow: 0 0 10px #ee8207, 0 0 20px #ee8207, 0 0 30px #ee8207,
+    0 0 40px #ee8207, 0 0 50px #ee8207, 0 0 60px #ee8207, 0 0 70px #ee8207;
+  font-family: "Quicksand", sans-serif;
+  font-size: 50px;
+  font-weight: 300;
+}
+@media screen and (max-width: 768px) {
+  .textoOpciones{
+    font-size: 20px;
+  font-weight: 300;
+  }
+  .textoIngreso{
+    font-size: 20px;
+  font-weight: 300;
+  }
 }

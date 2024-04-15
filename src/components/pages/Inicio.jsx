@@ -38,27 +38,27 @@ const Inicio = () => {
 
       <Container fluid className="p-0">
         <section className="banner-imagen3 ">
-          <h2 className="tituloSeccion text-center text-light">
+          <h2 className=" pt-1 text-center text-light textoIngreso">
             Ingresa a nuestros menús
           </h2>
-          <hr className="text-light" />
+          
           <Cardlink />
         </section>
       </Container>
 
       <Container fluid className=" p-0">
-        <section className=" banner-imagen4 w-100 vh-100 d-flex justify-content-center align-item-center">
-          <h2 className="tituloSeccion text-center text-light">
+        <section className="banner-imagen4">
+          <h2 className="text-center text-light textoOpciones">
             Conoce mas opciones
           </h2>
-          <hr className="text-light" />
-          <Row className="d-flex justify-content-center">
+          
+          <Row className="d-flex justify-content-center mx-0">
             <Cardevento />
           </Row>
         </section>
       </Container>
       <Container>
-        <section className="container">
+        <section className="container pt-5">
           <Reviews />
         </section>
       </Container>
