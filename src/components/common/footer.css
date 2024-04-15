@@ -3,6 +3,7 @@
 .contenedorFooter {
   width: 100%;
   background: #000000;
+  z-index: 1
 }
 
 .imgLogoFooter {
