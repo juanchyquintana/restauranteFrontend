@@ -44,7 +44,6 @@ const Carrito = () => {
           title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
           showConfirmButton: true,
         });
-        console.log(nuevoObjeto);
       }
     } else {
       const nuevoObjeto = crearObjetoPedido();
@@ -74,7 +73,6 @@ const Carrito = () => {
             title: `Ocurrió un error al realizar el pedido, intenta nuevamente.`,
             showConfirmButton: true,
           });
-          console.log(nuevoObjeto);
         }
       }
     }
