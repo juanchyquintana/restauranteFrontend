@@ -1,0 +1,8 @@
+#mainContacto{
+    color: #000;
+    margin: 0 auto;
+    padding: 1em;
+    background: hwb(0 100% 0% / 0.50) border-box;
+    overflow: hidden;
+    border-radius: .3em;   
+}

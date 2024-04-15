@@ -1,9 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
 #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.mainPage {
+.mainPage{
   flex-grow: 1;
+}
+
+.nav-espacio{
+  padding-top: 120px;
+}
+@media all and (max-width: 576px){
+  .nav-espacio{
+    padding-top: 80px;
+  }
+}
+.texto-overflow {
+  width: 100%; 
+  overflow: hidden; 
+  white-space: nowrap; 
+  text-overflow: ellipsis; 
 }

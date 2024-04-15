@@ -1,0 +1,63 @@
+.login-container{
+    position: relative;
+}
+
+.background-img-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.img-blur-ingreso{
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    filter: blur(5px);
+}
+
+.form-e-Img-Container{
+    z-index: 5;
+}
+
+.img-form-div{
+    overflow: hidden;
+    height: 100%;
+}
+
+.form-img{
+    object-fit: cover;
+    width: 100%;
+}
+
+
+
+
+@media all and (min-width: 992px){    
+    .formulario{
+        width: 75%;
+    }
+
+    .row{
+        height: 80vh;
+    }
+}
+
+@media all and (min-width: 768px){    
+    .form-e-Img-Container{
+        max-width: 70vw;
+    }
+}
+
+@media all and (min-width: 351px) and (max-width: 767px){    
+    .form-e-Img-Container{
+        max-width: 80vw;
+    }
+}
+
+@media all and (max-width: 350px){    
+    .form-e-Img-Container{
+        max-width: 90vw;
+    }
+}

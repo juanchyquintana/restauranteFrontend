@@ -1,0 +1,36 @@
+.banner-imagen3 {
+  background-image: url("./src/assets/pareja-disfrutando-comida-restaurante_23-2149269178.jpg");
+  background-size: cover;
+  height: 100vh;
+  margin-top: 0;
+}
+
+.hover-effect {
+  transition: transform 0.3s ease;
+}
+
+.hover-effect:hover {
+  transform: scale(1.3);
+}
+
+.tituloMenu,
+.tituloMenu2 {
+  color: #0c0909;
+  text-shadow: 0 0 10px #ee2f39, 0 0 20px #ee2f39, 0 0 30px #ee2f39,
+    0 0 40px #ee2f39, 0 0 50px #ee2f39, 0 0 60px #ee2f39, 0 0 70px #ee2f39;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.cardImagen {
+  padding-top: 80px;
+}
+
+@media screen and (max-width: 280px) {
+  .imgLink {
+    width: 100px;
+    box-shadow: 0 0 20px #eb555f;
+    border-radius: 5px;
+  }
+}

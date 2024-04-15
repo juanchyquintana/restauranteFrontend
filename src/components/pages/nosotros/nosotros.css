@@ -1,0 +1,19 @@
+#card-container{
+    min-width: 250px;
+    max-width: 340px;
+}
+
+.card-img{
+    aspect-ratio: 3/2;
+    object-fit: cover;
+}
+.row{
+    height: auto;
+}
+.tituloNosotros{
+    font-family: "Quicksand", sans-serif;
+}
+
+#about-us{
+    margin-top: 120px
+}

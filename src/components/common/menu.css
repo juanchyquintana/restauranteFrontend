@@ -1,0 +1,14 @@
+.navbar-custom{
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    max-width: 100vw;
+}
+
+.navbarLogo{
+    height: 110px;
+}
+
+@media all and (min-width: 992px){
+    .iconos-nav{
+        display: none;
+    }
+}
