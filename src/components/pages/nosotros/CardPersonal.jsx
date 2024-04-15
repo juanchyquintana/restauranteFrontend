@@ -1,20 +1,28 @@
-import { Button, Card } from "react-bootstrap"
-// import './cardProdCocina.css'
+import React from "react";
+import { Button, Card } from "react-bootstrap";
 
-const CardPersonal = () => {
+const CardPersonal = ({ imagenNosotros, nombre, reseña, linkedin, github }) => {
   return (
-    <Card id="card-container" >
-      <Card.Img variant="top" src="https://img.freepik.com/vector-premium/chef-mujer-trabajadora-avatar_18591-58459.jpg" className="card-img"/>
+    <Card id="card-container">
+      <Card.Img variant="top" src={imagenNosotros} className="card-img" />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">Go somewhere</Button>
+        <Card.Title className="text-center">{nombre}</Card.Title>
+        <Card.Text>{reseña}</Card.Text>
+        <div className="card-footer text-center d-flex justify-content-around">
+          <a href={linkedin} target="_blank" rel="noopener noreferrer">
+            <Button variant="btn btn-outline-info">
+              <i className="bi bi-linkedin"></i>
+            </Button>
+          </a>
+          <a href={github} target="_blank" rel="noopener noreferrer">
+            <Button variant="btn btn-outline-info">
+              <i className="bi bi-github"></i>
+            </Button>
+          </a>
+        </div>
       </Card.Body>
     </Card>
-  )
-}
+  );
+};
 
-export default CardPersonal
+export default CardPersonal;
