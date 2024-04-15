@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="text-center bg-green text-black  contenedorFooter">
       <div className="text-center ">
-        <div className="row m-0">
+        <div className="row m-0 claseRow">
           <div className="col-12 col-sm-12 col-lg-4">
             <a
               href="#"

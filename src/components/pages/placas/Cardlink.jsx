@@ -1,36 +1,39 @@
-import Col from "react-bootstrap/Col";
-import { Card, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import placa1 from "./img/placa-comida.jpg";
 import placa2 from "./img/placa-bebida.jpg";
+import "./cardlink.css";
 
 const Cardlink = () => {
   return (
-    <Container className="d-flex justify-content-between">
-    <Col sm={1} md={2} lg={3} className="tamañoCard d-flex ">
-      <Card className="position-relative">
-        <div className="position-absolute w-100 text-center top-50 start-50 translate-middle">
-          <Card.Title className="pt-5 display-6">Comidas</Card.Title>
+    <Container className="cardImagen">
+      <div className="container text-center">
+        <div className="row">
+          <div className="col">
+            <div className="hover-effect mt-5 imgLink">
+              <div className="tituloMenu text-white ">Comidas</div>
+              <a href="#">
+                <img
+                  src={placa1}
+                  alt="Comida"
+                  className="tamañoImagen img-fluid img-thumbnail"
+                />
+              </a>
+            </div>
+          </div>
+          <div className="col">
+            <div className="hover-effect mt-5 imgLink">
+              <div className="tituloMenu2 text-white">Bebidas</div>
+              <a href="#">
+                <img
+                  src={placa2}
+                  alt="Bebida"
+                  className="tamañoImagen img-fluid img-thumbnail"
+                />
+              </a>
+            </div>
+          </div>
         </div>
-        <div>
-          <a href="#">
-            <img src={placa1} alt="imagen" className="opcionImagen" />
-          </a>
-        </div>
-      </Card>
-    </Col>
-    <Col sm={1} md={2} lg={3} className="tamañoCard d-flex">
-      <Card className="position-relative ms-5">
-        <div className="position-absolute w-100 text-center top-50 start-50 translate-middle">
-        <Card.Title className="pt-5 display-6">bebidas</Card.Title>
-        </div>
-        <div>
-        <a href="#">
-          <img src={placa2} alt="imagen" className="opcionImagen" />
-        </a>
-        </div>
-      </Card>
-    </Col>
-
+      </div>
     </Container>
   );
 };
