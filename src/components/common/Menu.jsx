@@ -5,6 +5,7 @@ import './menu.css'
 import { Link, useNavigate, useLocation  } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import brandImg from '../pages/imagenLogo/lotusblanco.png'
+import Swal from 'sweetalert2/src/sweetalert2';
 
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -34,10 +35,25 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   }
 
   const logout = () => {
-    sessionStorage.removeItem("usuarioLotus");
-    sessionStorage.removeItem("pedido")
-    setUsuarioLogueado({});
-    navegacion("/ingresar");
+
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Quieres cerrar sesión?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, salir',
+      cancelButtonText: 'Cancelar'
+  }).then((result) => {
+      if (result.isConfirmed) {
+        sessionStorage.removeItem("usuarioLotus");
+        sessionStorage.removeItem("pedido")
+        setUsuarioLogueado({});
+        Swal.fire("Sesion cerrada con exito!");
+        navegacion("/ingresar");
+
+      }
+  });
   };
 
   useEffect(() => {
