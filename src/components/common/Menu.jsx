@@ -5,6 +5,7 @@ import './menu.css'
 import { Link, useNavigate, useLocation  } from 'react-router-dom';
 import Button from 'react-bootstrap/Button'
 import brandImg from '../pages/imagenLogo/lotusblanco.png'
+import Swal from 'sweetalert2/src/sweetalert2';
 
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -13,6 +14,8 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const navegacion = useNavigate();
   const location = useLocation();
   const currentlUrl = location.pathname
+  const widthAlIniciar = window.innerWidth
+
   window.addEventListener('resize', () => {
   const windowWidth = window.innerWidth;
   if (windowWidth < 992){
@@ -34,10 +37,25 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   }
 
   const logout = () => {
-    sessionStorage.removeItem("usuarioLotus");
-    sessionStorage.removeItem("pedido")
-    setUsuarioLogueado({});
-    navegacion("/ingresar");
+
+
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Quieres cerrar sesión?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, salir',
+      cancelButtonText: 'Cancelar'
+  }).then((result) => {
+      if (result.isConfirmed) {
+        sessionStorage.removeItem("usuarioLotus");
+        sessionStorage.removeItem("pedido")
+        setUsuarioLogueado({});
+        Swal.fire("Sesion cerrada con exito!");
+        navegacion("/ingresar");
+
+      }
+  });
   };
 
   useEffect(() => {
@@ -57,7 +75,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   }, []);
 
     return (
-      <Navbar expand="lg" variant='dark' bg={`${navbarEstilo()}`} className={`py-3 fixed-top navbar-custom text-white bg-body- fs-4 ${scrolled ? 'bg-black shadow' : ''}`}>
+      <Navbar expand="lg" variant='dark' bg={`${widthAlIniciar < 992 ? 'black' : navbarEstilo()}`} className={`py-3 fixed-top navbar-custom text-white bg-body- fs-4 ${scrolled ? 'bg-black shadow' : ''}`}>
           <Container fluid className=''>
             <Navbar.Brand href="#home">{
               <img src={brandImg} alt="logo Lotus" className='navbarLogo'/>
