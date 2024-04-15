@@ -4,11 +4,14 @@ const MisPedirosCard = ({
     pedido
   }) => {  
     const estiloEstado = (estado) => {
-      if (estado === "pendiente") {
+      if (estado === "pendiente" || estado === 'enviado') {
         return "bg-warning";
       }
-      if (estado === "en proceso") {
+      if (estado === "en proceso" || estado === 'entregado') {
         return "bg-success";
+      }
+      if (estado === 'terminado' || estado === 'cancelado'){
+        return "bg-danger"
       }
     };
   
