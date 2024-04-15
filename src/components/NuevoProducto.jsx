@@ -2,7 +2,7 @@ import { Button, Container, Form, Row } from "react-bootstrap";
 import {
   crearProducto,
   editarProducto,
-  obtenerProductoID,
+  obtenerProductoK,
 } from "../helpers/producto";
 import { useParams, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
@@ -62,7 +62,7 @@ const NuevoProducto = ({ editar, titulo }) => {
 
   const cargarDatosFormularioEditar = async () => {
     try {
-      const respuesta = await obtenerProductoID(id);
+      const respuesta = await obtenerProductoK(id);
       if (respuesta.status === 200) {
         const resultado = await respuesta.json();
         const { nombre, precio, imagen, categoria, estado, detalle } = resultado;
