@@ -78,6 +78,9 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                   <Link className='text-light nav-link' to="/carrito">
                     Carrito
                   </Link> 
+                  <Link className='text-light nav-link' to="/mis-pedidos">
+                    Mis Pedidos
+                  </Link> 
                   <Button className="text-light nav-link" variant="link" onClick={logout}>
                     Logout
                   </Button>

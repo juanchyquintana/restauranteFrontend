@@ -81,3 +81,12 @@ export const editarPedido = async (id, pedido) => {
     console.log(error);
   }
 };
+
+export const filtrarPedidosPorUsuario = async (id) => {
+  try {
+    const respuesta = await fetch(`${RESTAURANTE_URL}/pedidosUsuario/${id}`)
+    return respuesta.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
