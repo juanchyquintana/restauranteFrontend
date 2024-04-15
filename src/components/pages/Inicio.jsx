@@ -4,14 +4,18 @@ import Cardlink from "./placas/Cardlink";
 import "./inicio.css";
 import Reviews from "../Reseñas/Reviews";
 import LogoPortada from "./imagenLogo/lotusblanco.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Inicio = () => {
   const [cargando, setCargando] = useState(true);
 
-  window.onload = () => {
-    setCargando(false);
-  };
+  useEffect(() => {
+    setCargando(true);
+    const timeout = setTimeout(() => {
+      setCargando(false);
+    }, 500); 
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
     <>
