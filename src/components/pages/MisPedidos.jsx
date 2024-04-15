@@ -1,10 +1,8 @@
-import { Button, Card, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import "../pages/cocina/cocina.css";
-import CardProductoCocina from "../pages/cocina/CardProdCocina";
-import { editarPedido, filtrarPedidosPorUsuario, obtenerPedidos } from "../../helpers/pedidos";
+
+import { obtenerPedidos } from "../../helpers/pedidos";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2/src/sweetalert2.js";
-import moment from "moment-timezone";
 import banner from '../../assets/cocina/banner-cocina.jpg'
 import MisPedirosCard from "./MisPedirosCard";
 import { Navigate } from "react-router-dom";
