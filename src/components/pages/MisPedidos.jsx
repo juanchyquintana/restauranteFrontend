@@ -7,14 +7,18 @@ import Swal from "sweetalert2/src/sweetalert2.js";
 import moment from "moment-timezone";
 import banner from '../../assets/cocina/banner-cocina.jpg'
 import MisPedirosCard from "./MisPedirosCard";
+import { Navigate } from "react-router-dom";
 
 const MisPedidos = () => {
     const [pedidos, setPedidos] = useState([]);
     const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus"))
         
+        
     if (!usuario) {
-        return null; 
+        return <Navigate to="/error" />;
     }
+    if(usuario.tipoUsuario === "admin")
+        return <Navigate to="/error" />;
 
     const getPedidos = async () => {
         try {
