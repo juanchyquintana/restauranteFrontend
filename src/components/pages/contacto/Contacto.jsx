@@ -1,6 +1,7 @@
 import bannerContacto from "../../../assets/chicosConversando.jpg";
-import { useForm } from "react-hook-form";
 import { Form, Button, Container } from "react-bootstrap";
+import { useNavigate } from "react-router";
+import { useForm } from "react-hook-form";
 import "./contacto.css";
 
 const Contacto = () => {
@@ -11,10 +12,10 @@ const Contacto = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    // Aquí lógica para enviar los datos del formulario
-    console.log(data);
+  const navegacion = useNavigate();
 
+  const enviarFormulario = () => {
+    navegacion("/enviar-email");
     reset();
   };
 
@@ -34,7 +35,7 @@ const Contacto = () => {
           ¡Gracias por tu interés en contactar con nosotros! Por favor, llena el
           formulario a continuación y te responderemos lo antes posible.
         </p>
-        <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(enviarFormulario)}>
           <Form.Group controlId="formName" className="mb-3">
             <Form.Label className="fw-bold">Nombre:</Form.Label>
             <Form.Control
