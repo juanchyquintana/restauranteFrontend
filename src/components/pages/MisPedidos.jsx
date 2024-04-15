@@ -24,6 +24,7 @@ const MisPedidos = () => {
           const productosEntradas = respuesta.filter(
               (pedido) => pedido.usuario?._id === usuario.id
           );
+          console.log(productosEntradas)
           setPedidos(productosEntradas);
         } catch (error) {
           console.log(error);
@@ -46,15 +47,11 @@ const MisPedidos = () => {
             {pedidos?.length > 0 ? (
               <>
                 {pedidos?.map((pedido, i) =>
-                  pedido.estado !== "terminado" ? (
                     <div className="mb-3 mb-md-4 col-md-6 col-lg-4" key={i}>
                       <MisPedirosCard
                         pedido={pedido}
                       />
-                    </div>
-                  ) : (
-                    <div key={i}></div>
-                  )
+                    </div>     
                 )}
               </>
             ) : (
