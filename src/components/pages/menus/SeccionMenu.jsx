@@ -1,6 +1,8 @@
 import { obtenerProductos } from "../../../helpers/producto";
 import bannerComida from "./bannerImg/comidaChina.jpg";
 import bannerBebida from "./bannerImg/bebidaChina.jpg";
+import bannerPlatosPrincipales from "./bannerImg/platocomidachina.jpg";
+import bannerPostres from "./bannerImg/postreschina.jpg";
 import Swal from "sweetalert2/src/sweetalert2.js";
 import { Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
@@ -118,6 +120,19 @@ const SeccionMenu = () => {
     }
   };
 
+  const productosEntradas = productos.filter(
+    (producto) => producto.categoria === "Entradas"
+  );
+  const productosPlatosPrincipales = productos.filter(
+    (producto) => producto.categoria === "Platos Principales"
+  );
+  const productosPostres = productos.filter(
+    (producto) => producto.categoria === "Postres"
+  );
+  const productosBebidas = productos.filter(
+    (producto) => producto.categoria === "Bebidas"
+  );
+
   useEffect(() => {
     cargarProductos();
   }, []);
@@ -130,19 +145,28 @@ const SeccionMenu = () => {
           src={bannerComida}
           alt="plato con comida china"
         />
-        <h2 className="bannerTitulo">食品 Comidas</h2>
-        <Container className="my-4  pb-4">
+        <h2 className="bannerTitulo">门票 Entradas</h2>
+        <Container className="my-4 pb-4">
           <Row>
-            {productos?.map((producto) => (
+            {productosEntradas?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
                 <Card className="h-100">
-                  <Card.Img variant="top" src={producto.imagen} />
-
+                  <Card.Img
+                    variant="top"
+                    className="img-fluid h-50 object-fit-cover"
+                    src={producto.imagen}
+                  />
                   <Card.Body className="d-flex flex-column">
-                    <Card.Title>{producto.nombre}</Card.Title>
-                    <Card.Text className="d-flex texto-overflow flex-grow-1">{producto.detalle}</Card.Text>
+                    <Card.Title className="fw-bold">
+                      {producto.nombre}
+                    </Card.Title>
+                    <hr />
+                    <Card.Text id="detalle">{producto.detalle}</Card.Text>
+                  </Card.Body>
+
+                  <Card.Footer>
                     <form
-                      className="d-flex align-items-center justify-content-between"
+                      className="d-flex align-items-center justify-content-between gap-2"
                       onSubmit={(e) =>
                         agregarAlCarrito(
                           e,
@@ -152,7 +176,13 @@ const SeccionMenu = () => {
                         )
                       }
                     >
-                      <Button variant="primary" as={Link} to={`/detalleProducto/${producto._id}`}>Ver Más</Button>
+                      <Button
+                        variant="primary"
+                        as={Link}
+                        to={`/detalleProducto/${producto._id}`}
+                      >
+                        Ver Más
+                      </Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
@@ -165,7 +195,140 @@ const SeccionMenu = () => {
                         <i className="bi bi-plus-circle"></i>
                       </Button>
                     </form>
+                  </Card.Footer>
+                </Card>
+              </div>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      <section>
+        <div className="bannerContenedor2">
+          <img
+            className="banner2 mt-5"
+            src={bannerPlatosPrincipales}
+            alt="vasos con bebida"
+          />
+          <h2 className="titulo">主修课 Platos Principales</h2>
+        </div>
+        <Container className="my-4  pb-4">
+          <Row>
+            {productosPlatosPrincipales?.map((producto) => (
+              <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
+                <Card className="h-100">
+                  <Card.Img
+                    variant="top"
+                    className="img-fluid h-50 object-fit-cover"
+                    src={producto.imagen}
+                  />
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title className="fw-bold">
+                      {producto.nombre}
+                    </Card.Title>
+                    <hr />
+                    <Card.Text id="detalle">{producto.detalle}</Card.Text>
                   </Card.Body>
+
+                  <Card.Footer>
+                    <form
+                      className="d-flex align-items-center justify-content-between gap-2"
+                      onSubmit={(e) =>
+                        agregarAlCarrito(
+                          e,
+                          producto._id,
+                          producto.precio,
+                          producto.nombre
+                        )
+                      }
+                    >
+                      <Button
+                        variant="primary"
+                        as={Link}
+                        to={`/detalleProducto/${producto._id}`}
+                      >
+                        Ver Más
+                      </Button>
+                      <input
+                        type="number"
+                        className="agregar text-center ms-2"
+                        min={1}
+                        max={15}
+                        defaultValue={1}
+                        name="cantidad"
+                      />
+                      <Button className="bg-success ms-2" type="submit">
+                        <i className="bi bi-plus-circle"></i>
+                      </Button>
+                    </form>
+                  </Card.Footer>
+                </Card>
+              </div>
+            ))}
+          </Row>
+        </Container>
+      </section>
+
+      <section>
+        <div className="bannerContenedor2">
+          <img
+            className="banner2 mt-5"
+            src={bannerPostres}
+            alt="vasos con bebida"
+          />
+          <h2 className="titulo">甜点 Postres</h2>
+        </div>
+        <Container className="my-4  pb-4">
+          <Row>
+            {productosPostres?.map((producto) => (
+              <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
+                <Card className="h-100">
+                  <Card.Img
+                    variant="top"
+                    className="img-fluid h-50 object-fit-cover"
+                    src={producto.imagen}
+                  />
+
+                  <Card.Body className="d-flex flex-column">
+                    <Card.Title className="fw-bold">
+                      {producto.nombre}
+                    </Card.Title>
+                    <hr />
+                    <Card.Text id="detalle">{producto.detalle}</Card.Text>
+                  </Card.Body>
+
+                  <Card.Footer>
+                    <form
+                      className="d-flex align-items-center justify-content-between gap-2"
+                      onSubmit={(e) =>
+                        agregarAlCarrito(
+                          e,
+                          producto._id,
+                          producto.precio,
+                          producto.nombre
+                        )
+                      }
+                    >
+                      <Button
+                        variant="primary"
+                        as={Link}
+                        to={`/detalleProducto/${producto._id}`}
+                      >
+                        Ver Más
+                      </Button>
+                      <input
+                        type="number"
+                        className="agregar text-center ms-2"
+                        min={1}
+                        max={15}
+                        defaultValue={1}
+                        name="cantidad"
+                      />
+                      <Button className="bg-success ms-2" type="submit">
+                        <i className="bi bi-plus-circle"></i>
+                      </Button>
+                    </form>
+                  </Card.Footer>
                 </Card>
               </div>
             ))}
@@ -184,15 +347,26 @@ const SeccionMenu = () => {
         </div>
         <Container className="my-4  pb-4">
           <Row>
-            {productos?.map((producto) => (
+            {productosBebidas?.map((producto) => (
               <div className="col-md-4 col-lg-3 mb-3" key={producto.nombre}>
                 <Card className="h-100">
-                  <Card.Img variant="top" src={producto.imagen} />
+                  <Card.Img
+                    variant="top"
+                    className="img-fluid h-50 object-fit-cover"
+                    src={producto.imagen}
+                  />
+
                   <Card.Body className="d-flex flex-column">
-                    <Card.Title>{producto.nombre}</Card.Title>
-                    <Card.Text className="d-flex texto-overflow flex-grow-1">{producto.detalle}</Card.Text>
+                    <Card.Title className="fw-bold">
+                      {producto.nombre}
+                    </Card.Title>
+                    <hr />
+                    <Card.Text id="detalle">{producto.detalle}</Card.Text>
+                  </Card.Body>
+
+                  <Card.Footer>
                     <form
-                      className="d-flex align-items-center justify-content-between"
+                      className="d-flex align-items-center justify-content-between gap-2"
                       onSubmit={(e) =>
                         agregarAlCarrito(
                           e,
@@ -202,7 +376,13 @@ const SeccionMenu = () => {
                         )
                       }
                     >
-                      <Button variant="primary" as={Link} to={`/detalleProducto/${producto._id}`}>Ver Más</Button>
+                      <Button
+                        variant="primary"
+                        as={Link}
+                        to={`/detalleProducto/${producto._id}`}
+                      >
+                        Ver Más
+                      </Button>
                       <input
                         type="number"
                         className="agregar text-center ms-2"
@@ -215,7 +395,7 @@ const SeccionMenu = () => {
                         <i className="bi bi-plus-circle"></i>
                       </Button>
                     </form>
-                  </Card.Body>
+                  </Card.Footer>
                 </Card>
               </div>
             ))}
