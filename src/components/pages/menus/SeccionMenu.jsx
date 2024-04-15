@@ -28,6 +28,18 @@ const SeccionMenu = () => {
 
   const agregarAlCarrito = (e, productoID, precio, nombreProducto) => {
     e.preventDefault();
+
+    if(!usuario) {
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "¡Error al Agregar el Producto!",
+        text: "Debes estar logueado para Agregar Productos al Carrito",
+        showConfirmButton: true,
+      });
+      return;
+    }
+
     const cantidadIngresada = parseInt(e.target.cantidad.value);
 
     if (cantidadIngresada > 0 && cantidadIngresada <= 15) {
