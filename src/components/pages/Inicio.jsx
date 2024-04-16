@@ -42,6 +42,7 @@ const Inicio = () => {
               />
             </section>
           </Container>
+
           <Container fluid className="p-0">
           <img src={banner2} alt="banner 1" className="position-absolute banner1"/>
             <section className="banner-imagen2 position-relative d-flex">
@@ -85,6 +86,7 @@ const Inicio = () => {
               </Row>
             </section>
           </Container>
+          
           <Container>
             <section className="container pt-5">
               <Reviews />
