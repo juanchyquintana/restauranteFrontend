@@ -3,7 +3,7 @@ import {
   cerrarCaja,
   obtenerCantidadPedidosDia,
   obtenerPedidos,
-} from "../../helpers/pedidos";
+} from "../../helpers/pedidos.js";
 import { useEffect, useState } from "react";
 import bambu from "../../assets/tonyMontana.jpg";
 import banner from "../../assets/chicosConversando.jpg";
@@ -122,7 +122,7 @@ const PanelGanancias = () => {
         <h2 className="bannerTitulo mt-5 nav-espacio">利润 Ganancias</h2>
       </div>
 
-      <Container className="d-flex flex-column justify-content-center my-5 mainPage ganancias-containe">
+      <Container className="d-flex flex-column justify-content-center my-5 ganancias-containe">
         <div className="imagen-contenedora container-fluid bg-light p-3 p-lg-0 rounded-3 border shadow">
           <Row className="m-0">
             <div className="img-form-div col-lg-6 d-none d-lg-flex rounded-start-3 p-0">
@@ -131,7 +131,7 @@ const PanelGanancias = () => {
 
             <div className="col-lg-6 d-flex flex-column justify-content-center text-center">
               <div className="d-flex flex-column justify-content-center mb-3">
-                <h1 className="display-6">Ganancias del día:</h1>
+                <h1 className="display-6">- CAJA -</h1>
                 <span className="fw-bold fs-3 text-uppercase">
                   {fechaActual}
                 </span>
@@ -139,7 +139,7 @@ const PanelGanancias = () => {
               </div>
 
               <div className="d-flex flex-column justify-content-center mb-3">
-                <h1 className="display-6">Pedidos de la Fecha: </h1>
+                <h1 className="display-6">Total de Pedidos: </h1>
                 <span className="fw-bold fs-3">{cantidadPedidos}</span>
               </div>
 
@@ -165,24 +165,21 @@ const PanelGanancias = () => {
           <h1 className="display-6">Pedidos de la Fecha: </h1>
 
           <div>
-            <Table responsive striped bordered variant="dark">
-              <thead>
+            <Table responsive striped bordered>
+              <thead className="text-center">
                 <tr>
-                  <th>Nombre</th>
-                  <th>Fecha</th>
-                  <th>Tipo Entrega</th>
-                  <th>Total</th>
-                  <th>Estado</th>
+                  <th className="text-white bg-dark">Nombre</th>
+                  <th className="text-white bg-dark">Fecha</th>
+                  <th className="text-white bg-dark">Tipo Entrega</th>
+                  <th className="text-white bg-dark">Total</th>
+                  <th className="text-white bg-dark">Estado</th>
                 </tr>
               </thead>
               <tbody>
                 {pedidos?.length > 0
-                  ? pedidos.map((pedido) =>
-                      pedido.estado === "entregado" ||
-                      pedido.estado === "terminado" ? (
-                        <ItemPedidos key={pedido._id} pedido={pedido} />
-                      ) : null
-                    )
+                  ? pedidos.map((pedido) => (
+                      <ItemPedidos key={pedido._id} pedido={pedido} />
+                    ))
                   : null}
               </tbody>
             </Table>
