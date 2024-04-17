@@ -1,9 +1,5 @@
 import { Button, Container, Row, Table } from "react-bootstrap";
-import {
-  cerrarCaja,
-  obtenerCantidadPedidosDia,
-  obtenerPedidos,
-} from "../../helpers/pedidos.js";
+import { cerrarCaja, obtenerPedidos } from "../../helpers/pedidos.js";
 import { useEffect, useState } from "react";
 import bambu from "../../assets/tonyMontana.jpg";
 import banner from "../../assets/chicosConversando.jpg";
@@ -20,17 +16,17 @@ const PanelGanancias = () => {
     localStorage.getItem("cajaCerrada") === "true"
   );
 
-  const pedidoCantidad = async () => {
-    const cantidad = await obtenerCantidadPedidosDia();
-    setCantidadPedidos(cantidad);
-  };
-
   const totalGanancias = pedidos.reduce((total, pedido) => {
     if (pedido.estado === "entregado" || pedido.estado === "terminado") {
       return total + pedido.total;
     }
     return total;
   }, 0);
+
+  const pedidosTerminados = pedidos.filter(
+    (pedido) => pedido.estado === "terminado" || pedido.estado === "entregado"
+  );
+  const cantidadPedidosTerminados = pedidosTerminados.length;
 
   const obtenerPedidosDelDia = async () => {
     const pedidosDelDia = await obtenerPedidos();
@@ -66,7 +62,7 @@ const PanelGanancias = () => {
 
     const datosCaja = {
       ganancias: totalGanancias,
-      cantidadPedidos,
+      cantidadPedidos: cantidadPedidosTerminados,
       fechaCierreCaja: fecha.getTime(),
     };
 
@@ -99,7 +95,6 @@ const PanelGanancias = () => {
 
   useEffect(() => {
     if (!cajaCerrada) {
-      pedidoCantidad();
       obtenerPedidosDelDia();
     }
 
@@ -139,8 +134,10 @@ const PanelGanancias = () => {
               </div>
 
               <div className="d-flex flex-column justify-content-center mb-3">
-                <h1 className="display-6">Total de Pedidos: </h1>
-                <span className="fw-bold fs-3">{cantidadPedidos}</span>
+                <h1 className="fs-4">Total de Pedidos Terminados: </h1>
+                <span className="fw-bold fs-3">
+                  {cantidadPedidosTerminados}
+                </span>
               </div>
 
               <Button
