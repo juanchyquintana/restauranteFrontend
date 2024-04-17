@@ -10,7 +10,7 @@ const ItemPedidos = ({ pedido }) => {
     case 'terminado':
       estadoClass = 'bg-danger text-white';
       break;
-    case 'proceso':
+    case 'en proceso':
       estadoClass = 'bg-success text-white';
       break;
     case 'pendiente':

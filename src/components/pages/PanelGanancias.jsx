@@ -15,6 +15,8 @@ const PanelGanancias = () => {
   const [cajaCerrada, setCajaCerrada] = useState(
     localStorage.getItem("cajaCerrada") === "true"
   );
+  const [filtrar, setFiltrar] = useState("all");
+  const [filtroActivo, setFiltroActivo] = useState(false);
 
   const totalGanancias = pedidos.reduce((total, pedido) => {
     if (pedido.estado === "entregado" || pedido.estado === "terminado") {
@@ -93,6 +95,16 @@ const PanelGanancias = () => {
     window.location.reload();
   };
 
+  const handleFilterClick = (filter) => {
+    setFiltroActivo(true);
+    setFiltrar(filter);
+  };
+
+  const resetearFiltros = () => {
+    setFiltroActivo(false);
+    setFiltrar("all");
+  };
+
   useEffect(() => {
     if (!cajaCerrada) {
       obtenerPedidosDelDia();
@@ -114,7 +126,7 @@ const PanelGanancias = () => {
     <section className="nav-espacio">
       <div className="banner-container">
         <img className="banner" src={banner} alt="plato con comida china" />
-        <h2 className="bannerTitulo mt-5 nav-espacio">利润 Ganancias</h2>
+        <h2 className="bannerTitulo mt-5 nav-espacio">Ganancias</h2>
       </div>
 
       <Container className="d-flex flex-column justify-content-center my-5 ganancias-containe">
@@ -158,8 +170,45 @@ const PanelGanancias = () => {
           </Row>
         </div>
 
-        <div className="d-flex flex-column justify-content-center my-5">
-          <h1 className="display-6">Pedidos de la Fecha: </h1>
+        <div className="d-flex flex-column flex-md-row gap-2 gap-md-0 justify-content-around my-5">
+          <div>
+            <Button
+              variant="danger"
+              className="text-white text-bold text-uppercase fw-bold w-100"
+              onClick={() => handleFilterClick("terminado")}
+            >
+              Pedidos Terminados
+            </Button>
+          </div>
+          <div>
+            <Button
+              variant="success"
+              className="text-white text-bold text-uppercase fw-bold w-100"
+              onClick={() => handleFilterClick("en proceso")}
+            >
+              Pedidos en Proceso
+            </Button>
+          </div>
+          <div>
+            <Button
+              variant="warning"
+              className="text-white text-bold text-uppercase fw-bold w-100"
+              onClick={() => handleFilterClick("pendiente")}
+            >
+              Pedidos Pendientes
+            </Button>
+          </div>
+        </div>
+
+        <div className="d-flex flex-column justify-content-center">
+          <div className="d-flex justify-content-between align-items-center">
+            <h1 className="display-4 ">Pedidos del Día</h1>
+            <Button variant="primary" onClick={resetearFiltros}>
+              <i className="bi bi-arrow-clockwise"></i>
+            </Button>
+          </div>
+
+          <hr />
 
           <div>
             <Table responsive striped bordered>
@@ -173,11 +222,30 @@ const PanelGanancias = () => {
                 </tr>
               </thead>
               <tbody>
-                {pedidos?.length > 0
-                  ? pedidos.map((pedido) => (
-                      <ItemPedidos key={pedido._id} pedido={pedido} />
-                    ))
-                  : null}
+                {filtroActivo &&
+                  pedidos.filter((pedido) => pedido.estado === filtrar)
+                    .length === 0 && (
+                    <p className="text-center fw-bold ">
+                      No hay pedidos que coincidan con el filtro seleccionado.
+                    </p>
+                  )}
+                {filtroActivo
+                  ? pedidos
+                      .filter((pedido) => pedido.estado === filtrar)
+                      .map((pedido) => (
+                        <ItemPedidos
+                          key={pedido._id}
+                          pedido={pedido}
+                          setPedidos={setPedidos}
+                        />
+                      ))
+                  : pedidos.map((pedido) => (
+                      <ItemPedidos
+                        key={pedido._id}
+                        pedido={pedido}
+                        setPedidos={setPedidos}
+                      />
+                    ))}
               </tbody>
             </Table>
           </div>
