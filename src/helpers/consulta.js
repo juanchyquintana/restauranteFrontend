@@ -14,3 +14,25 @@ export const crearConsulta = async (consultaNueva) => {
       console.log(error);
     }
   };
+
+  export const obtenerConsultas = async () => {
+    try {
+      const response = await fetch(`${restauranteURL}/consultas`);
+      const datos = await response.json();
+      return datos;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  export const borrarConsultaAPI = async (id) => {
+    try {
+      const respuesta = await fetch(`${restauranteURL}/consultas/${id}`, {
+        method: "DELETE",
+      });
+      return respuesta;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  

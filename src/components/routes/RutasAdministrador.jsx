@@ -5,6 +5,7 @@ import Error404 from "../pages/error404/Error404";
 import PanelUsuarios from "../pages/PanelUsuarios";
 import Cocina from "../pages/cocina/Cocina";
 import PanelGanancias from "../pages/PanelGanancias";
+import Consultas from "../pages/consultas/Consultas";
 
 const RutasAdministrador = () => {
   return (
@@ -24,6 +25,7 @@ const RutasAdministrador = () => {
         <Route exact path="/panel-usuarios" element={<PanelUsuarios />} />
         <Route exact path="/ganancias" element={<PanelGanancias />} />
         <Route exact path="/cocina" element={<Cocina />} />
+        <Route exact path="/consultas" element={<Consultas/>}/>
         <Route exact path="*" element={<Error404 />} />
       </Routes>
     </>

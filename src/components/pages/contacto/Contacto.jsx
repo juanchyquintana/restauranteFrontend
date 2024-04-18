@@ -79,6 +79,10 @@ const Contacto = () => {
                   value: 8,
                   message: "Debe ingresar como minimo 8 caracteres",
                 },
+                maxLength: {
+                  value: 254,
+                  message: "Debe ingresar como maximo 254 caracteres",
+                },
                 pattern: {
                   value: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i,
                   message:
