@@ -60,10 +60,10 @@ const ConsultaItem = ({ consulta, setConsultas }) => {
             {consulta.mensaje}
             </Card.Text>
         </div>
-        <div className="mt-3 mt-md-0 d-flex justify-content-md-around flex-column flex-sm-row flex-md-column text-center">
+        <div className="mt-3 mt-md-0 d-flex justify-content-md-around flex-column">
             <Button 
                 variant="primary" 
-                className="d-flex align-items-center mb-md-2 justify-content-center"
+                className="d-flex align-items-center  justify-content-center"
                 onClick={abrirMail}
             >
                 <p className="m-0">
@@ -73,7 +73,7 @@ const ConsultaItem = ({ consulta, setConsultas }) => {
             </Button>
             <Button 
                 variant="danger" 
-                className="d-flex align-items-center mt-2 justify-content-center"
+                className="d-flex align-items-center mt-3 justify-content-center"
                 onClick={borrarConsulta}
             >
                 <p className="m-0">
