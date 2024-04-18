@@ -60,20 +60,20 @@ const ConsultaItem = ({ consulta, setConsultas }) => {
             {consulta.mensaje}
             </Card.Text>
         </div>
-        <div className="d-flex flex-column flex-sm-row">
+        <div className="mt-3 mt-md-0 d-flex justify-content-md-around flex-column flex-sm-row flex-md-column text-center">
             <Button 
                 variant="primary" 
-                className="mx-auto mx-md-2 mt-3 mt-md-0 align-self-center d-flex align-align-items-center"
+                className="d-flex align-items-center mb-md-2 justify-content-center"
                 onClick={abrirMail}
             >
                 <p className="m-0">
                     Responder 
-                </p>  
-                <PiEnvelope className="fs-5 ms-1 align-self-center"/>
+                </p>   
+                <PiEnvelope className="fs-5 ms-1 align-self-center justify-content-center"/>
             </Button>
             <Button 
                 variant="danger" 
-                className="mx-auto mx-md-2 mt-3 mt-md-0 align-self-center d-flex align-align-items-center"
+                className="d-flex align-items-center mt-2 justify-content-center"
                 onClick={borrarConsulta}
             >
                 <p className="m-0">
