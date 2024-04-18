@@ -1,8 +1,9 @@
 import bannerContacto from "../../../assets/chicosConversando.jpg";
 import { Form, Button, Container } from "react-bootstrap";
-import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import "./contacto.css";
+import { crearConsulta } from "../../../helpers/consulta";
+import Swal from "sweetalert2/src/sweetalert2";
 
 const Contacto = () => {
   const {
@@ -12,10 +13,17 @@ const Contacto = () => {
     formState: { errors },
   } = useForm();
 
-  const navegacion = useNavigate();
-
-  const enviarFormulario = () => {
-    navegacion("/enviar-email");
+  
+  const enviarFormulario = async(consulta) => {
+    consulta.fecha = new Date().toISOString();
+    const respuesta = await crearConsulta(consulta);
+    if(respuesta.status === 201){
+      Swal.fire({
+        title: "¡Consulta enviada!",
+        text: "Su consulta fue enviada correctamente. Te responderemos lo antes posible.",
+        icon: "success",
+      });
+    }
     reset();
   };
 
@@ -55,11 +63,9 @@ const Contacto = () => {
                 },
               })}
             />
-            {errors.nombre && (
-              <Form.Text className="text-danger">
-                Este campo es requerido.
-              </Form.Text>
-            )}
+            <Form.Text className="text-danger">
+               {errors.nombre?.message}
+            </Form.Text>
           </Form.Group>
 
           <Form.Group controlId="formEmail" className="mb-3">
@@ -74,17 +80,15 @@ const Contacto = () => {
                   message: "Debe ingresar como minimo 8 caracteres",
                 },
                 pattern: {
-                  value: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/,
+                  value: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i,
                   message:
-                    "Debe ingresar una email valido (alguien@algunlugar.es)",
+                    "Debe ingresar una email valido (alguien@algunlugar.com)",
                 },
               })}
             />
-            {errors.email && (
-              <Form.Text className="text-danger">
-                Este campo es requerido.
-              </Form.Text>
-            )}
+            <Form.Text className="text-danger">
+               {errors.email?.message}
+            </Form.Text>
           </Form.Group>
 
           <Form.Group controlId="formMessage" className="mb-3">
@@ -92,7 +96,7 @@ const Contacto = () => {
             <Form.Control
               as="textarea"
               rows={3}
-              name="message"
+              name="mensaje"
               {...register("mensaje", {
                 required: "El mensaje es obligatorio",
                 minLength: {
@@ -100,16 +104,14 @@ const Contacto = () => {
                   message: "El mensaje debe tener como minimo 10 caracteres",
                 },
                 maxLength: {
-                  value: 1000,
+                  value: 500,
                   message: "El mensaje debe tener como maximo 1000 caracteres",
                 },
               })}
             />
-            {errors.mensaje && (
-              <Form.Text className="text-danger">
-                Este campo es requerido.
-              </Form.Text>
-            )}
+            <Form.Text className="text-danger">
+               {errors.mensaje?.message}
+            </Form.Text>
           </Form.Group>
 
           <div className="text-end">
