@@ -50,7 +50,7 @@ const Contacto = () => {
               type="text"
               name="name"
               {...register("nombre", {
-                required: "El nombre del producto es obligatorio",
+                required: "El nombre es obligatorio.",
                 minLength: {
                   value: 2,
                   message:
@@ -61,6 +61,10 @@ const Contacto = () => {
                   message:
                     "Debe ingresar como maximo 50 caracteres para el nombre",
                 },
+                pattern:{
+                  value: /^[a-zA-Z\s]*$/,
+                  message: "Debe contener solo letras"
+                }
               })}
             />
             <Form.Text className="text-danger">
@@ -74,7 +78,7 @@ const Contacto = () => {
               type="email"
               name="email"
               {...register("email", {
-                required: "La imagen es obligatoria",
+                required: "el correo es obligatorio.",
                 minLength: {
                   value: 8,
                   message: "Debe ingresar como minimo 8 caracteres",
@@ -102,7 +106,7 @@ const Contacto = () => {
               rows={3}
               name="mensaje"
               {...register("mensaje", {
-                required: "El mensaje es obligatorio",
+                required: "El mensaje es obligatorio.",
                 minLength: {
                   value: 10,
                   message: "El mensaje debe tener como minimo 10 caracteres",
