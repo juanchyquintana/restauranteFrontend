@@ -19,7 +19,12 @@ const MisPedidos = () => {
   const getPedidos = async () => {
     try {
       const respuesta = await obtenerPedidos();
-      const productosEntradas = respuesta.filter(
+      const pedidosOrdenados = [...respuesta].sort((a, b) => {
+        const fechaA = new Date(b.fecha);
+        const fechaB = new Date(a.fecha);
+        return fechaA - fechaB;
+      });
+      const productosEntradas = pedidosOrdenados.filter(
         (pedido) => pedido.usuario?._id === usuario.id
       );
       setPedidos(productosEntradas);
@@ -33,7 +38,7 @@ const MisPedidos = () => {
     const pedidoEstado = copiaPedidos.find((pedido) => {
       return pedido._id === id;
     });
-    if (pedidoEstado.estado === 'pendiente'){
+    if (pedidoEstado.estado === "pendiente") {
       Swal.fire({
         title: "¿Cancelar pedido?",
         showDenyButton: true,
@@ -74,7 +79,8 @@ const MisPedidos = () => {
       Swal.fire({
         position: "center",
         icon: "error",
-        title: "El pedido no se puede cancelar. Pasaron 10 min o ya esta en proceso/terminado.",
+        title:
+          "El pedido no se puede cancelar. Pasaron 10 min o ya esta en proceso/terminado.",
         showConfirmButton: true,
       });
     }
@@ -110,7 +116,10 @@ const MisPedidos = () => {
             <>
               {pedidos?.map((pedido, i) => (
                 <div className="mb-3 mb-md-4 col-md-6 col-lg-4" key={i}>
-                  <MisPedirosCard pedido={pedido} cancelarPedido={cancelarPedido}/>
+                  <MisPedirosCard
+                    pedido={pedido}
+                    cancelarPedido={cancelarPedido}
+                  />
                 </div>
               ))}
             </>
