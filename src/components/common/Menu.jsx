@@ -95,6 +95,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                           <Link to="/administrador/panel-usuarios" className='text-black link-underline-opacity-0 dropdown-item text-center nav-link'>Panel Usuario</Link>
                           <Link to="/administrador/ganancias" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Ganancias</Link>
                           <Link to="/administrador/cocina" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Cocina</Link>
+                          <Link to={"/administrador/consultas"} className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Consultas</Link>
                       </NavDropdown>
                       <Button className="text-light nav-link" variant="link" onClick={logout}>
                         <i className="bi bi-box-arrow-left fs-2 iconos-nav"></i> Cerrar sesión
