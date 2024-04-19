@@ -4,7 +4,7 @@ import { editarPedido, obtenerPedidos } from "../../helpers/pedidos";
 import { useEffect, useState } from "react";
 import banner from "../../assets/cocina/banner-cocina.jpg";
 import MisPedirosCard from "./MisPedirosCard";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const MisPedidos = () => {
@@ -38,9 +38,9 @@ const MisPedidos = () => {
     const pedidoEstado = copiaPedidos.find((pedido) => {
       return pedido._id === id;
     });
-    const fechaActual = new Date()
-    const fechaPedido = new Date(pedidoEstado.fecha)
-    const tiempoTranscurrido = fechaActual - fechaPedido
+    const fechaActual = new Date();
+    const fechaPedido = new Date(pedidoEstado.fecha);
+    const tiempoTranscurrido = fechaActual - fechaPedido;
     if (pedidoEstado.estado === "pendiente" && fechaPedido < 600000) {
       Swal.fire({
         title: "¿Cancelar pedido?",
@@ -110,13 +110,13 @@ const MisPedidos = () => {
       </div>
       <Container>
         <div className="row">
-          <p className="mb-4 fs-4">
-            <span className="fw-bold">Importante:</span> Un pedido solo se puede
-            cancelar si aún no pasaron 10 minutos de haberlo hecho y no
-            comenzaron a cocinarlo (En proceso).
-          </p>
           {pedidos?.length > 0 ? (
             <>
+              <p className="mb-4 fs-4">
+                <span className="fw-bold">Importante:</span> Un pedido solo se
+                puede cancelar si aún no pasaron 10 minutos de haberlo hecho y
+                no comenzaron a cocinarlo (En proceso).
+              </p>
               {pedidos?.map((pedido, i) => (
                 <div className="mb-3 mb-md-4 col-md-6 col-lg-4" key={i}>
                   <MisPedirosCard
@@ -129,6 +129,9 @@ const MisPedidos = () => {
           ) : (
             <div>
               <h2>No hay pedidos.</h2>
+              <Link to="/menu" className="mt-3 btn btn-primary">
+                Volver al menú
+              </Link>
             </div>
           )}
         </div>
