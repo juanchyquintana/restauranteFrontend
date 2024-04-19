@@ -12,14 +12,29 @@ import Nosotros from "./components/pages/nosotros/Nosotros";
 import Carrito from "./components/pages/carrito/Carrito";
 import SeccionMenu from "./components/pages/menus/SeccionMenu";
 import RutasAdministrador from "./components/routes/RutasAdministrador";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RutasProtegidas from "./components/routes/RutasProtegidas";
 import DetalleProducto from "./components/pages/menus/DetalleProducto";
 import MisPedidos from "./components/pages/MisPedidos";
+import WhatsappIcono from "./components/pages/placas/WhatsappIcono.jsx";
 
 function App() {
   const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || {};
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuario);
+  const [mostrarIcono, setMostrarIcono] = useState(true);
+
+  useEffect(() => {
+    const verificarStatusAdmin = async () => {
+      try {
+        const esAdmin = usuarioLogueado.tipoUsuario === "admin";
+        setMostrarIcono(!esAdmin);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    verificarStatusAdmin();
+  }, [usuarioLogueado]);
 
   return (
     <>
@@ -56,7 +71,9 @@ function App() {
           <Route path="*" element={<Error404 />} />
         </Routes>
         <Footer />
+        {mostrarIcono && <WhatsappIcono/>}
       </BrowserRouter>
+      
     </>
   );
 }

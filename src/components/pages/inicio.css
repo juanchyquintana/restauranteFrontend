@@ -17,9 +17,15 @@
   object-fit: contain;
 }
 
-.banner1, .banner2, .banner3, .banner4{
+.banner1, .banner2, .banner3 {
   height: 100%;
   width: 100%;
+  object-fit: cover;
+}
+.banner4{
+  height: 110%;
+  width: 100%;
+  z-index: -1!important;
   object-fit: cover;
 }
 
