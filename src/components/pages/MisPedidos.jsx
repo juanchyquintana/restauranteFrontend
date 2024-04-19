@@ -38,7 +38,10 @@ const MisPedidos = () => {
     const pedidoEstado = copiaPedidos.find((pedido) => {
       return pedido._id === id;
     });
-    if (pedidoEstado.estado === "pendiente") {
+    const fechaActual = new Date()
+    const fechaPedido = new Date(pedidoEstado.fecha)
+    const tiempoTranscurrido = fechaActual - fechaPedido
+    if (pedidoEstado.estado === "pendiente" && fechaPedido < 600000) {
       Swal.fire({
         title: "¿Cancelar pedido?",
         showDenyButton: true,
