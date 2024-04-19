@@ -13,8 +13,7 @@ const ItemUsuarios = ({ usuario, setUsuarios }) => {
   const [estadoModificado, setEstadoModificado] = useState(false);
 
   const usuarioBorrar = () => {
-    const admin = { tipoUsuario: "admin" };
-    if (tipoUsuario === "admin" && tipoUsuario === admin.tipoUsuario) {
+    if (tipoUsuario === "admin") {
       Swal.fire({
         title: "Error",
         text: "No puedes eliminar a otro Administrador.",
@@ -41,16 +40,16 @@ const ItemUsuarios = ({ usuario, setUsuarios }) => {
             text: `Has eliminado al Usuario: ${nombre}`,
             icon: "success",
           });
-        }
-
-        const listadoUsuarios = await leerUsuariosAPI();
-        setUsuarios(listadoUsuarios);
-      } else {
+          const listadoUsuarios = await leerUsuariosAPI();
+          setUsuarios(listadoUsuarios);
+                
+        } else {
         Swal.fire({
           title: "Ocurrió un Error",
           text: `El Usuario ${nombre} no fue eliminado. Intenta nuevamente.`,
           icon: "error",
-        });
+          });
+        }
       }
     });
   };
