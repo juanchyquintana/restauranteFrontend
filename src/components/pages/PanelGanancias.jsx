@@ -57,7 +57,7 @@ const PanelGanancias = () => {
 
     await Swal.fire({
       title: "Caja cerrada",
-      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${totalGanancias}\n Cantidad de pedidos: ${cantidadPedidos}`,
+      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${totalGanancias}\n Cantidad de pedidos: ${cantidadPedidosTerminados}`,
       icon: "success",
       confirmButtonText: "Aceptar",
     });
