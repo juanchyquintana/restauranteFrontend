@@ -1,4 +1,8 @@
-import { actualizarEstado, borrarUsuario, leerUsuariosAPI } from "../helpers/usuario";
+import {
+  actualizarEstado,
+  borrarUsuario,
+  leerUsuariosAPI,
+} from "../helpers/usuario";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 import Swal from "sweetalert2";
@@ -6,17 +10,27 @@ import Swal from "sweetalert2";
 const ItemUsuarios = ({ usuario, setUsuarios }) => {
   const { email, estado, nombre, tipoUsuario, _id } = usuario;
   const [estadoUsuario, setEstadoUsuario] = useState(estado);
-  const [estadoModificado, setEstadoModificado] = useState(false)
+  const [estadoModificado, setEstadoModificado] = useState(false);
 
   const usuarioBorrar = () => {
+    const admin = { tipoUsuario: "admin" };
+    if (tipoUsuario === "admin" && tipoUsuario === admin.tipoUsuario) {
+      Swal.fire({
+        title: "Error",
+        text: "No puedes eliminar a otro Administrador.",
+        icon: "error",
+      });
+      return;
+    }
+
     Swal.fire({
-      title: "¿Estás seguro de eliminar el producto?",
-      text: "No podrás revertir este proceso",
+      title: `¿Estás seguro de eliminar al Usuario: ${nombre}?`,
+      text: "No podrás revertir este paso...",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#FF7A0C",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Borrar",
+      confirmButtonText: "Eliminar",
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -43,9 +57,9 @@ const ItemUsuarios = ({ usuario, setUsuarios }) => {
 
   const cambiarEstadoUsuario = async (e) => {
     const nuevoEstado = e.target.value;
-    setEstadoUsuario(nuevoEstado)
-    setEstadoModificado(true)
-  }
+    setEstadoUsuario(nuevoEstado);
+    setEstadoModificado(true);
+  };
 
   const guardarCambios = async () => {
     const respuesta = await actualizarEstado(_id, estadoUsuario);
@@ -56,24 +70,21 @@ const ItemUsuarios = ({ usuario, setUsuarios }) => {
         icon: "error",
       });
     } else {
-      setEstadoModificado(false)
+      setEstadoModificado(false);
       Swal.fire({
         title: "Estado Modificado",
         text: `El estado del ${nombre} fue modifcado correctamente!`,
         icon: "success",
       });
     }
-  }
+  };
 
   return (
     <tr>
       <td>{nombre}</td>
       <td>{email}</td>
       <td>
-        <Form.Select
-          value={estadoUsuario}
-          onChange={cambiarEstadoUsuario}
-        >
+        <Form.Select value={estadoUsuario} onChange={cambiarEstadoUsuario}>
           <option value="activo">Activo</option>
           <option value="inactivo">Inactivo</option>
         </Form.Select>
@@ -84,7 +95,9 @@ const ItemUsuarios = ({ usuario, setUsuarios }) => {
           <button className="btn btn-danger">
             <i className="bi bi-trash-fill" onClick={usuarioBorrar}></i>
           </button>
-          <button className={`btn btn-success ${estadoModificado ? "" : "disabled"}`}>
+          <button
+            className={`btn btn-success ${estadoModificado ? "" : "disabled"}`}
+          >
             <i className="bi bi-check2-circle" onClick={guardarCambios}></i>
           </button>
         </div>
