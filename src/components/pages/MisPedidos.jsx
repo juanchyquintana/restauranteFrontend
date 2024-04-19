@@ -44,6 +44,7 @@ const MisPedidos = () => {
         </div>
         <Container>
           <div className="row">
+            <p className="mb-4 fs-4"><span className="fw-bold">Importante:</span> Un pedido solo se puede cancelar si aún no pasaron 10 minutos de haberlo hecho y no comenzaron a cocinarlo (En proceso).</p>
             {pedidos?.length > 0 ? (
               <>
                 {pedidos?.map((pedido, i) =>

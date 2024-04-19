@@ -24,13 +24,14 @@ const MisPedirosCard = ({ pedido }) => {
 
   const opcionesHora = {
     hour: "numeric",
-    minute: "numeric"
+    minute: "numeric",
   };
   const horaFormateada = fecha.toLocaleTimeString("es-ES", opcionesHora);
 
   return (
     <Card className="rounded-0 h-100" id="cardContainer">
-      <Card.Body className="">
+      <Card.Body className="d-flex flex-column justify-content-between">
+        <div>
         <Card.Title className="d-flex gap-2 flex-wrap">
           <p className={`p-2 rounded-1 m-0`}>
             {pedido?.tipoEntrega.toUpperCase()}
@@ -64,8 +65,13 @@ const MisPedirosCard = ({ pedido }) => {
             <></>
           )}
         </ul>
-        <p className="m-0">Pedido realizado el {fechaFormateada} {horaFormateada}hs</p>
-        <p className="m-0 fw-bold">Total: ${pedido.total}</p>
+        </div>
+        <div className="">
+          <p className="m-0">
+            Pedido realizado el {fechaFormateada} {horaFormateada}hs
+          </p>
+          <p className="m-0 fw-bold">Total: ${pedido.total}</p>
+        </div>
       </Card.Body>
 
       <Card.Footer className="d-flex justify-content-end">
