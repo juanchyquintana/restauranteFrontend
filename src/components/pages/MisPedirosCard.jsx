@@ -1,6 +1,7 @@
 import { Card, Button } from "react-bootstrap";
 import "../pages/cocina/cardProdCocina.css";
-const MisPedirosCard = ({ pedido }) => {
+const MisPedirosCard = ({ pedido, cancelarPedido }) => {
+
   const estiloEstado = (estado) => {
     if (estado === "pendiente" || estado === "enviado") {
       return "bg-warning";
@@ -12,6 +13,13 @@ const MisPedirosCard = ({ pedido }) => {
       return "bg-danger";
     }
   };
+
+  const cancelarPedidoEstilo = (estado) => {
+    if (estado === 'cancelado'){
+      return 'disabled'
+    }
+  }
+
 
   const fecha = new Date(pedido.fecha);
   const opcionesFecha = {
@@ -75,7 +83,7 @@ const MisPedirosCard = ({ pedido }) => {
       </Card.Body>
 
       <Card.Footer className="d-flex justify-content-end">
-        <Button>Cancelar Pedido</Button>
+        <Button onClick={() => cancelarPedido(pedido._id)}>Cancelar Pedido</Button>
       </Card.Footer>
     </Card>
   );
