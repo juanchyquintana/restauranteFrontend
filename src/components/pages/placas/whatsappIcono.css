@@ -5,3 +5,36 @@
     right: 10px;
     z-index: 9999;
   }
+
+  @media screen and (max-width: 280px){
+    .whspIcono{
+      width: 31%;
+      bottom: 5px;
+      right: 1px;
+    }
+  }
+  @media screen and (min-width: 280px) and (max-width: 576px) {
+    .whspIcono{
+      width: 24%;
+      bottom: 5px;
+      right: -1px;
+    }
+  }
+  @media screen and (min-width: 577px) and (max-width: 1024px) {
+    .whspIcono{
+      width: 21%;
+      bottom: 5px;
+      right: -10px;
+    }
+  }
+  @media screen and (min-width: 1025px) and (max-width: 1400px) {
+    .whspIcono{
+      width: 1%;
+      bottom: 5px;
+      right: -14px;
+    }
+  }
+  @media screen and (min-width: 1401px) {
+    
+  }
+  
