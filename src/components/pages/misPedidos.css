@@ -1,0 +1,20 @@
+.btnVolver{
+    padding-right: 30px;
+}
+
+@media screen and (max-width: 280px) {
+    .btnVolver{
+        display: flex;
+        justify-content: center;
+        padding-right: 0px;
+        
+    }
+}
+@media screen and (min-width: 280px) and (max-width: 576px) {
+    .btnVolver{
+        display: flex;
+        justify-content: center;
+        padding-right: 0px;
+        
+    }
+}
