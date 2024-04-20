@@ -20,13 +20,16 @@ import MisPedidos from "./components/pages/MisPedidos";
 function App() {
   const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || {};
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuario);
-
+  const existePedido = JSON.parse(sessionStorage.getItem("pedido"))
+  const cantidadPedido = existePedido?  existePedido.productos.length : 0
+  const [carritoNumero, setCarritoNumero]= useState(cantidadPedido || 0)
   return (
     <>
       <BrowserRouter>
         <Menu 
           usuarioLogueado={usuarioLogueado}
           setUsuarioLogueado={setUsuarioLogueado}
+          carritoNumero ={carritoNumero}
         ></Menu>
         <Routes>
           <Route exact path="/" element={<Inicio />} />
@@ -45,9 +48,9 @@ function App() {
               </RutasProtegidas>
             }
           />
-          <Route exact path="/menu" element={<SeccionMenu />} />
+          <Route exact path="/menu" element={<SeccionMenu carritoNumero={carritoNumero} setCarritoNumero={setCarritoNumero} />} />
           
-          <Route exact path="/carrito" element={<Carrito />} />
+          <Route exact path="/carrito" element={<Carrito setCarritoNumero={setCarritoNumero}/>} />
           <Route exact path="/contacto" element={<Contacto />} />
           <Route exact path="/reseñas" element={<Reviews />} />
           <Route exact path="/nosotros" element={<Nosotros />} />
