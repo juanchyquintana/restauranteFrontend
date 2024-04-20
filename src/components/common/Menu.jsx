@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button'
 import brandImg from '../pages/imagenLogo/lotusblanco.png'
 import Swal from 'sweetalert2/src/sweetalert2';
 
-const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
+const Menu = ({ usuarioLogueado, setUsuarioLogueado, carritoNumero }) => {
   const [scrolled, setScrolled] = useState(false);
   const [windowSize, setWindowSize] = useState(false)
 
@@ -109,6 +109,9 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
                       </Link>  
                       <Link className='text-light nav-link' to="/carrito">
                         Carrito
+                        {
+                          carritoNumero !== 0 && <span className="badge text-bg-danger ms-2" >{carritoNumero}</span>
+                        }
                       </Link> 
                       <Button className="text-light nav-link" variant="link" onClick={logout}>
                       <i className="bi bi-box-arrow-left fs-2 iconos-nav"></i> Cerrar sesión
