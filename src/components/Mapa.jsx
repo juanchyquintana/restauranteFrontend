@@ -16,6 +16,15 @@ const Mapa = ({ datos, actualizarCarrito }) => {
     }
   };
 
+  const redIcon = new L.icon({
+    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+  })
+
   useEffect(() => {
     if (datos.delivery) {
       const mapa = L.map("mapa").setView([lat, lng], 15);
@@ -27,6 +36,7 @@ const Mapa = ({ datos, actualizarCarrito }) => {
       }).addTo(mapa);
 
       marker = new L.marker([lat, lng], {
+        icon: redIcon,
         draggable: true,
         autoPan: true,
       }).addTo(mapa);

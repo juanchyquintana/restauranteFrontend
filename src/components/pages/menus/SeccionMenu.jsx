@@ -11,7 +11,7 @@ import Card from "react-bootstrap/Card";
 import "./seccionMenu.css";
 import { Link } from "react-router-dom";
 
-const SeccionMenu = () => {
+const SeccionMenu = ({carritoNumero, setCarritoNumero}) => {
   const [productos, setProductos] = useState([]);
   const usuario = JSON.parse(sessionStorage.getItem("usuarioLotus")) || false;
 
@@ -79,6 +79,7 @@ const SeccionMenu = () => {
 
       pedido.total = pedido.total + parseInt(precio) * cantidadIngresada;
       sessionStorage.setItem("pedido", JSON.stringify(pedido));
+      setCarritoNumero(pedido.productos.length)
     } else {
       Swal.fire({
         position: "center",
@@ -147,6 +148,7 @@ const SeccionMenu = () => {
 
   useEffect(() => {
     cargarProductos();
+    setCarritoNumero(pedido.productos.length)
   }, []);
 
   return (

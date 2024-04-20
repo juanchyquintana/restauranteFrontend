@@ -8,7 +8,7 @@ import { crearPedido } from "../../../helpers/pedidos";
 import Swal from "sweetalert2/src/sweetalert2.js";
 import { Link, useNavigate } from "react-router-dom";
 
-const Carrito = () => {
+const Carrito = ( { setCarritoNumero } ) => {
   const [datos, setDatos] = useState({
     lat: -26.8301695,
     lng: -65.2044388,
@@ -35,6 +35,7 @@ const Carrito = () => {
           showConfirmButton: true,
         });
         sessionStorage.removeItem("pedido");
+        setCarritoNumero(0)
         pedido = false;
         navegar("/menu");
       } else {
@@ -65,6 +66,7 @@ const Carrito = () => {
           });
           sessionStorage.removeItem("pedido");
           pedido = false;
+          setCarritoNumero(0)
           navegar("/menu");
         } else {
           Swal.fire({
@@ -173,8 +175,10 @@ const Carrito = () => {
         console.log(error);
       }
     }
+    setCarritoNumero(productosArray.length) 
     setProductos(productosArray);
   };
+    
 
   useEffect(() => {
     setPedidoState(pedido);
