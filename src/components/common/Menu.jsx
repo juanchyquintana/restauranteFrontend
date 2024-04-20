@@ -107,7 +107,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado, carritoNumero }) => {
                       <Link className='text-light nav-link' to="/mis-pedidos">
                         Mis pedidos
                       </Link>  
-                      <Link className='text-light nav-link position-relative' to="/carrito">
+                      <Link className='text-light nav-link' to="/carrito">
                         Carrito
                         {
                           carritoNumero !== 0 && <span className="badge text-bg-danger ms-2" >{carritoNumero}</span>
