@@ -23,6 +23,7 @@ const SeccionMenu = ({carritoNumero, setCarritoNumero}) => {
     tipoEntrega: "bar",
     telefonoContacto: "",
     notas: "",
+    delivery: false,
     total: 0,
   };
 
