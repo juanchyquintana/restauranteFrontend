@@ -24,7 +24,7 @@ const Carrito = ( { setCarritoNumero } ) => {
   const realizarPedido = async (e) => {
     e.preventDefault();
     const nuevoObjeto = crearObjetoPedido();
-    if (!datos.delivery) {
+    if (!pedidoState.delivery) {
       nuevoObjeto.tipoEntrega = "bar";
       const infoPedido = await postPedido(nuevoObjeto);
       if (infoPedido.status === 201) {
