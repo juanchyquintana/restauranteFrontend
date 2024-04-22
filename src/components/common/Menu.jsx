@@ -93,7 +93,7 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado, carritoNumero }) => {
                       <NavDropdown title="Administrador" id="navbarScrollingDropdown">
                           <Link to="/administrador/" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Agregar productos</Link>
                           <Link to="/administrador/panel-usuarios" className='text-black link-underline-opacity-0 dropdown-item text-center nav-link'>Panel Usuario</Link>
-                          <Link to="/administrador/ganancias" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Ganancias</Link>
+                          <Link to="/administrador/ganancias" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Caja</Link>
                           <Link to="/administrador/cocina" className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Cocina</Link>
                           <Link to={"/administrador/consultas"} className='text-black link link-underline-opacity-0 dropdown-item text-center nav-link'>Consultas</Link>
                       </NavDropdown>
