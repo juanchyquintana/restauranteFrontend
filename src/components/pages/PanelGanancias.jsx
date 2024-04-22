@@ -1,5 +1,11 @@
 import { Button, Container, Row, Table } from "react-bootstrap";
-import { cerrarCaja, obtenerPedidos } from "../../helpers/pedidos.js";
+import {
+  cerrarCaja,
+  crearCaja,
+  editarCaja,
+  obtenerCajaPorFecha,
+  obtenerPedidos,
+} from "../../helpers/pedidos.js";
 import { useEffect, useState } from "react";
 import bambu from "../../assets/tonyMontana.jpg";
 import banner from "../../assets/chicosConversando.jpg";
@@ -54,31 +60,43 @@ const PanelGanancias = () => {
 
   const cerrarCajaHandler = async () => {
     const fechaFormateada = formatearFecha(fecha);
-
-    await Swal.fire({
-      title: "Caja cerrada",
-      text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${totalGanancias}\n Cantidad de pedidos: ${cantidadPedidosTerminados}`,
-      icon: "success",
-      confirmButtonText: "Aceptar",
-    });
+    const fechaFiltro = new Date().toISOString();
 
     const datosCaja = {
       ganancias: totalGanancias,
       cantidadPedidos: cantidadPedidosTerminados,
-      fechaCierreCaja: fecha.getTime(),
+      fechaCierre: fecha.getTime(),
     };
 
     try {
-      await cerrarCaja(datosCaja);
+      const respuestaFiltro = await obtenerCajaPorFecha(fechaFiltro);
+
+      if (!respuestaFiltro.data) {
+        const nuevaCaja = {
+          fechaCierre: fechaFiltro,
+          ganancias: datosCaja.ganancias,
+          cantidadPedidos: datosCaja.cantidadPedidos,
+        };
+        await crearCaja(nuevaCaja, fechaFiltro);
+      } else {
+        await editarCaja(respuestaFiltro.data._id, datosCaja);
+      }       
+
+      await Swal.fire({
+        title: "Caja cerrada",
+        text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${totalGanancias}\n Cantidad de pedidos: ${cantidadPedidosTerminados}`,
+        icon: "success",
+        confirmButtonText: "Aceptar",
+      });
+
       localStorage.setItem("cajaCerrada", "true");
       setCajaCerrada(true);
+      setGanancias(0);
+      setCantidadPedidos(0);
+      setPedidos([]);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-
-    setGanancias(0);
-    setCantidadPedidos(0);
-    setPedidos([]);
   };
 
   const abrirCajaHandler = () => {

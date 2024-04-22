@@ -67,3 +67,55 @@ export const filtrarPedidosPorUsuario = async (id) => {
     console.log(error)
   }
 }
+
+export const obtenerCajaPorFecha = async (fechaFiltro) => {
+  try {
+    if (!fechaFiltro) {
+      throw new Error('Fecha de filtro no especificada');
+    }
+
+    const respuesta = await fetch(`${RESTAURANTE_URL}/caja?fecha=${fechaFiltro}`);
+    return await respuesta.json();
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function crearCaja(datosCaja) {
+  try {
+    const fechaActual = new Date();
+    const fechaFiltro = fechaActual.toISOString();
+
+    const respuesta = await fetch(`${RESTAURANTE_URL}/api/caja`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioLotus")).token,
+      },
+      body: JSON.stringify({
+        ...datosCaja,
+        fecha: fechaFiltro, // Incluye la fecha en el cuerpo de la solicitud
+      }),
+    });
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+export async function editarCaja(id, datosCaja) {
+  try {
+    const respuesta = await fetch(`${RESTAURANTE_URL}/caja/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "x-token": JSON.parse(sessionStorage.getItem("usuarioLotus")).token,
+      },
+      body: JSON.stringify(datosCaja),
+    });
+    return respuesta;
+  } catch (error) {
+    console.log(error);
+  }
+}
