@@ -75,7 +75,8 @@ export const obtenerCajaPorFecha = async (fechaFiltro) => {
     }
 
     const respuesta = await fetch(`${RESTAURANTE_URL}/caja?fecha=${fechaFiltro}`);
-    return await respuesta.json();
+    
+    return respuesta;
   } catch (error) {
     console.log(error)
   }
@@ -83,9 +84,6 @@ export const obtenerCajaPorFecha = async (fechaFiltro) => {
 
 export async function crearCaja(datosCaja) {
   try {
-    const fechaActual = new Date();
-    const fechaFiltro = fechaActual.toISOString();
-
     const respuesta = await fetch(`${RESTAURANTE_URL}/api/caja`, {
       method: "POST",
       headers: {
@@ -94,15 +92,14 @@ export async function crearCaja(datosCaja) {
       },
       body: JSON.stringify({
         ...datosCaja,
-        fecha: fechaFiltro, // Incluye la fecha en el cuerpo de la solicitud
+        fecha: new Date().toISOString(),
       }),
     });
-    return respuesta;
+    return respuesta.json();
   } catch (error) {
     console.log(error);
   }
 }
-
 
 export async function editarCaja(id, datosCaja) {
   try {

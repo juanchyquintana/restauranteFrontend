@@ -24,17 +24,23 @@ const PanelGanancias = () => {
   const [filtrar, setFiltrar] = useState("all");
   const [filtroActivo, setFiltroActivo] = useState(false);
 
-  const totalGanancias = pedidos.reduce((total, pedido) => {
-    if (pedido.estado === "entregado" || pedido.estado === "terminado") {
-      return total + pedido.total;
-    }
-    return total;
-  }, 0);
+  useEffect(() => {
+    setGanancias(
+      pedidos.reduce((total, pedido) => {
+        if (pedido.estado === "entregado" || pedido.estado === "terminado") {
+          return total + pedido.total;
+        }
+        return total;
+      }, 0)
+    );
 
-  const pedidosTerminados = pedidos.filter(
-    (pedido) => pedido.estado === "terminado" || pedido.estado === "entregado"
-  );
-  const cantidadPedidosTerminados = pedidosTerminados.length;
+    setCantidadPedidos(
+      pedidos.filter(
+        (pedido) =>
+          pedido.estado === "terminado" || pedido.estado === "entregado"
+      )
+    );
+  }, [pedidos]);
 
   const obtenerPedidosDelDia = async () => {
     const pedidosDelDia = await obtenerPedidos();
@@ -63,45 +69,64 @@ const PanelGanancias = () => {
     const fechaFiltro = new Date().toISOString();
 
     const datosCaja = {
-      ganancias: totalGanancias,
-      cantidadPedidos: cantidadPedidosTerminados,
+      ganancias,
+      cantidadPedidos,
       fechaCierre: fecha.getTime(),
     };
 
     try {
       const respuestaFiltro = await obtenerCajaPorFecha(fechaFiltro);
-
-      if (!respuestaFiltro.data) {
-        const nuevaCaja = {
-          fechaCierre: fechaFiltro,
-          ganancias: datosCaja.ganancias,
-          cantidadPedidos: datosCaja.cantidadPedidos,
-        };
-        await crearCaja(nuevaCaja, fechaFiltro);
-      } else {
+      if (respuestaFiltro) {
         await editarCaja(respuestaFiltro.data._id, datosCaja);
-      }       
+        await Swal.fire({
+          title: "Caja cerrada",
+          text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${ganancias}\n Cantidad de pedidos: ${cantidadPedidos.length}`,
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
 
-      await Swal.fire({
-        title: "Caja cerrada",
-        text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${totalGanancias}\n Cantidad de pedidos: ${cantidadPedidosTerminados}`,
-        icon: "success",
-        confirmButtonText: "Aceptar",
-      });
-
-      localStorage.setItem("cajaCerrada", "true");
-      setCajaCerrada(true);
-      setGanancias(0);
-      setCantidadPedidos(0);
-      setPedidos([]);
+        localStorage.setItem("cajaCerrada", "true");
+        setCajaCerrada(true);
+        setGanancias(0);
+        setCantidadPedidos(0);
+        setPedidos([]);
+      } else {
+        await Swal.fire({
+          title: "Error!",
+          text: `No Existe una Caja con esa Fecha`,
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const abrirCajaHandler = () => {
-    localStorage.removeItem("cajaCerrada");
-    setCajaCerrada(false);
+  const abrirCajaHandler = async () => {
+    // const fechaFiltro = new Date().toISOString();
+    const datosCaja = {
+      ganancias,
+      cantidadPedidos,
+      fechaCierre: fecha.getTime(),
+    };
+
+    try {
+      const respuestaFiltro = await obtenerCajaPorFecha(datosCaja.fechaCierre);
+      if (respuestaFiltro) {
+        const nuevaCaja = {
+          fechaCierre: datosCaja.fechaCierre,
+          ganancias: datosCaja.ganancias,
+          cantidadPedidos: datosCaja.cantidadPedidos,
+        };
+        await crearCaja(nuevaCaja);
+      }
+      
+      localStorage.removeItem("cajaCerrada");
+      setCajaCerrada(false);
+    } catch (error) {
+      console.log(error);
+    }
 
     Swal.fire({
       title: "Caja Abierta",
@@ -110,7 +135,6 @@ const PanelGanancias = () => {
       confirmButtonText: "Aceptar",
     });
 
-    window.location.reload();
   };
 
   const handleFilterClick = (filter) => {
@@ -160,14 +184,12 @@ const PanelGanancias = () => {
                 <span className="fw-bold fs-3 text-uppercase">
                   {fechaActual}
                 </span>
-                <span className="fw-bold fs-3">${totalGanancias}</span>
+                <span className="fw-bold fs-3">${ganancias}</span>
               </div>
 
               <div className="d-flex flex-column justify-content-center mb-3">
                 <h1 className="fs-4">Total de Pedidos Terminados: </h1>
-                <span className="fw-bold fs-3">
-                  {cantidadPedidosTerminados}
-                </span>
+                <span className="fw-bold fs-3">{cantidadPedidos.length}</span>
               </div>
 
               <Button
