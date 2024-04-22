@@ -8,7 +8,7 @@ import { crearPedido } from "../../../helpers/pedidos";
 import Swal from "sweetalert2/src/sweetalert2.js";
 import { Link, useNavigate } from "react-router-dom";
 
-const Carrito = () => {
+const Carrito = ( { setCarritoNumero } ) => {
   const [datos, setDatos] = useState({
     lat: -26.8301695,
     lng: -65.2044388,
@@ -24,7 +24,7 @@ const Carrito = () => {
   const realizarPedido = async (e) => {
     e.preventDefault();
     const nuevoObjeto = crearObjetoPedido();
-    if (!datos.delivery) {
+    if (!pedidoState.delivery) {
       nuevoObjeto.tipoEntrega = "bar";
       const infoPedido = await postPedido(nuevoObjeto);
       if (infoPedido.status === 201) {
@@ -35,6 +35,7 @@ const Carrito = () => {
           showConfirmButton: true,
         });
         sessionStorage.removeItem("pedido");
+        setCarritoNumero(0)
         pedido = false;
         navegar("/menu");
       } else {
@@ -65,6 +66,7 @@ const Carrito = () => {
           });
           sessionStorage.removeItem("pedido");
           pedido = false;
+          setCarritoNumero(0)
           navegar("/menu");
         } else {
           Swal.fire({
@@ -80,7 +82,6 @@ const Carrito = () => {
 
   const crearObjetoPedido = () => {
     const fechaHoraActual = new Date();
-    fechaHoraActual.setHours(fechaHoraActual.getHours() - 3);
     const { usuario, productos, estado, total } = pedidoState;
     const nuevoObjeto = {
       usuario: usuario,
@@ -124,6 +125,8 @@ const Carrito = () => {
       ...prevState,
       [name]: value,
     }));
+    pedido[name]= value
+    sessionStorage.setItem("pedido", JSON.stringify(pedido))
   };
 
   const actualizarCarrito = (direccion, lat, lng) => {
@@ -173,8 +176,17 @@ const Carrito = () => {
         console.log(error);
       }
     }
+    setCarritoNumero(productosArray.length) 
     setProductos(productosArray);
   };
+    
+  const seleccionarDelivery = () => {
+    setDatos({ ...datos, delivery: !datos.delivery })
+    setPedidoState({ ...pedidoState, delivery: !pedidoState.delivery })
+    pedido.delivery = !pedido.delivery
+    setPedidoState(pedido)
+    sessionStorage.setItem("pedido", JSON.stringify(pedido))
+  }
 
   useEffect(() => {
     setPedidoState(pedido);
@@ -269,13 +281,11 @@ const Carrito = () => {
                 label="¿Delivery?"
                 className="fw-bold text-uppercase my-3 "
                 checked={datos.delivery}
-                onChange={() =>
-                  setDatos({ ...datos, delivery: !datos.delivery })
-                }
+                onChange={() => seleccionarDelivery()}
               />
             </div>
 
-            {datos.delivery ? (
+            {pedidoState.delivery ? (
               <>
                 <div className="">
                   <Form
@@ -301,7 +311,7 @@ const Carrito = () => {
                     <div>
                       <h4>Ubicá tu dirección en el mapa</h4>
                       <Mapa
-                        datos={datos}
+                        datos={pedidoState}
                         actualizarCarrito={actualizarCarrito}
                       />
                     </div>

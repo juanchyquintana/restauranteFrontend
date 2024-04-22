@@ -16,29 +16,6 @@ export const crearPedido = async (pedido) => {
   }
 };
 
-export const obtenerCantidadPedidosDia = async () => {
-  try {
-    const fechaHoy = new Date();
-    fechaHoy.setHours(0, 0, 0, 0);
-
-    const respuesta = await fetch(
-      `${RESTAURANTE_URL}/pedidos-dia?fecha=${fechaHoy.toISOString()}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "x-token": JSON.parse(sessionStorage.getItem("usuarioLotus")).token,
-        },
-      }
-    );
-    const data = await respuesta.json();
-    return data.cantidad;
-  } catch (error) {
-    console.log(error);
-    return 0;
-  }
-};
-
 export const cerrarCaja = async (datosCaja) => {
   try {
     const respuesta = await fetch(`${RESTAURANTE_URL}/cerrar-caja`, {
