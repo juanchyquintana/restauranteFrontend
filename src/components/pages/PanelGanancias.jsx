@@ -1,11 +1,10 @@
 import { Button, Container, Row, Table } from "react-bootstrap";
+import { obtenerPedidos } from "../../helpers/pedidos.js";
 import {
-  cerrarCaja,
+  obtenerCajaPorFecha,
   crearCaja,
   editarCaja,
-  obtenerCajaPorFecha,
-  obtenerPedidos,
-} from "../../helpers/pedidos.js";
+} from "../../helpers/caja.js";
 import { useEffect, useState } from "react";
 import bambu from "../../assets/tonyMontana.jpg";
 import banner from "../../assets/chicosConversando.jpg";
@@ -65,42 +64,44 @@ const PanelGanancias = () => {
   const fecha = new Date();
 
   const cerrarCajaHandler = async () => {
-    // const fechaFormateada = formatearFecha(fecha);
-    // const fechaFiltro = new Date().toISOString();
+    const fecha = new Date();
+    const dia = fecha.getDate();
+    const mes = fecha.getMonth() + 1;
+    const año = fecha.getFullYear();
+    const fechaFormateada = dia + "-" + mes + "-" + año;
 
-    // const datosCaja = {
-    //   ganancias,
-    //   cantidadPedidos,
-    //   fechaCierre: fecha.getTime(),
-    // };
+    const datosCaja = {
+      ganancias,
+      cantidadPedidos,
+      fechaCierre: fechaFormateada,
+    };
 
-    // try {
-    //   const respuestaFiltro = await obtenerCajaPorFecha(fechaFiltro);
-    //   if (respuestaFiltro) {
-    //     await editarCaja(respuestaFiltro.data._id, datosCaja);
-    //     await Swal.fire({
-    //       title: "Caja cerrada",
-    //       text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${ganancias}\n Cantidad de pedidos: ${cantidadPedidos.length}`,
-    //       icon: "success",
-    //       confirmButtonText: "Aceptar",
-    //     });
-
-    //     localStorage.setItem("cajaCerrada", "true");
-    //     setCajaCerrada(true);
-    //     setGanancias(0);
-    //     setCantidadPedidos(0);
-    //     setPedidos([]);
-    //   } else {
-    //     await Swal.fire({
-    //       title: "Error!",
-    //       text: `No Existe una Caja con esa Fecha`,
-    //       icon: "error",
-    //       confirmButtonText: "Aceptar",
-    //     });
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    try {
+      const respuestaFiltro = await obtenerCajaPorFecha(datosCaja.fechaCierre);
+      if (respuestaFiltro) {
+        await editarCaja(datosCaja.fechaCierre, datosCaja);
+        await Swal.fire({
+          title: "¡Caja Cerrada!",
+          text: `Caja Cerrada el ${fechaFormateada}. Ganancias del día: ${ganancias}\n Cantidad de pedidos: ${cantidadPedidos.length}`,
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
+        localStorage.setItem("cajaCerrada", "true");
+        setCajaCerrada(true);
+        setGanancias(0);
+        setCantidadPedidos(0);
+        setPedidos([]);
+      } else {
+        await Swal.fire({
+          title: "¡Error!",
+          text: `No Existe una Caja con esa Fecha`,
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const abrirCajaHandler = async () => {
@@ -116,32 +117,43 @@ const PanelGanancias = () => {
       fechaCierre: fechaFormateada,
     };
 
-    try {
-      const respuestaFiltro = await obtenerCajaPorFecha(datosCaja.fechaCierre);
-      console.log(respuestaFiltro)
+    if (!cajaCerrada) {
+      await Swal.fire({
+        title: "¡Advertencia!",
+        text: `La Caja del día ${fechaFormateada} ya se encuentra abierta.`,
+        icon: "warning",
+        confirmButtonText: "Aceptar",
+      });
+    } else {
+      try {
+        const respuestaFiltro = await obtenerCajaPorFecha(
+          datosCaja.fechaCierre
+        );
+        if (respuestaFiltro.status === 400) {
+          await crearCaja(datosCaja);
+          await Swal.fire({
+            title: "Caja Abierta",
+            text: `La Caja ha sido Abierta`,
+            icon: "success",
+            confirmButtonText: "Aceptar",
+          });
+        } else {
+          await Swal.fire({
+            title: "¡Información!",
+            text: `Ya se abrío previamente una Caja con la Fecha: ${fechaFormateada}. La próxima vez que cierres caja, se actualizará los datos.`,
+            icon: "info",
+            confirmButtonText: "Aceptar",
+          });
+          localStorage.setItem("cajaCerrada", "false");
+          window.location.reload();
+          return;
+        }
 
-      if (respuestaFiltro.status === 400) {
-        await crearCaja(datosCaja);
-        await Swal.fire({
-          title: "Caja Abierta",
-          text: `La Caja ha sido Abierta`,
-          icon: "success",
-          confirmButtonText: "Aceptar",
-        });
-      } else {
-        await Swal.fire({
-          title: "Error!",
-          text: `Ya existe una Caja con la Fecha: ${fechaFormateada}`,
-          icon: "error",
-          confirmButtonText: "Aceptar",
-        });
-        return;
+        localStorage.removeItem("cajaCerrada");
+        setCajaCerrada(false);
+      } catch (error) {
+        console.log(error);
       }
-
-      localStorage.removeItem("cajaCerrada");
-      setCajaCerrada(false);
-    } catch (error) {
-      console.log(error);
     }
   };
 
