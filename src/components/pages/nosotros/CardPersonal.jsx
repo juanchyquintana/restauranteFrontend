@@ -4,7 +4,7 @@ import { Button, Card } from "react-bootstrap";
 const CardPersonal = ({ imagenNosotros, nombre, reseña, linkedin, github }) => {
   return (
     <Card id="card-container">
-      <Card.Img variant="top" src={imagenNosotros} className="card-img" />
+      <Card.Img variant="top" src={imagenNosotros} className="card-img img-thumbnail" />
       <Card.Body>
         <Card.Title className="text-center">{nombre}</Card.Title>
         <Card.Text>{reseña}</Card.Text>

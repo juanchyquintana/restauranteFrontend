@@ -4,6 +4,7 @@ import { loginUsuario } from "../../helpers/usuario";
 import { Button, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
 import Swal from 'sweetalert2'
 import "./login.css";
 
@@ -15,6 +16,23 @@ const Login = ({ setUsuarioLogueado }) => {
   } = useForm();
 
   const navegacion = useNavigate();
+  
+  const [mostrarIcono, setMostrarIcono] = useState(true);
+
+  useEffect(() => {
+    const verificarStatusAdmin = async () => {
+      try {
+        const respuesta = await loginUsuario();
+        const datos = await respuesta.json();
+        const esAdmin = datos.tipoUsuario === "admin";
+        setMostrarIcono(!esAdmin);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    verificarStatusAdmin();
+  }, []);
 
   const login = async (usuario) => {
     try {

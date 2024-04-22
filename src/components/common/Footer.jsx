@@ -1,6 +1,14 @@
+import { Link } from "react-router-dom";
 import logoFooter from "../pages/imagenLogo/lotus.png";
 import logoExelencia from "../pages/imagenLogo/tripadvisor.png";
 import "./footer.css";
+
+const handleScrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
 
 const Footer = () => {
   return (
@@ -8,32 +16,56 @@ const Footer = () => {
       <div className="text-center ">
         <div className="row m-0 claseRow">
           <div className="col-12 col-sm-12 col-lg-4">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="contenedorLogo d-flex justify-content-center"
             >
-              <img src={logoFooter} alt="Logo" className="imgLogoFooter img-fluid " />
-            </a>
+              <img
+                src={logoFooter}
+                alt="Logo"
+                className="imgLogoFooter img-fluid "
+              />
+            </Link>
             <div>
               <ul className="listaFooter">
                 <li className="list-unstyled">
-                  <h4 className="text-light fw-bold tituloLista">Acerca de</h4>
+                  <h4 className="text-light fw-bold tituloLista">Secciones</h4>
                 </li>
                 <li className="mt-3 list-unstyled">
-                  <a
-                    href="#"
+                  <Link
+                    to="/"
+                    onClick={handleScrollToTop}
                     className="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light listaAyuda"
                   >
-                    Acerca de Nosotros
-                  </a>
+                    Inicio
+                  </Link>
                 </li>
                 <li className="mt-3 list-unstyled">
-                  <a
-                    href="#"
+                  <Link
+                    to="/menu"
+                    onClick={handleScrollToTop}
                     className="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light listaAyuda"
                   >
-                    Ayuda
-                  </a>
+                    Menu
+                  </Link>
+                </li>
+                <li className="mt-3 list-unstyled">
+                  <Link
+                    to="/contacto"
+                    onClick={handleScrollToTop}
+                    className="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light listaAyuda"
+                  >
+                    Contacto
+                  </Link>
+                </li>
+                <li className="mt-3 list-unstyled">
+                  <Link
+                    to="/nosotros"
+                    onClick={handleScrollToTop}
+                    className="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light listaAyuda"
+                  >
+                    Acerca de nosotros
+                  </Link>
                 </li>
               </ul>
               <div className="d-flex flex-column">
@@ -61,27 +93,31 @@ const Footer = () => {
                 <h4 className="text-light fw-bold"></h4>
               </li>
               <li className="mt-3 list-unstyled">
-                <a
-                  href="#"
+                <Link
+                  to="/"
                   className="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light"
-                ></a>
+                ></Link>
               </li>
               <li className="mt-3 list-unstyled">
-                <a
-                  href="./registro.html"
+                <Link
+                  to="/registrarse"
                   className="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light"
-                ></a>
+                ></Link>
               </li>
             </ul>
           </div>
 
           <div className="col-12 col-sm-12 col-lg-4 d-flex flex-column justify-content-center">
-            <a
-              href="#"
+            <Link
+              to="/"
               className="contenedorLogo d-flex justify-content-center"
             >
-              <img src={logoExelencia} alt="Logo" className="imgLogoFooter2 img-fluid" />
-            </a>
+              <img
+                src={logoExelencia}
+                alt="Logo"
+                className="imgLogoFooter2 img-fluid"
+              />
+            </Link>
           </div>
         </div>
       </div>

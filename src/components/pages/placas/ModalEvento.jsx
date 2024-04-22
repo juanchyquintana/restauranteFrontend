@@ -12,11 +12,11 @@ const ModalEvento = ({ show, handleClose, titulo, texto, imagen }) => {
         <img
           src={imagen}
           alt="Descripción de la imagen"
-          className="w-100 h-auto img-fluid"
+          className="w-75 h-auto img-fluid"
         />
 
         <div>
-          <p className="fw-bold my-3">- Restaurante Lotus -</p>
+          <p className="fw-bold my-0">- Restaurante Lotus -</p>
           <hr />
           <p>{texto}</p>
         </div>
