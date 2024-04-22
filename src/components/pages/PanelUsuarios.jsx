@@ -35,13 +35,13 @@ const PanelUsuarios = () => {
           <hr />
 
           <Table responsive striped bordered>
-            <thead>
+            <thead className="text-center">
               <tr>
-                <th>Usuario</th>
-                <th>Email</th>
-                <th>Estado</th>
-                <th>Tipo Usuario</th>
-                <th>Opciones</th>
+                <th className="text-white bg-dark">Usuario</th>
+                <th className="text-white bg-dark">Email</th>
+                <th className="text-white bg-dark">Estado</th>
+                <th className="text-white bg-dark">Tipo Usuario</th>
+                <th className="text-white bg-dark">Opciones</th>
               </tr>
             </thead>
 

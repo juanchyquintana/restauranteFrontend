@@ -1,23 +1,44 @@
-import { Card } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import "../pages/cocina/cardProdCocina.css";
-const MisPedirosCard = ({
-    pedido
-  }) => {  
-    const estiloEstado = (estado) => {
-      if (estado === "pendiente" || estado === 'enviado') {
-        return "bg-warning";
-      }
-      if (estado === "en proceso" || estado === 'entregado') {
-        return "bg-success";
-      }
-      if (estado === 'terminado' || estado === 'cancelado'){
-        return "bg-danger"
-      }
-    };
-  
-    return (
-      <Card className="rounded-0 h-100" id="cardContainer">
-        <Card.Body className="">
+const MisPedirosCard = ({ pedido, cancelarPedido }) => {
+  const estiloEstado = (estado) => {
+    if (estado === "pendiente" || estado === "enviado") {
+      return "bg-warning";
+    }
+    if (estado === "en proceso" || estado === "entregado") {
+      return "bg-success";
+    }
+    if (estado === "terminado" || estado === "cancelado") {
+      return "bg-danger";
+    }
+  };
+
+  const cancelarPedidoEstilo = (estado) => {
+    if (estado !== "pendiente") {
+      return "disabled";
+    }
+  };
+
+  const fecha = new Date(pedido.fecha);
+  const opcionesFecha = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+
+  const fechaFormateada = fecha.toLocaleDateString("es-ES", opcionesFecha);
+  fecha.setHours(fecha.getHours() + 3);
+  const opcionesHora = {
+    hour: "numeric",
+    minute: "numeric",
+  };
+  const horaFormateada = fecha.toLocaleTimeString("es-ES", opcionesHora);
+
+  return (
+    <Card className="rounded-0 h-100" id="cardContainer">
+      <Card.Body className="d-flex flex-column justify-content-between">
+        <div>
           <Card.Title className="d-flex gap-2 flex-wrap">
             <p className={`p-2 rounded-1 m-0`}>
               {pedido?.tipoEntrega.toUpperCase()}
@@ -51,8 +72,24 @@ const MisPedirosCard = ({
               <></>
             )}
           </ul>
-        </Card.Body>
-      </Card>
-    );
-  };
+        </div>
+        <div className="">
+          <p className="m-0">
+            Pedido realizado el {fechaFormateada} {horaFormateada}hs
+          </p>
+          <p className="m-0 fw-bold">Total: ${pedido.total}</p>
+        </div>
+      </Card.Body>
+
+      <Card.Footer className="d-flex justify-content-end">
+        <Button
+          onClick={() => cancelarPedido(pedido._id)}
+          className={`${cancelarPedidoEstilo(pedido.estado)}`}
+        >
+          Cancelar Pedido
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
+};
 export default MisPedirosCard;

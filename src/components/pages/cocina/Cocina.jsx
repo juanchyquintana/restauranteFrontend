@@ -112,7 +112,6 @@ const Cocina = () => {
     const intervalId = setInterval(() => {
       const fechas = [];
       let fechaActual = moment.tz("America/Argentina/Buenos_Aires").toDate();
-      fechaActual.setHours(fechaActual.getHours() - 3);
   
       for (let i = 0; i < pedidos.length; i++) {
         const fecha = pedidos[i]?.fecha;
