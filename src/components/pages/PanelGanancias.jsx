@@ -65,76 +65,84 @@ const PanelGanancias = () => {
   const fecha = new Date();
 
   const cerrarCajaHandler = async () => {
-    const fechaFormateada = formatearFecha(fecha);
-    const fechaFiltro = new Date().toISOString();
+    // const fechaFormateada = formatearFecha(fecha);
+    // const fechaFiltro = new Date().toISOString();
 
-    const datosCaja = {
-      ganancias,
-      cantidadPedidos,
-      fechaCierre: fecha.getTime(),
-    };
+    // const datosCaja = {
+    //   ganancias,
+    //   cantidadPedidos,
+    //   fechaCierre: fecha.getTime(),
+    // };
 
-    try {
-      const respuestaFiltro = await obtenerCajaPorFecha(fechaFiltro);
-      if (respuestaFiltro) {
-        await editarCaja(respuestaFiltro.data._id, datosCaja);
-        await Swal.fire({
-          title: "Caja cerrada",
-          text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${ganancias}\n Cantidad de pedidos: ${cantidadPedidos.length}`,
-          icon: "success",
-          confirmButtonText: "Aceptar",
-        });
+    // try {
+    //   const respuestaFiltro = await obtenerCajaPorFecha(fechaFiltro);
+    //   if (respuestaFiltro) {
+    //     await editarCaja(respuestaFiltro.data._id, datosCaja);
+    //     await Swal.fire({
+    //       title: "Caja cerrada",
+    //       text: `Caja cerrada el ${fechaFormateada}.\n Ganancias del día: ${ganancias}\n Cantidad de pedidos: ${cantidadPedidos.length}`,
+    //       icon: "success",
+    //       confirmButtonText: "Aceptar",
+    //     });
 
-        localStorage.setItem("cajaCerrada", "true");
-        setCajaCerrada(true);
-        setGanancias(0);
-        setCantidadPedidos(0);
-        setPedidos([]);
-      } else {
-        await Swal.fire({
-          title: "Error!",
-          text: `No Existe una Caja con esa Fecha`,
-          icon: "error",
-          confirmButtonText: "Aceptar",
-        });
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    //     localStorage.setItem("cajaCerrada", "true");
+    //     setCajaCerrada(true);
+    //     setGanancias(0);
+    //     setCantidadPedidos(0);
+    //     setPedidos([]);
+    //   } else {
+    //     await Swal.fire({
+    //       title: "Error!",
+    //       text: `No Existe una Caja con esa Fecha`,
+    //       icon: "error",
+    //       confirmButtonText: "Aceptar",
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   const abrirCajaHandler = async () => {
-    // const fechaFiltro = new Date().toISOString();
+    const fecha = new Date();
+    const dia = fecha.getDate();
+    const mes = fecha.getMonth() + 1;
+    const año = fecha.getFullYear();
+    const fechaFormateada = dia + "-" + mes + "-" + año;
+
     const datosCaja = {
       ganancias,
       cantidadPedidos,
-      fechaCierre: fecha.getTime(),
+      fechaCierre: fechaFormateada,
     };
 
     try {
       const respuestaFiltro = await obtenerCajaPorFecha(datosCaja.fechaCierre);
-      if (respuestaFiltro) {
-        const nuevaCaja = {
-          fechaCierre: datosCaja.fechaCierre,
-          ganancias: datosCaja.ganancias,
-          cantidadPedidos: datosCaja.cantidadPedidos,
-        };
-        await crearCaja(nuevaCaja);
+      console.log(respuestaFiltro)
+
+      if (respuestaFiltro.status === 400) {
+        await crearCaja(datosCaja);
+        await Swal.fire({
+          title: "Caja Abierta",
+          text: `La Caja ha sido Abierta`,
+          icon: "success",
+          confirmButtonText: "Aceptar",
+        });
+      } else {
+        await Swal.fire({
+          title: "Error!",
+          text: `Ya existe una Caja con la Fecha: ${fechaFormateada}`,
+          icon: "error",
+          confirmButtonText: "Aceptar",
+        });
+        return;
       }
-      
+
       localStorage.removeItem("cajaCerrada");
       setCajaCerrada(false);
     } catch (error) {
       console.log(error);
     }
-
-    Swal.fire({
-      title: "Caja Abierta",
-      text: `La Caja ha sido Abierta`,
-      icon: "success",
-      confirmButtonText: "Aceptar",
-    });
-
   };
 
   const handleFilterClick = (filter) => {

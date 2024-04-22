@@ -74,25 +74,27 @@ export const obtenerCajaPorFecha = async (fechaFiltro) => {
       throw new Error('Fecha de filtro no especificada');
     }
 
-    const respuesta = await fetch(`${RESTAURANTE_URL}/caja?fecha=${fechaFiltro}`);
-    
+    const respuesta = await fetch(`${RESTAURANTE_URL}/caja/${fechaFiltro}`);
+
     return respuesta;
   } catch (error) {
     console.log(error)
   }
 }
 
-export async function crearCaja(datosCaja) {
+export const crearCaja = async (datosCaja) => {
   try {
-    const respuesta = await fetch(`${RESTAURANTE_URL}/api/caja`, {
+    console.log(datosCaja)
+    const respuesta = await fetch(`${RESTAURANTE_URL}/caja`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "x-token": JSON.parse(sessionStorage.getItem("usuarioLotus")).token,
       },
       body: JSON.stringify({
-        ...datosCaja,
-        fecha: new Date().toISOString(),
+        ganancias: datosCaja.ganancias,
+        cantidadPedidos: datosCaja.cantidadPedidos,
+        fechaCierre: datosCaja.fechaCierre,
       }),
     });
     return respuesta.json();
@@ -101,7 +103,7 @@ export async function crearCaja(datosCaja) {
   }
 }
 
-export async function editarCaja(id, datosCaja) {
+export const editarCaja = async (id, datosCaja) => {
   try {
     const respuesta = await fetch(`${RESTAURANTE_URL}/caja/${id}`, {
       method: "PUT",
