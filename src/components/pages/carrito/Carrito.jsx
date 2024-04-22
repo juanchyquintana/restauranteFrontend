@@ -82,7 +82,6 @@ const Carrito = ( { setCarritoNumero } ) => {
 
   const crearObjetoPedido = () => {
     const fechaHoraActual = new Date();
-    fechaHoraActual.setHours(fechaHoraActual.getHours() - 3);
     const { usuario, productos, estado, total } = pedidoState;
     const nuevoObjeto = {
       usuario: usuario,
