@@ -24,7 +24,7 @@ const Carrito = ( { setCarritoNumero } ) => {
   const realizarPedido = async (e) => {
     e.preventDefault();
     const nuevoObjeto = crearObjetoPedido();
-    if (!datos.delivery) {
+    if (!pedidoState.delivery) {
       nuevoObjeto.tipoEntrega = "bar";
       const infoPedido = await postPedido(nuevoObjeto);
       if (infoPedido.status === 201) {
@@ -125,6 +125,8 @@ const Carrito = ( { setCarritoNumero } ) => {
       ...prevState,
       [name]: value,
     }));
+    pedido[name]= value
+    sessionStorage.setItem("pedido", JSON.stringify(pedido))
   };
 
   const actualizarCarrito = (direccion, lat, lng) => {
@@ -178,6 +180,13 @@ const Carrito = ( { setCarritoNumero } ) => {
     setProductos(productosArray);
   };
     
+  const seleccionarDelivery = () => {
+    setDatos({ ...datos, delivery: !datos.delivery })
+    setPedidoState({ ...pedidoState, delivery: !pedidoState.delivery })
+    pedido.delivery = !pedido.delivery
+    setPedidoState(pedido)
+    sessionStorage.setItem("pedido", JSON.stringify(pedido))
+  }
 
   useEffect(() => {
     setPedidoState(pedido);
@@ -272,13 +281,11 @@ const Carrito = ( { setCarritoNumero } ) => {
                 label="¿Delivery?"
                 className="fw-bold text-uppercase my-3 "
                 checked={datos.delivery}
-                onChange={() =>
-                  setDatos({ ...datos, delivery: !datos.delivery })
-                }
+                onChange={() => seleccionarDelivery()}
               />
             </div>
 
-            {datos.delivery ? (
+            {pedidoState.delivery ? (
               <>
                 <div className="">
                   <Form
@@ -304,7 +311,7 @@ const Carrito = ( { setCarritoNumero } ) => {
                     <div>
                       <h4>Ubicá tu dirección en el mapa</h4>
                       <Mapa
-                        datos={datos}
+                        datos={pedidoState}
                         actualizarCarrito={actualizarCarrito}
                       />
                     </div>
