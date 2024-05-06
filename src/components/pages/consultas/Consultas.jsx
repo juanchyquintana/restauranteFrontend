@@ -14,7 +14,7 @@ const Consultas = () => {
             const datos = await obtenerConsultas()
             setConsultas(datos)
         } catch (error) {
-            console.log("🚀 ~ consultarDB ~ error:", error)
+            console.log(error)
         }
     }
 

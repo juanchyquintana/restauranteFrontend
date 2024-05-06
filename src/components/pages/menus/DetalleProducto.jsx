@@ -13,7 +13,7 @@ useEffect(()=>{
 
 const cargarDetalle = async()=>{
   const respuesta = await obtenerProductoK(id)
-  console.log(respuesta)
+  
   if(respuesta.status === 200){
     const datoProducto = await respuesta.json();
     setProducto(datoProducto);

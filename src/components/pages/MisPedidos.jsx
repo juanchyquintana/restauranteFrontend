@@ -48,7 +48,7 @@ const MisPedidos = () => {
     const fechaPedido = new Date(pedidoEstado.fecha);
     fechaPedido.setHours(fechaPedido.getHours() + 3);
     const tiempoTranscurrido = fechaActual - fechaPedido;
-    console.log(tiempoTranscurrido)
+
     if (pedidoEstado.estado === "pendiente" && tiempoTranscurrido < 600000) {
       Swal.fire({
         title: "¿Cancelar pedido?",
