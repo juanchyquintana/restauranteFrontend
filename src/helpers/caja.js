@@ -16,7 +16,6 @@ export const obtenerCajaPorFecha = async (fechaFiltro) => {
 
 export const crearCaja = async (datosCaja) => {
   try {
-    console.log(datosCaja);
     const respuesta = await fetch(`${RESTAURANTE_URL}/caja`, {
       method: "POST",
       headers: {

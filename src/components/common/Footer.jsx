@@ -18,6 +18,7 @@ const Footer = () => {
           <div className="col-12 col-sm-12 col-lg-4">
             <Link
               to="/"
+              onClick={handleScrollToTop}
               className="contenedorLogo d-flex justify-content-center"
             >
               <img
@@ -71,16 +72,16 @@ const Footer = () => {
               <div className="d-flex flex-column">
                 <p className="text-light">Síguenos en nuestras redes:</p>
                 <div className="d-flex justify-content-center">
-                  <a href="#">
+                  <a href="https://www.instagram.com/lotus-restaurante-404" target="_blank">
                     <i className="bi bi-instagram fs-3 m-2 colorIcon"></i>
                   </a>
-                  <a href="#">
+                  <a href="https://www.facebook.com/lotus.restaurante.404/" target="_blank">
                     <i className="bi bi-facebook fs-3 m-2 colorIcon"></i>
                   </a>
-                  <a href="#">
+                  <a href="https://twitter.com/lotus-restaurante-404" target="_blank">
                     <i className="bi bi-twitter fs-3 m-2 colorIcon"></i>
                   </a>
-                  <a href="#">
+                  <a href="https://www.linkedin.com/lotus-restaurante-404" target="_blank">
                     <i className="bi bi-linkedin fs-3 m-2 colorIcon"></i>
                   </a>
                 </div>
@@ -94,7 +95,7 @@ const Footer = () => {
               </li>
               <li className="mt-3 list-unstyled">
                 <Link
-                  to="/"
+                  to="/error"
                   className="link-light link-underline-opacity-10 link-underline-opacity-50-hover text-light"
                 ></Link>
               </li>
@@ -109,7 +110,8 @@ const Footer = () => {
 
           <div className="col-12 col-sm-12 col-lg-4 d-flex flex-column justify-content-center">
             <Link
-              to="/"
+              to="/error"
+              onClick={handleScrollToTop}
               className="contenedorLogo d-flex justify-content-center"
             >
               <img

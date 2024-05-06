@@ -96,8 +96,8 @@ const Login = ({ setUsuarioLogueado }) => {
 
       <div className="form-e-Img-Container container-fluid bg-light p-3 p-lg-0 rounded-3">
         <div className="row m-0">
-          <div className="img-form-div col-lg-6 d-none d-lg-flex rounded-start-3 p-0">
-            <img src={formImg} className="form-img"/>
+          <div className="col-lg-6 d-none d-lg-flex rounded-start-3 p-0">
+            <img src={formImg} className="form-img img-thumbnail"/>
           </div>
 
           <div className="col-lg-6 d-flex flex-column justify-content-center align-items-lg-center">

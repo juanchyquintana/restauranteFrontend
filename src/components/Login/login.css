@@ -39,8 +39,8 @@
         width: 75%;
     }
 
-    .row{
-        height: 80vh;
+    .nav-espacio {
+        margin-top: 100px;
     }
 }
 
@@ -48,16 +48,28 @@
     .form-e-Img-Container{
         max-width: 70vw;
     }
+
+    .nav-espacio {
+        margin-top: 80px;
+    }
 }
 
 @media all and (min-width: 351px) and (max-width: 767px){    
     .form-e-Img-Container{
         max-width: 80vw;
     }
+
+    .nav-espacio {
+        margin-top: 80px;
+    }
 }
 
 @media all and (max-width: 350px){    
     .form-e-Img-Container{
         max-width: 90vw;
+    }
+
+    .nav-espacio {
+        margin-top: 80px;
     }
 }

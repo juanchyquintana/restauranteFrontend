@@ -49,15 +49,15 @@ const Registrarse = () => {
 
   return (
     <>
-      <section className="login-container mainPage d-flex flex-column justify-content-center">
+      <section className="login-container mainPage d-flex flex-column justify-content-center py-4">
         <div className="background-img-container bg-black">
           <img src={backgroundImg} className="img-blur-ingreso" />
         </div>
 
-        <div className="form-e-Img-Container container-fluid bg-light p-3 p-lg-0 rounded-3">
+        <div className="form-e-Img-Container container-fluid bg-light p-3 p-lg-0 rounded-3 nav-espacio my-lg-5">
           <div className="row m-0">
-            <div className="img-form-div col-lg-6 d-none d-lg-flex rounded-start-3 p-0">
-              <img src={formImg} className="form-img img-thumbnail mt-5" />
+            <div className="col-lg-6 d-none d-lg-flex rounded-start-3 p-0">
+              <img src={formImg} className="form-img img-thumbnail" />
             </div>
 
             <div className="col-lg-6 py-3 d-flex flex-column  justify-content-center">
@@ -83,6 +83,10 @@ const Registrarse = () => {
                         message:
                           "El Nombre debe tener un máximo de 3 caracteres",
                       },
+                      pattern: {
+                        value:  /^[a-zA-Z\u00C0-\u024F\s]+$/,
+                        message: "Solo se permite ingresar letras"
+                      }
                     })}
                   />
                 </Form.Group>
