@@ -83,6 +83,10 @@ const Registrarse = () => {
                         message:
                           "El Nombre debe tener un máximo de 3 caracteres",
                       },
+                      pattern: {
+                        value:  /^[a-zA-Z\u00C0-\u024F\s]+$/,
+                        message: "Solo se permite ingresar letras"
+                      }
                     })}
                   />
                 </Form.Group>
