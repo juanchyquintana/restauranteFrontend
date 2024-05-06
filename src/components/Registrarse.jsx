@@ -49,7 +49,7 @@ const Registrarse = () => {
 
   return (
     <>
-      <section className="login-container mainPage d-flex flex-column justify-content-center">
+      <section className="login-container mainPage d-flex flex-column justify-content-center py-4">
         <div className="background-img-container bg-black">
           <img src={backgroundImg} className="img-blur-ingreso" />
         </div>
