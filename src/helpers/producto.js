@@ -37,7 +37,6 @@ export const borrarProductoAPI = async (id) => {
         "x-token": JSON.parse(sessionStorage.getItem("usuarioLotus")).token,
       },
     });
-    console.log(respuesta);
     return respuesta;
   } catch (error) {
     console.log(error);
